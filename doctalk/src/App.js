@@ -1,3 +1,5 @@
+import Login from './components/Login';
+import ContactForm from './components/Contact';
 import React from "react";
 import Header from "./components/Header";
 import AboutUs from "./components/AboutUs";
@@ -43,6 +45,14 @@ function App() {
 
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<AboutUs />} />
+            <Route 
+                path="/login"
+                element={<Login />}
+              />
+              <Route 
+                path="/contact"
+                element={<ContactForm />}
+              />
 
           </Routes>
 
