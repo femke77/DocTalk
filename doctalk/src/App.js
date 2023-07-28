@@ -1,14 +1,28 @@
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
+import Login from './components/Login';
+import ContactForm from './components/Contact';
 
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>DocTalk</h1>
-        
-      </header>
-    </div>
+      <Router>
+        <div className="flex-column justify-flex-start min-100-vh">
+          <div className="container">
+            <Routes>
+              <Route 
+                path="/login"
+                element={<Login />}
+              />
+              <Route 
+                path="/contact"
+                element={<ContactForm />}
+              />
+            </Routes>
+          </div>
+        </div>
+      </Router>
   );
 }
 
