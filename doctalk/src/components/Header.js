@@ -12,6 +12,7 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
+import { Link } from 'react-router-dom'; // Import the Link component
 
 const pages = ['About Us', 'Contact Us', 'Consultation', 'Billing'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -62,7 +63,7 @@ function ResponsiveAppBar() {
           </Box>
           <Box sx={{ flexGrow: 1, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
-              {isLoggedIn ? ( // If user is logged in, show user menu with settings
+              {isLoggedIn ? (
                 <>
                   <Tooltip title="Open settings">
                     <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -92,10 +93,21 @@ function ResponsiveAppBar() {
                     ))}
                   </Menu>
                 </>
-              ) : ( // If user is not logged in, show login and new user buttons
+              ) : (
+                // If user is not logged in, show Login and SignUp buttons as Links
                 <Box sx={{ display: 'flex' }}>
-                  <Button color="inherit">Login</Button>
-                  <Button color="inherit">Sign Up</Button>
+                  {/* Use the Link component to navigate to the Login page */}
+                  <Link to="/login" style={{ textDecoration: 'none' }}>
+                    <Button color="inherit" sx={{ color: 'white', mr: 1 }}>
+                      Login
+                    </Button>
+                  </Link>
+                  {/* Use the Link component to navigate to the Signup page */}
+                  <Link to="/signup" style={{ textDecoration: 'none' }}>
+                    <Button color="inherit" sx={{ color: 'white' }}>
+                      Sign Up
+                    </Button>
+                  </Link>
                 </Box>
               )}
             </Box>
@@ -112,4 +124,5 @@ function ResponsiveAppBar() {
     </AppBar>
   );
 }
+
 export default ResponsiveAppBar;

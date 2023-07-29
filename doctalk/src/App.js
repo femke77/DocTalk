@@ -1,4 +1,5 @@
 import Login from './components/Login';
+import Signup from './components/Signup'; 
 import ContactForm from './components/Contact';
 import React from "react";
 import Header from "./components/Header";
@@ -11,7 +12,6 @@ import {
   InMemoryCache,
   ApolloProvider,
   createHttpLink,
-
 } from '@apollo/client';
 
 import { setContext } from '@apollo/client/link/context';
@@ -39,26 +39,17 @@ function App() {
     <>
       <ApolloProvider client={client}>
         <Router>
-
           <Header />
           <Routes>
-
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<AboutUs />} />
-            <Route 
-                path="/login"
-                element={<Login />}
-              />
-              <Route 
-                path="/contact"
-                element={<ContactForm />}
-              />
-
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/contact" element={<ContactForm />} />
+            
           </Routes>
-
         </Router>
       </ApolloProvider>
-
     </>
   );
 }
