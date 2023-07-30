@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -26,7 +26,6 @@ function Signup() {
     });
   };
 
-  const history = useHistory(); 
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -48,7 +47,7 @@ function Signup() {
       if (!response.ok) {
         throw new Error('Signup failed');
       }
-      history.push('/'); // Redirect to the Homepage (change the path if needed)
+    
     } catch (error) {
       console.error('Signup error:', error);
       // Handle any errors that occurred during signup
