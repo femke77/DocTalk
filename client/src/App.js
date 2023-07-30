@@ -9,17 +9,12 @@ import Consultation from "./components/Consultation";
 import Billing from "./components/Billing";
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import {
-  ApolloClient,
-  InMemoryCache,
-  ApolloProvider,
-  createHttpLink,
-} from '@apollo/client';
+import { ApolloClient,InMemoryCache,ApolloProvider,createHttpLink} from '@apollo/client';
 
 import { setContext } from '@apollo/client/link/context';
 
 const httpLink = createHttpLink({
-  uri: '/graphql',
+  uri: 'http://localhost:3001/graphql',
 });
 
 const authLink = setContext((_, { headers }) => {

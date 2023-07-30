@@ -13,6 +13,7 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { Link } from 'react-router-dom';
+import AuthService from '../utils/auth'
 
 const pages = ['About Us', 'Contact Us', 'Consultation', 'Billing'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -20,7 +21,7 @@ const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const isLoggedIn = AuthService.loggedIn();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -94,9 +95,7 @@ function ResponsiveAppBar() {
                   </Menu>
                 </>
               ) : (
-              
                 <Box sx={{ display: 'flex' }}>
-                
                   <Link to="/login" style={{ textDecoration: 'none' }}>
                     <Button color="inherit" sx={{ color: 'white', mr: 1 }}>
                       Login
@@ -108,7 +107,6 @@ function ResponsiveAppBar() {
                       Sign Up
                     </Button>
                   </Link>
-
                 </Box>
               )}
             </Box>
@@ -127,5 +125,3 @@ function ResponsiveAppBar() {
 }
 
 export default ResponsiveAppBar;
-
-
