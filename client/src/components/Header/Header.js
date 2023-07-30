@@ -13,7 +13,7 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { Link } from 'react-router-dom';
-import AuthService from '../utils/auth'
+import AuthService from '../../utils/auth'
 
 const pages = ['About Us', 'Contact Us', 'Consultation', 'Billing'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];

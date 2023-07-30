@@ -2,10 +2,10 @@ import Login from './components/Login';
 import Signup from './components/Signup'; 
 import ContactForm from './components/Contact';
 import React from "react";
-import Header from "./components/Header";
+import Header from "./components/Header/Header";
 import AboutUs from "./components/AboutUs";
-import Home from "./components/Home";
-import Consultation from "./components/Consultation";
+import Home from "./components/Home/Home";
+import Services from "./components/Services";
 import Billing from "./components/Billing";
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
@@ -44,7 +44,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/contactus" element={<ContactForm />} />
-            <Route path="/consultation" element={<Consultation />} />
+            <Route path="/services" element={<Services />} />
             <Route path="/billing" element={<Billing />} />
             
           </Routes>

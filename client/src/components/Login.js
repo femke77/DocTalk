@@ -1,27 +1,48 @@
+import React from 'react';
+import { useMutation } from '@apollo/client';
+import { LOGIN_USER } from '../utils/mutations';
+import { Link } from 'react-router-dom';
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
+import AuthService from '../utils/auth';
 
 export default function Login() {
-  const handleSubmit = (event) => {
+
+  const [loginUser, { loading, error }] = useMutation(LOGIN_USER);
+
+  const handleLogin = async (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    const formData = new FormData(event.currentTarget);
+
+    try {
+      const { data } = await loginUser({
+        variables: {
+          email: formData.get("email"),
+          password: formData.get("password"),
+        },
+      });
+
+      const token = data.login.token;
+      AuthService.setToken(token);
+
+      // window.location.replace("/");
+
+    } catch (error) {
+
+      console.log('Login error:', error.message);
+    }
   };
 
   return (
     <Container component="main" maxWidth="xs">
       <Box
-        sx={{  
+        sx={{
           marginTop: 8,
           display: "flex",
           flexDirection: "column",
@@ -31,7 +52,7 @@ export default function Login() {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+        <Box component="form" onSubmit={handleLogin} noValidate sx={{ mt: 1 }}>
           <TextField
             margin="normal"
             required
@@ -78,6 +99,7 @@ export default function Login() {
           </Grid>
         </Box>
       </Box>
+      <Link to="/">Go to Homepage</Link>
     </Container>
   );
 }

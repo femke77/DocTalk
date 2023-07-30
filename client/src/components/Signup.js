@@ -19,6 +19,7 @@ function Signup() {
     firstName: '',
     lastName: '',
     role: 'patient', // Default role is patient
+    showPassword: false,
   });
 
   const [addUser] = useMutation(ADD_USER);
@@ -31,7 +32,7 @@ function Signup() {
         password: formState.password,
         firstName: formState.firstName,
         lastName: formState.lastName,
-        role: formState.role, // Include the selected role in the mutation
+        role: formState.role, 
       },
     });
     const token = mutationResponse.data.addUser.token;
@@ -45,6 +46,14 @@ function Signup() {
       [name]: value,
     });
   };
+
+  const handlePasswordVisibility = () => {
+    setFormState({
+      ...formState,
+      showPassword: !formState.showPassword,
+    });
+  };
+
 
   return (
     <Container component="main" maxWidth="xs">
