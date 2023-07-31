@@ -14,6 +14,7 @@ import Button from "@mui/material/Button";
 
 function Signup() {
   const [formState, setFormState] = useState({
+    username: '',
     email: '',
     password: '',
     firstName: '',
@@ -28,6 +29,7 @@ function Signup() {
     event.preventDefault();
     const mutationResponse = await addUser({
       variables: {
+        username: formState.username,
         email: formState.email,
         password: formState.password,
         firstName: formState.firstName,
@@ -69,6 +71,17 @@ function Signup() {
           Sign up
         </Typography>
         <Box component="form" onSubmit={handleFormSubmit} noValidate sx={{ mt: 1 }}>
+        <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="username"
+            label="username"
+            name="username"
+            autoComplete="given-name"
+            autoFocus
+            onChange={handleChange}
+          />
           <TextField
             margin="normal"
             required
