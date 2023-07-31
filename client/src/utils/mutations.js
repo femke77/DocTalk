@@ -1,22 +1,21 @@
-// your-existing-mutations.js
 import { gql } from '@apollo/client';
 
 
 export const ADD_USER = gql`
-  mutation addUser($email: String!, $password: String!, $username: String!, $firstName: String!, $lastName: String!, $doctor: Boolean!, $patient: Boolean!) {
-    addUser(email: $email, password: $password, username: $username, firstName: $firstName, lastName: $lastName, doctor: $doctor, patient: $patient) {
-      token
-      user {
-        username,
-        firstName,
-        lastName,
-        email,
-        password,
-        patient,
-        doctor,
-      }
+mutation addUser($username: String!, $email: String!, $password: String!, $firstName: String!, $lastName: String!, $patient: Boolean!, $doctor: Boolean!) {
+  addUser(username: $username, email: $email, password: $password, firstName: $firstName, lastName: $lastName, patient: $patient, doctor: $doctor) {
+    token
+    user {
+      _id
+      username
+      email
+      firstName
+      lastName
+      patient
+      doctor
     }
   }
+}
 `;
 
 export const UPDATE_USER = gql`
