@@ -8,6 +8,7 @@ export const ADD_USER = gql`
       token
       user {
         _id
+        username
         email
         firstName
         lastName
@@ -22,6 +23,7 @@ export const UPDATE_USER = gql`
   mutation updateUser($_id: ID!, $input: UpdateUserInput!) {
     updateUser(_id: $_id, input: $input) {
       _id
+      username
       email
       firstName
       lastName
@@ -38,10 +40,8 @@ export const LOGIN_USER = gql`
       user {
         _id
         email
-        firstName
-        lastName
-        doctor
-        patient
+        password
+
       }
     }
   }
