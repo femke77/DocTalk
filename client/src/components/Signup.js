@@ -14,12 +14,13 @@ import Button from "@mui/material/Button";
 
 function Signup() {
   const [formState, setFormState] = useState({
-    username: '',
+    username: "",
     email: '',
     password: '',
     firstName: '',
     lastName: '',
-    role: 'patient', // Default role is patient
+    doctor: false,
+    patient: true,   
     showPassword: false,
   });
 
@@ -34,7 +35,8 @@ function Signup() {
         password: formState.password,
         firstName: formState.firstName,
         lastName: formState.lastName,
-        role: formState.role, 
+        patient: formState.patient, 
+        doctor: formState.doctor
       },
     });
     const token = mutationResponse.data.addUser.token;
