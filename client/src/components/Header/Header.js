@@ -14,10 +14,10 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { Link } from 'react-router-dom';
 import AuthService from '../../utils/auth';
-import PatientHeader from './PatientHeader';
+import CheckboxComponent from './CheckBoxComponent';
+import AppHeader from './AppHeader';
 
-const pages = ['About Us', 'Contact Us', 'Consultation', 'Billing'];
-const settings = ['Profile', 'Account', 'Dashboard'];
+const pages = ['About Us', 'Contact Us', 'Services'];
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = useState(null);
@@ -74,7 +74,7 @@ function ResponsiveAppBar() {
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
               {isLoggedIn ? (
                 <>
-                  <Tooltip title="Open settings">
+                  <Tooltip title="Open user menu">
                     <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                       <Avatar alt="User Avatar" src="/static/images/avatar.jpg" />
                     </IconButton>
@@ -95,11 +95,6 @@ function ResponsiveAppBar() {
                     open={Boolean(anchorElUser)}
                     onClose={handleCloseUserMenu}
                   >
-                    {settings.map((setting) => (
-                      <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                        <Typography textAlign="center">{setting}</Typography>
-                      </MenuItem>
-                    ))}
                     {/* Logout menu item */}
                     <MenuItem onClick={handleLogout}>
                       <Typography textAlign="center">Logout</Typography>
