@@ -40,8 +40,8 @@ function ResponsiveAppBar() {
   };
 
   const handleLogout = () => {
-    AuthService.logout(); // For example, call the AuthService logout function
-    window.location.reload(); // Reload the page to clear the user session
+    AuthService.logout();
+    window.location.reload(); 
   };
 
   return (
