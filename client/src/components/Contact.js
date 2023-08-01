@@ -13,14 +13,12 @@ export default function ContactForm() {
 
   return (
     <div>
-    <Box
-      sx={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        height: "100vh",
-      }}
-    >
+    <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", height: "100vh" }}>
+      <img
+        src="/images/hero.jpg"
+        alt="contact"
+        style={{ width: '100%', maxWidth: '800px', height: 'auto', marginBottom: '20px' }}
+      />
       <Box sx={{ maxWidth: 600, mx: "auto", p: 2 }}>
         <Typography variant="h4" align="center" mb={2}>
           Contact Us
