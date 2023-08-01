@@ -10,7 +10,9 @@ import Container from "@mui/material/Container";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
+import Radio from "@mui/material/Radio";
 import Button from "@mui/material/Button";
+import RadioGroup from '@mui/material/RadioGroup';
 
 function Signup() {
   const [formState, setFormState] = useState({
@@ -20,7 +22,7 @@ function Signup() {
     firstName: '',
     lastName: '',
     doctor: false,
-    patient: true,   
+    patient: true,
     showPassword: false,
   });
 
@@ -35,14 +37,16 @@ function Signup() {
         password: formState.password,
         firstName: formState.firstName,
         lastName: formState.lastName,
-        patient: formState.patient, 
+        patient: formState.patient,
         doctor: formState.doctor
       },
     });
+
     const token = mutationResponse.data.addUser.token;
     Auth.login(token);
   };
 
+  
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormState({
@@ -73,7 +77,7 @@ function Signup() {
           Sign up
         </Typography>
         <Box component="form" onSubmit={handleFormSubmit} noValidate sx={{ mt: 1 }}>
-        <TextField
+          <TextField
             margin="normal"
             required
             fullWidth
@@ -127,28 +131,32 @@ function Signup() {
             onChange={handleChange}
           />
           {/* Radio buttons for Doctor/Patient selection */}
-          <FormControlLabel
-            control={
-              <Checkbox
-                name="role"
-                value="doctor"
-                checked={formState.role === "doctor"}
-                onChange={handleChange}
-              />
-            }
-            label="Doctor"
-          />
-          <FormControlLabel
-            control={
-              <Checkbox
-                name="role"
-                value="patient"
-                checked={formState.role === "patient"}
-                onChange={handleChange}
-              />
-            }
-            label="Patient"
-          />
+          <RadioGroup name="role">
+            <FormControlLabel
+              control={
+                <Radio
+                  name="role"
+                  value={formState.doctor}
+                  checked={formState.doctor}
+                  onChange={() => setFormState({ ...formState, doctor: !formState.doctor })}
+                />
+              }
+              label="Doctor"
+              
+            />
+            <FormControlLabel
+              control={
+                <Radio
+                  name="role"
+                  value={formState.patient}
+                  checked={formState.patient}
+                  onChange={() => setFormState({ ...formState, patient: !formState.patient })}
+                />
+              }
+              label="Patient"
+            />
+          </RadioGroup>
+
           <Button
             type="submit"
             fullWidth
