@@ -7,6 +7,7 @@ import Footer from './Footer';
 
 const AboutUs = () => {
   return (
+    <div>
     <Container component="main" maxWidth="md" sx={{ display: 'flex', gap: '20px', marginBottom: '50px' }}>
       <div>
         <Typography variant="h3" gutterBottom sx={{ fontFamily: 'Roboto', fontWeight: 'bold' }}>
@@ -70,8 +71,10 @@ const AboutUs = () => {
           </Typography>
         </Box>
       </div>
-      <Footer />
     </Container>
+    <br></br>
+    <Footer />
+    </div>
   );
 };
 
