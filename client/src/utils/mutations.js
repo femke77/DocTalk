@@ -32,6 +32,20 @@ export const UPDATE_USER = gql`
   }
 `;
 
+
+export const ADD_BILL = gql`
+  mutation addBill($amount: Float!, $description: String!) {
+    addBill(input: { amount: $amount, description: $description }) {
+      _id
+      amount
+      description
+      createdAt
+      updatedAt
+    }
+  }
+`;
+
+
 export const LOGIN_USER = gql`
   mutation login($email: String!, $password: String!) {
     login(email: $email, password: $password) {
@@ -45,5 +59,3 @@ export const LOGIN_USER = gql`
     }
   }
 `;
-
-
