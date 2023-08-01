@@ -13,10 +13,11 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { Link } from 'react-router-dom';
-import AuthService from '../../utils/auth'
+import AuthService from '../../utils/auth';
+import PatientHeader from './PatientHeader';
 
 const pages = ['About Us', 'Contact Us', 'Consultation', 'Billing'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = ['Profile', 'Account', 'Dashboard'];
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = useState(null);
@@ -38,10 +39,16 @@ function ResponsiveAppBar() {
     setAnchorElUser(null);
   };
 
+  const handleLogout = () => {
+    AuthService.logout(); // For example, call the AuthService logout function
+    window.location.reload(); // Reload the page to clear the user session
+  };
+
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
+          {/* Logo section */}
           <Box sx={{ flexGrow: 0, display: 'flex', alignItems: 'center' }}>
             <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
             <Typography
@@ -62,6 +69,7 @@ function ResponsiveAppBar() {
               DocTalk
             </Typography>
           </Box>
+          {/* User menu section */}
           <Box sx={{ flexGrow: 1, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
               {isLoggedIn ? (
@@ -92,6 +100,10 @@ function ResponsiveAppBar() {
                         <Typography textAlign="center">{setting}</Typography>
                       </MenuItem>
                     ))}
+                    {/* Logout menu item */}
+                    <MenuItem onClick={handleLogout}>
+                      <Typography textAlign="center">Logout</Typography>
+                    </MenuItem>
                   </Menu>
                 </>
               ) : (
@@ -110,6 +122,7 @@ function ResponsiveAppBar() {
                 </Box>
               )}
             </Box>
+            {/* Navigation menu section */}
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
               {pages.map((page) => (
                 <Link key={page} to={`/${page.replace(/\s/g, '').toLowerCase()}`} style={{ textDecoration: 'none' }}>

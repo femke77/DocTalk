@@ -2,7 +2,7 @@ import Login from './components/Login';
 import Signup from './components/Signup'; 
 import ContactForm from './components/Contact';
 import React from "react";
-import Header from "./components/Header/Header";
+import AppHeader from "./components/Header/AppHeader";
 import AboutUs from "./components/AboutUs";
 import Home from "./components/Home/Home";
 import Services from "./components/Services";
@@ -37,7 +37,7 @@ function App() {
     <>
       <ApolloProvider client={client}>
         <Router>
-          <Header />
+          <AppHeader />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/aboutus" element={<AboutUs />} />
