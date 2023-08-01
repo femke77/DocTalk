@@ -9,7 +9,7 @@ import AppHeader from '../Header/AppHeader';
 import ContactDoc from '../../pages/Patient/ContactDoc';
 import PatientHeader from '../../components/Header/PatientHeader';
 import ContactDoctor from '../../pages/Patient/ContactDoc';
-import Footer from '../Footer/Footer';
+import Footer from '../Footer';
 
 
 
