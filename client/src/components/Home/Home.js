@@ -4,9 +4,27 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
+import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
+import AppHeader from '../Header/AppHeader';
+import ContactDoc from '../../pages/Patient/ContactDoc';
+import PatientHeader from '../../components/Header/PatientHeader';
+import ContactDoctor from '../../pages/Patient/ContactDoc';
+
+
 
 export default function Homepage() {
+  // const navigate = useNavigate();
+
+  // const navigateToContactDoctor = () => {
+  //   navigate('/contactdoctor');
+  // };
   return (
+    // <div> 
+    //     <PatientHeader />
+    //     <Routes>
+    //       <Route path="/loggedinContact" element={<ContactDoctor />} />
+    //     </Routes>
+    // </div>
     <Card sx={{ maxWidth: 345 }}>
       <CardActionArea>
         <CardMedia
