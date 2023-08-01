@@ -12,6 +12,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ApolloClient,InMemoryCache,ApolloProvider,createHttpLink} from '@apollo/client';
 
 import { setContext } from '@apollo/client/link/context';
+import ContactDoctor from './pages/Patient/ContactDoc';
 
 const httpLink = createHttpLink({
   uri: 'http://localhost:3001/graphql',
@@ -46,7 +47,8 @@ function App() {
             <Route path="/contactus" element={<ContactForm />} />
             <Route path="/services" element={<Services />} />
             <Route path="/billing" element={<Billing />} />
-            
+            <Route path="/contactdoctor" element={<ContactDoctor />} />
+
           </Routes>
         </Router>
       </ApolloProvider>

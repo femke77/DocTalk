@@ -15,6 +15,9 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
+import ChatIcon from '@mui/icons-material/Chat';
+import CallIcon from '@mui/icons-material/Call';
+import { Link } from 'react-router-dom';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -98,7 +101,9 @@ export default function PrimarySearchAppBar() {
       onClose={handleMenuClose}
     >
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={handleMenuClose}>My Account</MenuItem>
+      <MenuItem onClick={handleMenuClose}><Link to="/billing">Billing</Link></MenuItem>
+      <MenuItem onClick={handleMenuClose}>Sign Out</MenuItem>
     </Menu>
   );
 
@@ -127,6 +132,25 @@ export default function PrimarySearchAppBar() {
         </IconButton>
         <p>Messages</p>
       </MenuItem>
+
+      <MenuItem>
+        <IconButton size="large" aria-label="" color="inherit">
+          <Badge>
+            <ChatIcon />
+          </Badge>
+        </IconButton>
+        <p>Chat</p>
+      </MenuItem>
+
+      <MenuItem>
+        <IconButton size="large" aria-label="" color="inherit">
+          <Badge>
+            <CallIcon />
+          </Badge>
+        </IconButton>
+        <p>Call</p>
+      </MenuItem>
+
       <MenuItem>
         <IconButton
           size="large"
@@ -139,6 +163,8 @@ export default function PrimarySearchAppBar() {
         </IconButton>
         <p>Notifications</p>
       </MenuItem>
+
+
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
           size="large"
@@ -191,6 +217,19 @@ export default function PrimarySearchAppBar() {
                 <MailIcon />
               </Badge>
             </IconButton>
+
+              <IconButton size="large" aria-label="" color="inherit">
+                <Badge>
+                  <ChatIcon />
+                </Badge>
+              </IconButton>
+
+              <IconButton size="large" aria-label="" color="inherit">
+                <Badge>
+                  <Link to="/contactdoctor"><CallIcon /></Link>
+                </Badge>
+              </IconButton>              
+
             <IconButton
               size="large"
               aria-label="show 17 new notifications"
