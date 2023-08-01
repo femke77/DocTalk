@@ -7,7 +7,7 @@ const Footer = () => {
     const currentYear = new Date().getFullYear();
 
     return (
-        <AppBar position="fixed" color="primary" sx={{ top: 'auto', bottom: 0, height: '95px' }}>
+        <AppBar position="fixed" color="primary" sx={{ top: 'auto', bottom: 0, height: '85px' }}>
             <Toolbar sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <div>
                 <Typography variant="body1" color="inherit" align="left">
