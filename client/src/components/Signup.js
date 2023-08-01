@@ -11,6 +11,7 @@ import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import Button from "@mui/material/Button";
+import Footer from './Footer';
 
 function Signup() {
   const [formState, setFormState] = useState({
@@ -60,6 +61,7 @@ function Signup() {
 
 
   return (
+    <div>
     <Container component="main" maxWidth="xs">
       <Box
         sx={{
@@ -172,6 +174,8 @@ function Signup() {
         </Box>
       </Box>
     </Container>
+    <Footer />
+    </div>
   );
 }
 

@@ -4,9 +4,11 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
+import Footer from '../Footer';
 
 export default function Homepage() {
   return (
+    <div>
     <Card sx={{ maxWidth: 345 }}>
       <CardActionArea>
         <CardMedia
@@ -31,5 +33,7 @@ export default function Homepage() {
         </Button>
       </CardActions>
     </Card>
+    <Footer />
+    </div>
   );
 }
