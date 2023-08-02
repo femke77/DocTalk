@@ -23,7 +23,7 @@ function Signup() {
     firstName: '',
     lastName: '',
     doctor: false,
-    patient: true,
+    patient: false,
     showPassword: false,
   });
 
