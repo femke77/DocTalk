@@ -13,6 +13,7 @@ import Checkbox from "@mui/material/Checkbox";
 import Radio from "@mui/material/Radio";
 import Button from "@mui/material/Button";
 import RadioGroup from '@mui/material/RadioGroup';
+import Footer from './Footer';
 
 function Signup() {
   const [formState, setFormState] = useState({
@@ -64,6 +65,7 @@ function Signup() {
 
 
   return (
+    <div>
     <Container component="main" maxWidth="xs">
       <Box
         sx={{
@@ -180,6 +182,8 @@ function Signup() {
         </Box>
       </Box>
     </Container>
+    <Footer />
+    </div>
   );
 }
 

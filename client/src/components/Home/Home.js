@@ -9,6 +9,7 @@ import AppHeader from '../Header/AppHeader';
 import ContactDoc from '../../pages/Patient/ContactDoc';
 import PatientHeader from '../../components/Header/PatientHeader';
 import ContactDoctor from '../../pages/Patient/ContactDoc';
+import Footer from '../Footer';
 
 
 
@@ -25,6 +26,7 @@ export default function Homepage() {
     //       <Route path="/loggedinContact" element={<ContactDoctor />} />
     //     </Routes>
     // </div>
+    <div>
     <Card sx={{ maxWidth: 345 }}>
       <CardActionArea>
         <CardMedia
@@ -49,5 +51,7 @@ export default function Homepage() {
         </Button>
       </CardActions>
     </Card>
+    <Footer />
+    </div>
   );
 }

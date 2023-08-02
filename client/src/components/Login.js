@@ -11,6 +11,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Auth from '../utils/auth';
+import Footer from './Footer';
 
 export default function Login() {
 
@@ -38,6 +39,7 @@ export default function Login() {
   };
 
   return (
+    <div>
 
     <Container component="main" maxWidth="xs">
        {data ? (
@@ -106,5 +108,7 @@ export default function Login() {
      
       <Link to="/">Go to Homepage</Link>
     </Container>
+    <Footer />
+    </div>
   );
 }

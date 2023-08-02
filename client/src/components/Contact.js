@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { TextField, Button, Typography, Box } from "@mui/material";
+import Footer from "./Footer";
 
 export default function ContactForm() {
   const [name, setName] = useState("");
@@ -11,6 +12,7 @@ export default function ContactForm() {
   };
 
   return (
+    <div>
     <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", height: "100vh" }}>
       <img
         src="/images/hero.jpg"
@@ -55,5 +57,7 @@ export default function ContactForm() {
         </form>
       </Box>
     </Box>
+    <Footer />
+    </div>
   );
 }
