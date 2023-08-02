@@ -3,9 +3,11 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 import Box from '@mui/material/Box';
+import Footer from './Footer';
 
 const AboutUs = () => {
   return (
+    <div>
     <Container component="main" maxWidth="md" sx={{ display: 'flex', gap: '20px', marginBottom: '50px' }}>
       <div>
         <Typography variant="h3" gutterBottom sx={{ fontFamily: 'Roboto', fontWeight: 'bold' }}>
@@ -70,6 +72,9 @@ const AboutUs = () => {
         </Box>
       </div>
     </Container>
+    <br></br>
+    <Footer />
+    </div>
   );
 };
 

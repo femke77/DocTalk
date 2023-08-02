@@ -7,6 +7,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import Footer from './Footer';
 
 const Billing = () => {
   const [formState, setFormState] = useState({ amount: 0, description: '', doctor: '' });
@@ -91,6 +92,7 @@ const Billing = () => {
           <Link to="/">← Go back to Home</Link>
         </Box>
       </Box>
+        <Footer />
     </Container>
   );
 };
