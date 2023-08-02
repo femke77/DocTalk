@@ -16,6 +16,7 @@ import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import Billing from '../Billing';
+import AuthService from '../../utils/auth';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -80,7 +81,10 @@ export default function PrimarySearchAppBar() {
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
-
+  const handleLogout = () => {
+    AuthService.logout(); 
+    window.location.reload();
+  };
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
     <Menu
@@ -100,7 +104,7 @@ export default function PrimarySearchAppBar() {
     >
       <MenuItem onClick={handleMenuClose}>DashBoard</MenuItem>
       <MenuItem onClick={handleMenuClose}>Billing</MenuItem>
-      <MenuItem onClick={handleMenuClose}>Logout</MenuItem>
+      <MenuItem onClick={handleLogout}>Logout</MenuItem>
     </Menu>
   );
 

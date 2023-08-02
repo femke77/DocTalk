@@ -9,7 +9,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
+// import Checkbox from "@mui/material/Checkbox";
 import Radio from "@mui/material/Radio";
 import Button from "@mui/material/Button";
 import RadioGroup from '@mui/material/RadioGroup';
@@ -42,6 +42,25 @@ function Signup() {
         doctor: formState.doctor
       },
     });
+    try {
+      const user = mutationResponse.data.addUser.user;
+      if(user){
+        // TODO: Move this to a common util method and call it from both login and signup
+        if(user.doctor === true || user.doctor === 'true' ){
+          Auth.setRole('doctor');
+          // localStorage.setItem('user_type', 'doctor');
+        }else if(user.patient === true || user.patient === 'true' ){
+          Auth.setRole('patient');
+          // localStorage.setItem('user_type', 'patient');
+        }
+        else{
+          Auth.setRole(null);
+          // localStorage.setItem('user_type', null);
+        }
+      }
+    } catch (error) {
+      Auth.setRole(null);
+    }
 
     const token = mutationResponse.data.addUser.token;
     Auth.login(token);
@@ -133,7 +152,7 @@ function Signup() {
             onChange={handleChange}
           />
           {/* Radio buttons for Doctor/Patient selection */}
-          <RadioGroup name="role">
+          <RadioGroup>
             <FormControlLabel
               control={
                 <Radio

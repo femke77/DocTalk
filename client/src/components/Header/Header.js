@@ -39,10 +39,10 @@ function ResponsiveAppBar() {
     setAnchorElUser(null);
   };
 
-  const handleLogout = () => {
-    AuthService.logout();
-    window.location.reload(); 
-  };
+  // const handleLogout = () => {
+  //   AuthService.logout();
+  //   window.location.reload(); 
+  // };
 
   return (
     <AppBar position="static">
@@ -96,10 +96,11 @@ function ResponsiveAppBar() {
                     onClose={handleCloseUserMenu}
                   >
                     {/* Logout menu item */}
-                    <MenuItem onClick={handleLogout}>
+                    {/* <MenuItem onClick={handleLogout}>
                       <Typography textAlign="center">Logout</Typography>
-                    </MenuItem>
+                    </MenuItem> */}
                   </Menu>
+
                 </>
               ) : (
                 <Box sx={{ display: 'flex' }}>

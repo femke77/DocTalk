@@ -13,6 +13,7 @@ import DocTalkLogo from '../../assets/images/virtual.jpeg';
 export default function Homepage() {
   // ...
   return (
+    <div>
     <Container
       maxWidth="100%"
       sx={{
@@ -25,19 +26,19 @@ export default function Homepage() {
     >
       {/* Top Section */}
       <div style={{ display: 'flex', width: '100%', padding: '1rem' }}>
-        <Card sx={{ maxWidth: 400 }}>
+        <Card sx={{ maxWidth: 500 }}>
           <CardActionArea>
-            <CardMedia
+            {/* <CardMedia
               component="img"
-              width= '50%'
-              height="55%"
+              width= '100%'
+              height="100%"
               image={DocTalkLogo}
               alt="image of blue and white background with DocTalk logo"
-            />
+            /> */}
           </CardActionArea>
         </Card>
 
-        <Card sx={{ maxWidth: 400, marginLeft:'1rem', display: 'flex', justifyContent:'center', alignItems: 'center'}}>
+        {/* <Card sx={{ maxWidth: 400, marginLeft:'1rem', display: 'flex', justifyContent:'center', alignItems: 'center'}}>
           <CardActionArea>
             <Typography variant="h5">
               Welcome to DocTalk
@@ -52,7 +53,7 @@ export default function Homepage() {
               Our doctors are available 24/7 to help you feel better faster.
             </Typography>
           </CardActionArea>
-        </Card>
+        </Card> */}
       </div>
 
       {/* Running Text */}
@@ -79,7 +80,7 @@ export default function Homepage() {
 
       {/* Bottom Section */}
       <div style={{ display: 'flex', width: '100%', backgroundColor: '#fff', padding: '1rem' }}>
-        <Card sx={{ maxWidth: 454 }}>
+        {/* <Card sx={{ maxWidth: 454 }}>
           <CardActionArea>
             <Typography variant="body1">
               We are Doctors who care about your health.
@@ -88,9 +89,9 @@ export default function Homepage() {
               Now you can message, chat, and request a call from your doctor. No more waiting for an appointment, waiting room, or long lines at the pharmacy.
             </Typography>
           </CardActionArea>
-        </Card>
+        </Card> */}
 
-        <Card sx={{ maxWidth: 554 }}>
+        {/* <Card sx={{ maxWidth: 554 }}>
           <CardActionArea>
             <CardMedia
               component="img"
@@ -100,10 +101,13 @@ export default function Homepage() {
               alt="image of a female and male doctor and a male nurse"
             />
           </CardActionArea>
-        </Card>
+        </Card> */}
       </div>
 
-      <Footer />
+     
     </Container>
+
+ <Footer />
+ </div>
   );
 }

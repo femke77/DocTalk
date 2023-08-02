@@ -1,33 +1,21 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Header from './Header';
-import PatientHeader from './PatientHeader';
+import PatientHeader from './PatientHeader'; 
 import DoctorHeader from './DoctorHeader';
 import AuthService from '../../utils/auth';
-import CheckboxComponent from './CheckBoxComponent';
 
 function AppHeader() {
-  const [isLoggedIn, setIsLoggedIn] = useState(AuthService.loggedIn());
-  const [userType, setUserType] = useState('patient');
+  const isLoggedIn = AuthService.loggedIn();
 
-  const handleUserTypeChange = (isDoctor) => {
-    setUserType(isDoctor ? 'doctor' : 'patient');
+  const role = AuthService.getRole()
+  console.log("THE ROLE IS    ", role);
+  // Conditional rendering based on the user's login state
+  return isLoggedIn ? ( role === 'patient' ? <PatientHeader /> : <DoctorHeader />) : <Header />;
+  
+  const handleLogout = () => {
+    AuthService.logout(); // For example, call the AuthService logout function
+    window.location.reload(); // Reload the page to clear the user session
   };
-
-  if (isLoggedIn) {
-    
-    return (
-      <>
-       
-        <CheckboxComponent onChange={handleUserTypeChange} />
-
-        
-        {userType === 'doctor' ? <DoctorHeader /> : <PatientHeader />}
-      </>
-    );
-  } else {
-   
-    return <Header />;
-  }
 }
 
 export default AppHeader;
