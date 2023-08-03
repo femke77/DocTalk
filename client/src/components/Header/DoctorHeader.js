@@ -1,4 +1,4 @@
-import React,{ useState} from 'react';
+import React,{ useState } from 'react';
 import { styled, alpha } from '@mui/material/styles';
 import { Link } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
@@ -235,7 +235,7 @@ export default function PrimarySearchAppBar() {
 
             <IconButton size="large" aria-label="" color="inherit">
                 <Badge>
-                  <ChatIcon />
+                  <Link to="/ContactPatientChat"><ChatIcon /></Link>
                 </Badge>
               </IconButton>
 
