@@ -34,12 +34,14 @@ export default function Login() {
           Auth.setRole('doctor');
           // localStorage.setItem('user_type', 'doctor');
         }else if(user.patient === true || user.patient === 'true' ){
-          Auth.setRole('patient');
           // localStorage.setItem('user_type', 'patient');
+          Auth.setRole('patient');
+          
         }
         else{
+            // localStorage.setItem('user_type', null);
           Auth.setRole(null);
-          // localStorage.setItem('user_type', null);
+        
         }        
       } catch (error) {
         Auth.setRole(null);
@@ -60,7 +62,7 @@ export default function Login() {
     <Container component="main" maxWidth="xs">
        {data ? (
           <p>
-            Success! Redirecting{' '}
+            {/* Success! Redirecting{' '} */}
             <Link to="/">Home.</Link>
           </p>):
           ( <Box
