@@ -9,12 +9,14 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
+// import Checkbox from "@mui/material/Checkbox";
+import Radio from "@mui/material/Radio";
 import Button from "@mui/material/Button";
+import RadioGroup from '@mui/material/RadioGroup';
 import Footer from './Footer';
 
 function Signup() {
-  // default to patient:
+  // checked = doctor, unchecked = patient
   const [checked, setChecked] = useState(false)
   
   const [formState, setFormState] = useState({
@@ -43,10 +45,32 @@ function Signup() {
         patient: checked ? false : true
       },
     });
+    try {
+      const user = mutationResponse.data.addUser.user;
+      if(user){
+
+        if(user.doctor === true || user.doctor === 'true' ){
+          Auth.setRole('doctor');
+          // localStorage.setItem('user_type', 'doctor');
+        }else if(user.patient === true || user.patient === 'true' ){
+          Auth.setRole('patient');
+  
+        }
+        else{
+          // localStorage.setItem('user_type', null);
+          Auth.setRole(null);
+       
+        }
+      }
+    } catch (error) {
+      Auth.setRole(null);
+    }
+
     const token = mutationResponse.data.addUser.token;
     Auth.login(token);
   };
 
+  
   const handleChange = (event) => {
 
     const { name, value } = event.target;
