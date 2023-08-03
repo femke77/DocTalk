@@ -32,6 +32,20 @@ export const UPDATE_USER = gql`
   }
 `;
 
+export const ADD_MESSAGE = gql`
+mutation addMessage($messageData: MessageInput) {
+  message(messageData: $messageData) {
+    _id
+    email
+    firstName
+    lastName
+    phonenumber
+    patient
+    message
+  }
+}
+`;
+
 
 export const ADD_BILL = gql`
   mutation addBill($amount: Float!, $description: String!) {
