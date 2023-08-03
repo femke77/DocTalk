@@ -14,14 +14,25 @@ export default function Homepage() {
   // ...
   return (
     <div>
+      <Card sx={{ maxWidth: 645 }}>
+        <CardActionArea>
+          <CardMedia
+            component="img"
+            height="140"
+            image={DoctorImage}
+            alt="Doctor"
+          />
+        </CardActionArea>
+      </Card>
+  
       
-    <div>
+  
  
 
       {/* Running Text */}
       {/* ... */}
 
-      {/* <marquee
+      <marquee
         behavior="scroll"
         direction="left"
 
@@ -38,11 +49,20 @@ export default function Homepage() {
         }}
       >
         Established In&nbsp;&nbsp;&nbsp;2023 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 24/7&nbsp;&nbsp; Available To Serve Our Patients &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Serving In&nbsp;&nbsp;California&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 100% HIPPA Compliant&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; We Value Our Relationship
-      </marquee> */}
+      </marquee>
 
      
-      </div>
 
+<Card sx={{ maxWidth: 645 }}>
+        <CardActionArea>
+          <CardMedia
+            component="img"
+            height="140"
+            image={VirtualImage}
+            alt="Virtual"
+          />
+        </CardActionArea>
+      </Card>
      
   
 
