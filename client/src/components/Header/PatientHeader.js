@@ -145,8 +145,12 @@ export default function PrimarySearchAppBar() {
       </MenuItem>
 
       <MenuItem>
-        <IconButton size="large" aria-label="" color="inherit">
-          <Badge>
+        <IconButton
+          size="large"
+          aria-label="show 2 new chats"
+          color="inherit"
+        >
+          <Badge badgeContent={2} color="error">
             <ChatIcon />
           </Badge>
         </IconButton>
@@ -210,7 +214,7 @@ export default function PrimarySearchAppBar() {
             component="div"
             sx={{ display: { xs: 'none', sm: 'block' } }}
           >
-            MUI
+            DocTalk
           </Typography>
           <Search>
             <SearchIconWrapper>
@@ -237,7 +241,7 @@ export default function PrimarySearchAppBar() {
 
               <IconButton size="large" aria-label="" color="inherit">
                 <Badge>
-                  <Link to="/contactdoctor"><CallIcon /></Link>
+                  <Link to="/contact"><CallIcon /></Link>
                 </Badge>
               </IconButton>              
 

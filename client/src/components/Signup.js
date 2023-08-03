@@ -45,17 +45,18 @@ function Signup() {
     try {
       const user = mutationResponse.data.addUser.user;
       if(user){
-        // TODO: Move this to a common util method and call it from both login and signup
+
         if(user.doctor === true || user.doctor === 'true' ){
           Auth.setRole('doctor');
           // localStorage.setItem('user_type', 'doctor');
         }else if(user.patient === true || user.patient === 'true' ){
           Auth.setRole('patient');
-          // localStorage.setItem('user_type', 'patient');
+  
         }
         else{
-          Auth.setRole(null);
           // localStorage.setItem('user_type', null);
+          Auth.setRole(null);
+       
         }
       }
     } catch (error) {
