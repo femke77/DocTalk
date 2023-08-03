@@ -11,6 +11,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Auth from '../utils/auth';
+import Footer from './Footer';
 
 export default function Login() {
 
@@ -27,6 +28,22 @@ export default function Login() {
           password: formData.get("password"),
         },
       });
+      try {
+        const user = data.login.user;
+        if(user.doctor === true || user.doctor === 'true' ){
+          Auth.setRole('doctor');
+          // localStorage.setItem('user_type', 'doctor');
+        }else if(user.patient === true || user.patient === 'true' ){
+          Auth.setRole('patient');
+          // localStorage.setItem('user_type', 'patient');
+        }
+        else{
+          Auth.setRole(null);
+          // localStorage.setItem('user_type', null);
+        }        
+      } catch (error) {
+        Auth.setRole(null);
+      }
 
       const token = data.login.token;
       Auth.login(token);
@@ -37,7 +54,8 @@ export default function Login() {
     }
   };
 
-  return (
+  return (  
+    <div>
 
     <Container component="main" maxWidth="xs">
        {data ? (
@@ -106,5 +124,7 @@ export default function Login() {
      
       <Link to="/">Go to Homepage</Link>
     </Container>
+    <Footer />
+    </div>
   );
 }

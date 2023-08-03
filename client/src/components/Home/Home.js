@@ -1,53 +1,52 @@
 import React from 'react';
 import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { Button, CardActionArea, CardActions } from '@mui/material';
+import { CardActionArea } from '@mui/material';
+import { Container } from '@mui/material';
 import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
-import AppHeader from '../Header/AppHeader';
-import ContactDoc from '../../pages/Patient/ContactDoc';
-import PatientHeader from '../../components/Header/PatientHeader';
-import ContactDoctor from '../../pages/Patient/ContactDoc';
-
-
+import Footer from '../Footer';
+import DoctorImage from '../../assets/images/3568984.jpg';
+import VirtualImage from '../../assets/images/virtualimage.jpeg';
+import DocTalkLogo from '../../assets/images/virtual.jpeg';
 
 export default function Homepage() {
-  // const navigate = useNavigate();
-
-  // const navigateToContactDoctor = () => {
-  //   navigate('/contactdoctor');
-  // };
+  // ...
   return (
-    // <div> 
-    //     <PatientHeader />
-    //     <Routes>
-    //       <Route path="/loggedinContact" element={<ContactDoctor />} />
-    //     </Routes>
-    // </div>
-    <Card sx={{ maxWidth: 345 }}>
-      <CardActionArea>
-        <CardMedia
-          component="img"
-          height="140"
-          image="/static/images/cards/contemplative-reptile.jpg"
-          alt="green iguana"
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            Lizard
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-      <CardActions>
-        <Button size="small" color="primary">
-          Share
-        </Button>
-      </CardActions>
-    </Card>
+    <div>
+      
+    <div>
+ 
+
+      {/* Running Text */}
+      {/* ... */}
+
+      {/* <marquee
+        behavior="scroll"
+        direction="left"
+
+        style={{
+          background: '#1976d2',
+          padding: '3rem',
+          color: '#fff',
+
+          fontFamily: 'Arial, sans-serif',
+          fontSize: '18px',
+          fontWeight: 'bold',
+          fontStyle: 'italic',
+
+        }}
+      >
+        Established In&nbsp;&nbsp;&nbsp;2023 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 24/7&nbsp;&nbsp; Available To Serve Our Patients &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Serving In&nbsp;&nbsp;California&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 100% HIPPA Compliant&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; We Value Our Relationship
+      </marquee> */}
+
+     
+      </div>
+
+     
+  
+
+ <Footer />
+ </div>
   );
 }
