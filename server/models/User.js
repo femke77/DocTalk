@@ -30,9 +30,11 @@ const userSchema = new Schema({
   },
   patient: {
     type: Boolean, 
+    default: false
   },
   doctor: {
     type: Boolean,
+    default: false
   },
 });
 
