@@ -28,6 +28,24 @@ export default function Login() {
           password: formData.get("password"),
         },
       });
+      try {
+        const user = data.login.user;
+        if(user.doctor === true || user.doctor === 'true' ){
+          Auth.setRole('doctor');
+          // localStorage.setItem('user_type', 'doctor');
+        }else if(user.patient === true || user.patient === 'true' ){
+          // localStorage.setItem('user_type', 'patient');
+          Auth.setRole('patient');
+          
+        }
+        else{
+            // localStorage.setItem('user_type', null);
+          Auth.setRole(null);
+        
+        }        
+      } catch (error) {
+        Auth.setRole(null);
+      }
 
       const token = data.login.token;
       Auth.login(token);
@@ -38,13 +56,13 @@ export default function Login() {
     }
   };
 
-  return (
+  return (  
     <div>
 
     <Container component="main" maxWidth="xs">
        {data ? (
           <p>
-            Success! Redirecting{' '}
+            {/* Success! Redirecting{' '} */}
             <Link to="/">Home.</Link>
           </p>):
           ( <Box
