@@ -15,6 +15,7 @@ import FindDoctor from './pages/Patient/FindDoctor';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ApolloClient,InMemoryCache,ApolloProvider,createHttpLink} from '@apollo/client';
 
+import {client, Chat} from './Chat'
 
 import { setContext } from '@apollo/client/link/context';
 import ContactDoctor from './pages/Patient/ContactDoc';
@@ -43,6 +44,10 @@ function App() {
   return (
     <>
       <ApolloProvider client={client}>
+      <div className = "App">
+        <h2>Dev Thoughts 💭</h2>
+        <Chat/>
+      </div>
         <Router>
           <AppHeader />
           <Routes>
