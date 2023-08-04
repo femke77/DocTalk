@@ -53,8 +53,8 @@ function App() {
             <Route path="/billing" element={<Billing />} />
             <Route path="/contactdoctor" element={<ContactDoctor />} />
             <Route path="/contactpatient" element={<ContactPatient />} />
-            <Route path="/doctor-email" component={DoctorEmail} />
             
+            <Route path="/doctor-email" component={DoctorEmail} />
             <Route path="/contactpatientchat" element={<ContactPatientChat />} />
 
           </Routes>

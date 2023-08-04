@@ -1,3 +1,5 @@
+import react from 'react';
+import ContactPatientChat from './ContactPatientChat';
 import { ApolloClient, InMemoryCache, useMutation, useSubscription, gql} from '@apollo/client';
 import { WebSocketLink } from "@apollo/client/link/ws";
 import {Container, Chip, Grid, TextField, Button} from '@material-ui/core';
@@ -15,7 +17,7 @@ export const client = new ApolloClient({
     cache: new InMemoryCache(),
   });
   
-  export const Chat = () =>{
+  export const ContactPatientChat = () =>{
     return(
       <div>
          <h3>Welcome to DevThoughts! A simple chat app for the GraphQL series!</h3>
