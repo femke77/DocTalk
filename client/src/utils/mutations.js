@@ -2,7 +2,7 @@ import { gql } from '@apollo/client';
 
 
 export const ADD_USER = gql`
-mutation addUser($username: String!, $email: String!, $password: String!, $firstName: String!, $lastName: String!, $patient: Boolean!, $doctor: Boolean!) {
+mutation addUser($username: String!, $email: String!, $password: String!, $firstName: String!, $lastName: String!, $patient: Boolean, $doctor: Boolean) {
   addUser(username: $username, email: $email, password: $password, firstName: $firstName, lastName: $lastName, patient: $patient, doctor: $doctor) {
     token
     user {
@@ -30,6 +30,20 @@ export const UPDATE_USER = gql`
       patient
     }
   }
+`;
+
+export const ADD_MESSAGE = gql`
+mutation addMessage($messageData: MessageInput) {
+  message(messageData: $messageData) {
+    _id
+    email
+    firstName
+    lastName
+    phonenumber
+    patient
+    message
+  }
+}
 `;
 
 
