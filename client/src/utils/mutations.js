@@ -76,6 +76,15 @@ export const LOGIN_USER = gql`
   }
 `;
 
+export const ADD_CHAT_MESSAGE = gql`
+  mutation addChatMessage($message: ChatMessageInput) {
+    addMessage(message: $message) {
+      id
+      text
+    }
+  }
+`;
+
 export const ADD_APPOINTMENT = gql`
   mutation AddAppointment(
     $firstName: String!
@@ -103,3 +112,4 @@ export const ADD_APPOINTMENT = gql`
     }
   }
 `;
+

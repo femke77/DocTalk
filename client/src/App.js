@@ -23,12 +23,15 @@ import { ApolloClient,InMemoryCache,ApolloProvider,createHttpLink} from '@apollo
 import { setContext } from '@apollo/client/link/context';
 import ContactDoctor from './pages/Patient/ContactDoc';
 import ContactPatient from './pages/Doctor/ContactPatient';
+import ContactPatientChat from './pages/Doctor/ContactPatientChat';
 
 
 
 const httpLink = createHttpLink({
   uri: 'http://localhost:3001/graphql',
 });
+
+
 
 const authLink = setContext((_, { headers }) => {
   const token = localStorage.getItem('id_token');
@@ -40,6 +43,7 @@ const authLink = setContext((_, { headers }) => {
   };
 });
 
+
 const client = new ApolloClient({
   link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
@@ -48,6 +52,7 @@ const client = new ApolloClient({
 function App() {
   return (
     <>
+  
       <ApolloProvider client={client}>
      
         <Router>
@@ -63,6 +68,10 @@ function App() {
             <Route path="/contactdoctor" element={<ContactDoctor />} />
             <Route path="/contactpatient" element={<ContactPatient />} />
 
+
+        
+            <Route path="/contactpatientchat" element={<ContactPatientChat />} />
+
             <Route path="/PatientProfile" element={<PatientProfile />} />
             <Route path="/BookAppointment" element={<BookAppointment />} />
             <Route path="/FindDoctor" element={<FindDoctor />} />
@@ -70,6 +79,7 @@ function App() {
             <Route path="/MyAccount" element={<MyAccount />} />
             <Route path="/doctor-email" element={<DoctorEmail />} />
             <Route path="/DoctorProfile" element={<DoctorProfile />} />
+
 
           </Routes>
         </Router>
