@@ -4,7 +4,7 @@ import { useMutation } from '@apollo/client';
 import { gql } from '@apollo/client';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Auth from '../../utils/auth';
+import Auth from '../../../utils/auth';
 
 const SEND_EMAIL_MUTATION = gql`
   mutation SendEmail($emailInput: EmailInput!) {

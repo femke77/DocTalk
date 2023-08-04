@@ -11,7 +11,6 @@ import Button from '@mui/material/Button';
 import MailIcon from '@mui/icons-material/Mail';
 import DraftsIcon from '@mui/icons-material/Drafts';
 import SendIcon from '@mui/icons-material/Send';
-import Card from '@mui/material/Card';
 import { Link } from 'react-router-dom';
 import EmailDetails from './EmailDetails'; 
 import { useQuery, gql } from '@apollo/client';  
@@ -53,7 +52,14 @@ const EmailDashboard = () => {
     // Add more emails here...
   ]);
 
-  const { loading, error, data } = useQuery(GET_EMAILS_QUERY);
+  const { loading, error, data } = useQuery(GET_EMAILS_QUERY, {
+    // Include the authentication token in the request headers
+    context: {
+      headers: {
+        Authorization: `Bearer YOUR_AUTH_TOKEN_HERE`,
+      },
+    },
+  });
 
   React.useEffect(() => {
     if (data) {

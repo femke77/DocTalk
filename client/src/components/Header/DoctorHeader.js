@@ -16,13 +16,13 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
-import Billing from '../Billing';
+
 import AuthService from '../../utils/auth';
 import ChatIcon from '@mui/icons-material/Chat';
 import CallIcon from '@mui/icons-material/Call';
-import CallPatient from '../../pages/Doctor/CallPatient';
-// import DoctorEmail from '../../pages/Doctor/DoctorEmails/DoctorEmailPage';
-import EmailDashboard from '../../pages/Doctor/DoctorEmails/EmailDashboard';
+
+
+
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
   borderRadius: theme.shape.borderRadius,
