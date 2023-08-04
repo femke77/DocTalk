@@ -1,4 +1,4 @@
-import React,{ useState} from 'react';
+import React, { useState } from 'react';
 import { styled, alpha } from '@mui/material/styles';
 import { Link } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
@@ -20,96 +20,103 @@ import Billing from '../Billing';
 import AuthService from '../../utils/auth';
 import ChatIcon from '@mui/icons-material/Chat';
 import CallIcon from '@mui/icons-material/Call';
+import DoctorEmail from '../../pages/Doctor/DoctorEmail';
 
 const Search = styled('div')(({ theme }) => ({
-    position: 'relative',
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: alpha(theme.palette.common.white, 0.15),
-    '&:hover': {
-        backgroundColor: alpha(theme.palette.common.white, 0.25),
-    },
-    marginRight: theme.spacing(2),
-    marginLeft: 0,
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-        marginLeft: theme.spacing(3),
-        width: 'auto',
-    },
+  position: 'relative',
+  borderRadius: theme.shape.borderRadius,
+  backgroundColor: alpha(theme.palette.common.white, 0.15),
+  '&:hover': {
+    backgroundColor: alpha(theme.palette.common.white, 0.25),
+  },
+  marginRight: theme.spacing(2),
+  marginLeft: 0,
+  width: '100%',
+  [theme.breakpoints.up('sm')]: {
+    marginLeft: theme.spacing(3),
+    width: 'auto',
+  },
 }));
 
 const SearchIconWrapper = styled('div')(({ theme }) => ({
-    padding: theme.spacing(0, 2),
-    height: '100%',
-    position: 'absolute',
-    pointerEvents: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
+  padding: theme.spacing(0, 2),
+  height: '100%',
+  position: 'absolute',
+  pointerEvents: 'none',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
-    color: 'inherit',
-    '& .MuiInputBase-input': {
-        padding: theme.spacing(1, 1, 1, 0),
-        // vertical padding + font size from searchIcon
-        paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-        transition: theme.transitions.create('width'),
-        width: '100%',
-        [theme.breakpoints.up('md')]: {
-            width: '20ch',
-        },
+  color: 'inherit',
+  '& .MuiInputBase-input': {
+    padding: theme.spacing(1, 1, 1, 0),
+    // vertical padding + font size from searchIcon
+    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    transition: theme.transitions.create('width'),
+    width: '100%',
+    [theme.breakpoints.up('md')]: {
+      width: '20ch',
     },
+  },
 }));
 
 export default function PrimarySearchAppBar() {
-    const [isLoggedIn, setIsLoggedIn] = useState(AuthService.loggedIn());
+  const [isLoggedIn, setIsLoggedIn] = useState(AuthService.loggedIn());
 
-    const [anchorEl, setAnchorEl] = React.useState(null);
-    const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
-    const isMenuOpen = Boolean(anchorEl);
-    const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+  const isMenuOpen = Boolean(anchorEl);
+  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-    const handleProfileMenuOpen = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
+  const handleProfileMenuOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
 
-    const handleMobileMenuClose = () => {
-        setMobileMoreAnchorEl(null);
-    };
+  const handleMobileMenuClose = () => {
+    setMobileMoreAnchorEl(null);
+  };
 
-    const handleMenuClose = () => {
-        setAnchorEl(null);
-        handleMobileMenuClose();
-    };
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+    handleMobileMenuClose();
+  };
 
-    const handleMobileMenuOpen = (event) => {
-        setMobileMoreAnchorEl(event.currentTarget);
-    };
-    // Logout Function for patientiside
-    const handleLogout = () => {
-        AuthService.logout();
-        setIsLoggedIn(false);
-        handleMenuClose();
-    };
+  const handleMobileMenuOpen = (event) => {
+    setMobileMoreAnchorEl(event.currentTarget);
+  };
+  // Logout Function for patientiside
+  const handleLogout = () => {
+    AuthService.logout();
+    setIsLoggedIn(false);
+    handleMenuClose();
+  };
+  const handleEmailClick = () => {
+    // Add any additional logic you may need before navigating to the DoctorEmail page
+    if (isLoggedIn) {
+      <Link to="/doctor-email" />;
+    }
+  };
 
-    const menuId = 'primary-search-account-menu';
-    const renderMenu = (
-        <Menu
-            anchorEl={anchorEl}
-            anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-            }}
-            id={menuId}
-            keepMounted
-            transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-            }}
-            open={isMenuOpen}
-            onClose={handleMenuClose}
-        >
+  const menuId = 'primary-search-account-menu';
+  const renderMenu = (
+    <Menu
+      anchorEl={anchorEl}
+      anchorOrigin={{
+        vertical: 'top',
+        horizontal: 'right',
+      }}
+      id={menuId}
+      keepMounted
+      transformOrigin={{
+        vertical: 'top',
+        horizontal: 'right',
+      }}
+      open={isMenuOpen}
+      onClose={handleMenuClose}
+    >
       <MenuItem onClick={handleMenuClose}>DashBoard</MenuItem>
       <MenuItem onClick={handleMenuClose}>Billing</MenuItem>
       <MenuItem onClick={handleLogout}>Logout</MenuItem>
@@ -141,7 +148,7 @@ export default function PrimarySearchAppBar() {
         </IconButton>
         <p>Messages</p>
       </MenuItem>
-  
+
       <MenuItem>
         <IconButton
           size="large"
@@ -154,9 +161,9 @@ export default function PrimarySearchAppBar() {
         </IconButton>
         <p>Chat</p>
       </MenuItem>
-  
+
       <MenuItem>
-      <IconButton size="large" aria-label="" color="inherit">
+        <IconButton size="large" aria-label="" color="inherit">
           <Badge>
             <CallIcon />
           </Badge>
@@ -164,7 +171,7 @@ export default function PrimarySearchAppBar() {
         <p>Call</p>
         console.log(error.message)
       </MenuItem>
-  
+
       <MenuItem>
         <IconButton
           size="large"
@@ -176,9 +183,9 @@ export default function PrimarySearchAppBar() {
           </Badge>
         </IconButton>
         <p>Notifications</p>
-        
+
       </MenuItem>
-  
+
 
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
@@ -227,23 +234,32 @@ export default function PrimarySearchAppBar() {
           </Search>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+
+            {/* <IconButton size="large" aria-label="show 4 new mails" color="inherit">
               <Badge badgeContent={4} color="error">
                 <MailIcon />
+              </Badge>
+            </IconButton> */}
+
+            <Link to="/doctor-email">
+              <IconButton size="large" aria-label="show 2 new chats" color="inherit" onClick={handleEmailClick}>
+                <Badge badgeContent={2} color="error">
+                <MailIcon />
+                </Badge>
+              </IconButton>
+            </Link>
+
+            <IconButton size="large" aria-label="" color="inherit">
+              <Badge>
+                <ChatIcon />
               </Badge>
             </IconButton>
 
             <IconButton size="large" aria-label="" color="inherit">
-                <Badge>
-                  <ChatIcon />
-                </Badge>
-              </IconButton>
-
-              <IconButton size="large" aria-label="" color="inherit">
-                <Badge>
-                  <Link to="/contactpatient"><CallIcon /></Link>
-                </Badge>
-              </IconButton>              
+              <Badge>
+                <Link to="/doctor-email"><CallIcon /></Link>
+              </Badge>
+            </IconButton>
 
             <IconButton
               size="large"
