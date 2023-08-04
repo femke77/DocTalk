@@ -123,8 +123,6 @@ export default function Login() {
               </Grid>
             </Box>
           </Box>)}
-     
-      <Link to="/">Go to Homepage</Link>
     </Container>
     <Footer />
     </div>

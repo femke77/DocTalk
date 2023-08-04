@@ -8,15 +8,26 @@ import Home from "./components/Home/Home";
 import Services from "./components/Services";
 import Billing from "./components/Billing";
 
+import DoctorEmail from './pages/Doctor/DoctorEmail';
+
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ApolloClient,InMemoryCache,ApolloProvider,createHttpLink} from '@apollo/client';
+import { WebSocketLink } from '@apollo/client/link/ws';
 
 import { setContext } from '@apollo/client/link/context';
 import ContactDoctor from './pages/Patient/ContactDoc';
 import ContactPatient from './pages/Doctor/ContactPatient';
+import ContactPatientChat from './pages/Doctor/ContactPatientChat';
 
 const httpLink = createHttpLink({
   uri: 'http://localhost:3001/graphql',
+});
+
+const wsLink = new WebSocketLink({
+  uri: `ws://localhost:3001/graphql`,
+  options: {
+    reconnect: true,
+  }
 });
 
 const authLink = setContext((_, { headers }) => {
@@ -29,6 +40,11 @@ const authLink = setContext((_, { headers }) => {
   };
 });
 
+const chatClient = new ApolloClient({
+  link: wsLink,
+  cache: new InMemoryCache(),
+});
+
 const client = new ApolloClient({
   link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
@@ -37,6 +53,13 @@ const client = new ApolloClient({
 function App() {
   return (
     <>
+      <ApolloProvider client={chatClient}>
+        <Router>
+          <Routes>
+            <Route path="/chat" element={<ContactPatientChat />} />
+          </Routes>        
+        </Router>
+      </ApolloProvider>
       <ApolloProvider client={client}>
         <Router>
           <AppHeader />
@@ -50,6 +73,9 @@ function App() {
             <Route path="/billing" element={<Billing />} />
             <Route path="/contactdoctor" element={<ContactDoctor />} />
             <Route path="/contactpatient" element={<ContactPatient />} />
+
+            <Route path="/doctor-email" component={DoctorEmail} />
+            <Route path="/contactpatientchat" element={<ContactPatientChat />} />
 
           </Routes>
         </Router>
