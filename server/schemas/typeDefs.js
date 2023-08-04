@@ -12,6 +12,12 @@ const typeDefs = gql`
     doctor: Boolean
   }
 
+  type Chat {
+    _id: ID
+    user: User
+    text: String
+  }
+
   type Message {
     _id: ID
     email: String
@@ -39,6 +45,7 @@ const typeDefs = gql`
   type Query {
     users: [User!]!
     userByEmail(email: String!): User
+    getChats: [Chat]
   }
 
   type Mutation {
@@ -46,6 +53,7 @@ const typeDefs = gql`
     login(email: String!, password: String!): Auth
     updateUser(_id: ID!, input: UpdateUserInput!): User!
     message(messageData:MessageInput):Message
+    postChat(userId: ID!, text: String!): Chat
   }
 
   input UpdateUserInput {

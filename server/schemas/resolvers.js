@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Message } = require('../models');
+const { User, Message, Chat } = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
@@ -22,6 +22,15 @@ const resolvers = {
         throw new Error('Error fetching user by email');
       }
     },
+    getChats: async (parent, args) => {
+      try {
+        const chats = await Chat.find().populate('user');
+        return chats;
+      } catch (error) {
+        console.error(error);
+        throw new Error('Error fetching chats');
+      }
+    }
   },
   Mutation: {
     addUser: async (parent, { username, email, password, firstName, lastName, patient, doctor }) => {
@@ -85,6 +94,10 @@ const resolvers = {
       const token = signToken(user);
 
       return { token, user };
+    },
+    postChat: async (parent, { userId, text }) => {
+      const chat = await Chat.create({ user: userId, text });
+      return chat;
     },
   },
 };
