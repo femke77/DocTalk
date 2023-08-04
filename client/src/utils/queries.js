@@ -12,5 +12,21 @@ export const QUERY_ALL_USERS = gql`
         username
       }
     }
+  
+`;
+
+
+export const CHANNEL_DETAILS = gql`
+  query ChannelDetailsQuery {
+    channel {
+      id
+      name
+      messages {
+        id
+        text
+      }
+    }
   }
 `;
+
+

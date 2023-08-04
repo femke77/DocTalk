@@ -61,3 +61,12 @@ export const LOGIN_USER = gql`
     }
   }
 `;
+
+export const ADD_MESSAGE = gql`
+  mutation addMessage($message: String) {
+    addMessage(message: $message) {
+      id
+      text
+    }
+  }
+`;

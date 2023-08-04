@@ -2,6 +2,16 @@ const { AuthenticationError } = require('apollo-server-express');
 const { User } = require('../models');
 const { signToken } = require('../utils/auth');
 
+const channel = {
+  id: "1",
+  name: "Chat with Doctor",
+  messages: [{
+    id: "1",
+    text: "The doctor will be with you shortly ..."
+  }]
+}
+let nextMessageId = "2";
+
 const resolvers = {
   Query: {
     users: async () => {
@@ -22,6 +32,9 @@ const resolvers = {
         throw new Error('Error fetching user by email');
       }
     },
+    channel: async()=> {
+      return channel;
+    }
   },
   Mutation: {
     addUser: async (parent, { username, email, password, firstName, lastName, patient, doctor }) => {
@@ -77,6 +90,11 @@ const resolvers = {
 
       return { token, user };
     },
+    addMessage: async (parent, {message}) => {     
+      const newMessage = {id: String(nextMessageId++), text: message}
+      channel.messages.push(newMessage)
+      return newMessage;
+    }
   },
 };
 
