@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Message } = require('../models');
+const { User, Message, Email } = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
@@ -20,6 +20,18 @@ const resolvers = {
       } catch (error) {
         console.log(error);
         throw new Error('Error fetching user by email');
+      }
+    },
+    getAllEmails: async () => {
+      try {
+        const emails = await Email.find();
+        return emails.map(async (email) => {
+          const sender = await User.findById(email.sender);
+          return { ...email._doc, sender };
+        });
+      } catch (error) {
+        console.log(error);
+        throw new Error('Error fetching all emails');
       }
     },
   },
@@ -86,6 +98,34 @@ const resolvers = {
 
       return { token, user };
     },
+
+    sendEmail: async (parent, { emailInput }, context) => {
+      if (!context.user) {
+        throw new AuthenticationError('You must be logged in to send an email');
+      }
+
+      const { subject, recipients, body } = emailInput;
+      const sender = context.user.email;
+
+      const email = new Email({
+        subject,
+        sender,
+        recipients,
+        body,
+        timestamp: new Date().toISOString(),
+        status: 'sent',
+        user: context.user._id,
+      });
+
+      try {
+        const savedEmail = await email.save();
+        return savedEmail;
+      } catch (error) {
+        console.error('Error sending email:', error);
+        throw new Error('Failed to send email');
+      }
+    },
+
   },
 };
 

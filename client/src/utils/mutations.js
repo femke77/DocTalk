@@ -75,3 +75,45 @@ export const LOGIN_USER = gql`
     }
   }
 `;
+
+export const SEND_EMAIL_MUTATION = gql`
+  mutation SendEmail($emailInput: EmailInput!) {
+    sendEmail(emailInput: $emailInput) {
+      id
+      subject
+      sender
+      recipients
+      body
+      timestamp
+      status
+    }
+  }
+`;
+
+// export const UPDATE_EMAIL_MUTATION = gql`
+//   mutation UpdateEmail($id: ID!, $emailInput: EmailInput!) {
+//     updateEmail(id: $id, emailInput: $emailInput) {
+//       id
+//       subject
+//       sender
+//       recipients
+//       body
+//       timestamp
+//       status
+//     }
+//   }
+// `;
+
+// export const DELETE_EMAIL_MUTATION = gql`
+//   mutation DeleteEmail($id: ID!) {
+//     deleteEmail(id: $id) {
+//       id
+//       subject
+//       sender
+//       recipients
+//       body
+//       timestamp
+//       status
+//     }
+//   }
+// `;

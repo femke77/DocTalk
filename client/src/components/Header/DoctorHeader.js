@@ -20,8 +20,9 @@ import Billing from '../Billing';
 import AuthService from '../../utils/auth';
 import ChatIcon from '@mui/icons-material/Chat';
 import CallIcon from '@mui/icons-material/Call';
-import DoctorEmail from '../../pages/Doctor/DoctorEmail';
-
+import CallPatient from '../../pages/Doctor/CallPatient';
+// import DoctorEmail from '../../pages/Doctor/DoctorEmails/DoctorEmailPage';
+import EmailDashboard from '../../pages/Doctor/DoctorEmails/EmailDashboard';
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
   borderRadius: theme.shape.borderRadius,
@@ -96,7 +97,7 @@ export default function PrimarySearchAppBar() {
   const handleEmailClick = () => {
     // Add any additional logic you may need before navigating to the DoctorEmail page
     if (isLoggedIn) {
-      <Link to="/doctor-email" />;
+      <Link to="/email-dashboard" />;
     }
   };
 
@@ -117,7 +118,7 @@ export default function PrimarySearchAppBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>DashBoard</MenuItem>
+      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
       <MenuItem onClick={handleMenuClose}>Billing</MenuItem>
       <MenuItem onClick={handleLogout}>Logout</MenuItem>
     </Menu>
@@ -216,13 +217,22 @@ export default function PrimarySearchAppBar() {
             <MenuIcon />
           </IconButton>
           <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ display: { xs: 'none', sm: 'block' } }}
-          >
-            DocTalk
-          </Typography>
+              variant="h6"
+              noWrap
+              component="a"
+              href="/"
+              sx={{
+                mr: 2,
+                display: { xs: 'none', md: 'flex' },
+                fontFamily: 'monospace',
+                fontWeight: 700,
+                letterSpacing: '.3rem',
+                color: 'inherit',
+                textDecoration: 'none',
+              }}
+            >
+              DocTalk
+            </Typography>
           <Search>
             <SearchIconWrapper>
               <SearchIcon />
@@ -241,7 +251,7 @@ export default function PrimarySearchAppBar() {
               </Badge>
             </IconButton> */}
 
-            <Link to="/doctor-email">
+            <Link to="/email-dashboard">
               <IconButton size="large" aria-label="show 2 new chats" color="inherit" onClick={handleEmailClick}>
                 <Badge badgeContent={2} color="error">
                 <MailIcon />
@@ -257,7 +267,7 @@ export default function PrimarySearchAppBar() {
 
             <IconButton size="large" aria-label="" color="inherit">
               <Badge>
-                <Link to="/doctor-email"><CallIcon /></Link>
+                <Link to="/callpatient"><CallIcon /></Link>
               </Badge>
             </IconButton>
 

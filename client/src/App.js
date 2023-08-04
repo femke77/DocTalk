@@ -7,15 +7,19 @@ import AboutUs from "./components/AboutUs";
 import Home from "./components/Home/Home";
 import Services from "./components/Services";
 import Billing from "./components/Billing";
-
-import DoctorEmail from './pages/Doctor/DoctorEmail';
-
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ApolloClient,InMemoryCache,ApolloProvider,createHttpLink} from '@apollo/client';
-
-import { setContext } from '@apollo/client/link/context';
 import ContactDoctor from './pages/Patient/ContactDoc';
-import ContactPatient from './pages/Doctor/ContactPatient';
+import { setContext } from '@apollo/client/link/context';
+import CallPatient from './pages/Doctor/CallPatient';
+
+import ComposeEmail from './pages/Doctor/DoctorEmails/ComposeEmail';
+import EmailDashboard from './pages/Doctor/DoctorEmails/EmailDashboard';
+import EmailDetails from './pages/Doctor/DoctorEmails/EmailDetails';
+import EmailList from './pages/Doctor/DoctorEmails/EmailList';
+
+
+
 
 const httpLink = createHttpLink({
   uri: 'http://localhost:3001/graphql',
@@ -51,8 +55,13 @@ function App() {
             <Route path="/services" element={<Services />} />
             <Route path="/billing" element={<Billing />} />
             <Route path="/contactdoctor" element={<ContactDoctor />} />
-            <Route path="/contactpatient" element={<ContactPatient />} />
-            <Route path="/doctor-email" component={DoctorEmail} />
+            <Route path="/compose" element={<ComposeEmail />} />
+            <Route path="/email-dashboard" element={<EmailDashboard />} />
+            <Route path='/emaillist' element={<EmailList />} />
+            <Route path="/emaildetails" element={<EmailDetails />} />
+            <Route path="/callpatient" element={<CallPatient />} />
+
+
             
           </Routes>
         </Router>

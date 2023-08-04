@@ -34,11 +34,14 @@ const typeDefs = gql`
   type Auth {
     token: ID!
     user: User
+    email: String
   }
 
   type Query {
     users: [User!]!
     userByEmail(email: String!): User
+    getAllEmails: [Email] 
+
   }
 
   type Mutation {
@@ -46,6 +49,7 @@ const typeDefs = gql`
     login(email: String!, password: String!): Auth
     updateUser(_id: ID!, input: UpdateUserInput!): User!
     message(messageData:MessageInput):Message
+    sendEmail(emailInput: EmailInput!): Email
   }
 
   input UpdateUserInput {
@@ -56,6 +60,21 @@ const typeDefs = gql`
     password: String
     patient: Boolean
     doctor: Boolean
+  }
+  input EmailInput {
+    subject: String!
+    recipients: [String!]!
+    body: String!
+  }
+  
+  type Email {
+    id: ID
+    subject: String
+    sender: User
+    recipients: [String]
+    body: String
+    timestamp: String
+    status: String
   }
 `;
 
