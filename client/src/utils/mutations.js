@@ -40,7 +40,9 @@ mutation addMessage($messageData: MessageInput) {
     firstName
     lastName
     phonenumber
-    patient
+    patient {
+      _id
+    }
     message
   }
 }

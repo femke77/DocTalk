@@ -18,7 +18,7 @@ const typeDefs = gql`
     firstName: String
     lastName: String
     phonenumber: String
-    patient: ID
+    patient: User
     message: String
   }
 
@@ -39,6 +39,7 @@ const typeDefs = gql`
   type Query {
     users: [User!]!
     userByEmail(email: String!): User
+    messages: [Message]
   }
 
   type Mutation {

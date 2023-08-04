@@ -22,6 +22,13 @@ const resolvers = {
         throw new Error('Error fetching user by email');
       }
     },
+    messages: async (parent, args, context) => {
+      if (context.user.doctor) {
+        return await Message.find({}).populate('patient');
+      } else {
+        throw new AuthenticationError('You must be a doctor!');
+      }
+    }
   },
   Mutation: {
     addUser: async (parent, { username, email, password, firstName, lastName, patient, doctor }) => {

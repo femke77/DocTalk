@@ -16,6 +16,7 @@ import { ApolloClient,InMemoryCache,ApolloProvider,createHttpLink} from '@apollo
 import { setContext } from '@apollo/client/link/context';
 import ContactDoctor from './pages/Patient/ContactDoc';
 import ContactPatient from './pages/Doctor/ContactPatient';
+import MessagesPatients from './pages/Doctor/MessagesPatient';
 
 const httpLink = createHttpLink({
   uri: 'http://localhost:3001/graphql',
@@ -52,7 +53,8 @@ function App() {
             <Route path="/billing" element={<Billing />} />
             <Route path="/contactdoctor" element={<ContactDoctor />} />
             <Route path="/contactpatient" element={<ContactPatient />} />
-            <Route path="/doctor-email" component={DoctorEmail} />
+            <Route path="/doctor-email" element={<DoctorEmail />} />
+            <Route path="/doctor-messages" element={<MessagesPatients/>} />
             
           </Routes>
         </Router>
