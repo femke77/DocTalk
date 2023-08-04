@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User } = require('../models');
+const { User, Message } = require('../models');
 const { signToken } = require('../utils/auth');
 
 const channel = {
@@ -52,6 +52,15 @@ const resolvers = {
 
       return { token, user };
     },
+
+    message: async (parent, {messageData}, context) => {
+      if (context.user) {
+        const message = await Message.create({...messageData, patient:context.user._id})
+        return message
+      } 
+        throw new AuthenticationError('You must be logged in!');
+    },
+
     updateUser: async (parent, { _id, input }) => {
       try {
         const user = await User.findById(_id);
