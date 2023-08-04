@@ -2,35 +2,35 @@ const { AuthenticationError } = require('apollo-server-express');
 const { User, Message, Email } = require('../models');
 const { signToken } = require('../utils/auth');
 
-// const emails = [
-//   {
-//     id: '1',
-//     subject: 'Sample Email 1',
-//     sender: 'sender@example.com',
-//     recipients: ['recipient1@example.com', 'recipient2@example.com'],
-//     body: 'This is the content of the email.',
-//     timestamp: '2023-08-04T12:00:00.000Z',
-//     status: 'received',
-//     user: {
-//       patient: null,
-//       doctor: null,
-//     },
-//   },
-//   {
-//     id: '2',
-//     subject: 'Sample Email 2',
-//     sender: 'sender@example.com',
-//     recipients: ['recipient3@example.com'],
-//     body: 'This is another email.',
-//     timestamp: '2023-08-05T09:30:00.000Z',
-//     status: 'received',
-//     user: {
-//       patient: null,
-//       doctor: null,
-//     },
-//   },
-//   // Add more email objects as needed
-// ];
+const emails = [
+  {
+    id: '1',
+    subject: 'Sample Email 1',
+    sender: 'sender@example.com',
+    recipients: ['recipient1@example.com', 'recipient2@example.com'],
+    body: 'This is the content of the email.',
+    timestamp: '2023-08-04T12:00:00.000Z',
+    status: 'received',
+    user: {
+      patient: null,
+      doctor: null,
+    },
+  },
+  {
+    id: '2',
+    subject: 'Sample Email 2',
+    sender: 'sender@example.com',
+    recipients: ['recipient3@example.com'],
+    body: 'This is another email.',
+    timestamp: '2023-08-05T09:30:00.000Z',
+    status: 'received',
+    user: {
+      patient: null,
+      doctor: null,
+    },
+  },
+  // Add more email objects as needed
+];
 const resolvers = {
   Query: {
     users: async () => {
