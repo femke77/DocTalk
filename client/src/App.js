@@ -12,18 +12,19 @@ import BookAppointment from './pages/Patient/BookAppointment';
 import Appointments from './pages/Patient/Appointments';
 import MyAccount from './pages/Patient/MyAccount';
 import FindDoctor from './pages/Patient/FindDoctor';
-
+import DoctorProfile from './pages/Doctor/DoctorProfile';
 import DoctorEmail from './pages/Doctor/DoctorEmail';
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ApolloClient,InMemoryCache,ApolloProvider,createHttpLink} from '@apollo/client';
 
-// import {client as chatClient, Chat} from './Chat'
+
 
 import { setContext } from '@apollo/client/link/context';
 import ContactDoctor from './pages/Patient/ContactDoc';
 import ContactPatient from './pages/Doctor/ContactPatient';
-import { getScopedCssBaselineUtilityClass } from '@mui/material';
+
+
 
 const httpLink = createHttpLink({
   uri: 'http://localhost:3001/graphql',
@@ -48,10 +49,7 @@ function App() {
   return (
     <>
       <ApolloProvider client={client}>
-      {/* <div className = "App">
-        <h2>Dev Thoughts 💭</h2>
-        <Chat/>
-      </div> */}
+     
         <Router>
           <AppHeader />
           <Routes>
@@ -70,8 +68,9 @@ function App() {
             <Route path="/FindDoctor" element={<FindDoctor />} />
             <Route path="/Appointments" element={<Appointments />} />
             <Route path="/MyAccount" element={<MyAccount />} />
-            <Route path="/doctor-email" component={<DoctorEmail />} />
-            
+            <Route path="/doctor-email" element={<DoctorEmail />} />
+            <Route path="/DoctorProfile" element={<DoctorProfile />} />
+
           </Routes>
         </Router>
       </ApolloProvider>
