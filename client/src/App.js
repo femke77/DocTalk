@@ -8,6 +8,8 @@ import Home from "./components/Home/Home";
 import Services from "./components/Services";
 import Billing from "./components/Billing";
 
+import DoctorEmail from './pages/Doctor/DoctorEmail';
+
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ApolloClient,InMemoryCache,ApolloProvider,createHttpLink} from '@apollo/client';
 
@@ -51,6 +53,8 @@ function App() {
             <Route path="/billing" element={<Billing />} />
             <Route path="/contactdoctor" element={<ContactDoctor />} />
             <Route path="/contactpatient" element={<ContactPatient />} />
+            <Route path="/doctor-email" component={DoctorEmail} />
+            
             <Route path="/contactpatientchat" element={<ContactPatientChat />} />
 
           </Routes>
