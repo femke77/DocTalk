@@ -25,6 +25,24 @@ export const CHANNEL_DETAILS = gql`
         id
         text
       }
+      }  }
+`;
+
+export const GET_MESSAGES = gql`
+  subscription GET_MESSAGES {
+    getChats {
+      _id
+      user {
+        _id
+        username
+        email
+        password
+        firstName
+        lastName
+        patient
+        doctor
+      }
+      text
     }
   }
 `;

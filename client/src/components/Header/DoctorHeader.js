@@ -250,10 +250,10 @@ export default function PrimarySearchAppBar() {
             </Link>
 
             <IconButton size="large" aria-label="" color="inherit">
-              <Badge>
-                <ChatIcon />
-              </Badge>
-            </IconButton>
+                <Badge>
+                  <Link to="/ContactPatientChat"><ChatIcon /></Link>
+                </Badge>
+              </IconButton>
 
             <IconButton size="large" aria-label="" color="inherit">
               <Badge>

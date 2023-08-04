@@ -1,4 +1,4 @@
-const { gql } = require('apollo-server-express');
+const { gql } = require("apollo-server-express");
 
 const typeDefs = gql`
   type User {
@@ -12,19 +12,17 @@ const typeDefs = gql`
     doctor: Boolean
   }
 
-<<<<<<< HEAD
   type Channel {
-    id: ID!               
+    id: ID!
     name: String!
     messages: [Message]
- }
+  }
 
- 
- type Message {
-   id: ID!
-   text: String
- }
-=======
+  type ChatMessage {
+    id: ID!
+    text: String
+  }
+
   type Message {
     _id: ID
     email: String
@@ -43,7 +41,6 @@ const typeDefs = gql`
     message: String
     patient: ID
   }
->>>>>>> 01e8fd1d168868d3904a36c23d48ce46e498a676
 
   type Auth {
     token: ID!
@@ -53,21 +50,28 @@ const typeDefs = gql`
   type Query {
     users: [User!]!
     userByEmail(email: String!): User
+
     # query the chat channel
-    channels: Channel  
+    channels: Channel
   }
 
-
   type Mutation {
-    addUser(username: String!, email: String!, password: String!, firstName: String!, lastName: String!, patient: Boolean, doctor: Boolean): Auth
+    addUser(
+      username: String!
+      email: String!
+      password: String!
+      firstName: String!
+      lastName: String!
+      patient: Boolean
+      doctor: Boolean
+    ): Auth
     login(email: String!, password: String!): Auth
     updateUser(_id: ID!, input: UpdateUserInput!): User!
-<<<<<<< HEAD
+
     # add a message to the channel
     addMessage(message: String): Message
-=======
-    message(messageData:MessageInput):Message
->>>>>>> 01e8fd1d168868d3904a36c23d48ce46e498a676
+
+    message(messageData: MessageInput): Message
   }
 
   input UpdateUserInput {
@@ -82,6 +86,3 @@ const typeDefs = gql`
 `;
 
 module.exports = typeDefs;
-
-
-

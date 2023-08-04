@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Message } = require('../models');
+const { User, Message, Chat } = require('../models');
 const { signToken } = require('../utils/auth');
 
 const channel = {
@@ -34,6 +34,15 @@ const resolvers = {
     },
     channel: async()=> {
       return channel;
+    },
+    getChats: async (parent, args) => {
+      try {
+        const chats = await Chat.find().populate('user');
+        return chats;
+      } catch (error) {
+        console.error(error);
+        throw new Error('Error fetching chats');
+      }
     }
   },
   Mutation: {
@@ -103,7 +112,11 @@ const resolvers = {
       const newMessage = {id: String(nextMessageId++), text: message}
       channel.messages.push(newMessage)
       return newMessage;
-    }
+    },
+    postChat: async (parent, { userId, text }) => {
+      const chat = await Chat.create({ user: userId, text });
+      return chat;
+    },
   },
 };
 
