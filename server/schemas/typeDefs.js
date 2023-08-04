@@ -15,7 +15,7 @@ const typeDefs = gql`
   type Channel {
     id: ID!
     name: String!
-    messages: [Message]
+    messages: [ChatMessage]
   }
 
   type ChatMessage {
@@ -47,12 +47,17 @@ const typeDefs = gql`
     user: User
   }
 
+  input ChatMessageInput{
+   channelId: ID!
+   text: String
+ }
+
   type Query {
     users: [User!]!
     userByEmail(email: String!): User
-
+    channels: [Channel]  
     # query the chat channel
-    channels: Channel
+    channel(id: ID!): Channel
   }
 
   type Mutation {
@@ -67,10 +72,10 @@ const typeDefs = gql`
     ): Auth
     login(email: String!, password: String!): Auth
     updateUser(_id: ID!, input: UpdateUserInput!): User!
+    # add a message to the chat channel
+    addMessage(message: ChatMessageInput): ChatMessage
 
-    # add a message to the channel
-    addMessage(message: String): Message
-
+    # send a message to the doctor (not chat)
     message(messageData: MessageInput): Message
   }
 

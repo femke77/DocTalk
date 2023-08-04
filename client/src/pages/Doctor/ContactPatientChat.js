@@ -1,22 +1,22 @@
-import react from 'react';
-import { ApolloClient, InMemoryCache, useMutation, useSubscription, gql } from '@apollo/client';
-import { WebSocketLink } from "@apollo/client/link/ws";
-import { Container, Chip, Grid, TextField, Button } from '@material-ui/core';
-import { GET_MESSAGES } from '../../utils/queries';
+// import react from 'react';
+// import { ApolloClient, InMemoryCache, useMutation, useSubscription, gql } from '@apollo/client';
 
-const ContactPatientChat = () => {
-  const { data } = useSubscription(GET_MESSAGES);
+// // import { Container, Chip, Grid, TextField, Button } from '@material-ui/core';
+// import { GET_MESSAGES } from '../../utils/queries';
 
-  if (!data) {
-    return null;
-  }
+// const ContactPatientChat = () => {
+//   const { data } = useSubscription(GET_MESSAGES);
 
-  return (
-    <div>
-      <h3>Welcome to DevThoughts! A simple chat app for the GraphQL series!</h3>
-      <p>ttest</p>
-    </div>
-  )
-}
+//   if (!data) {
+//     return null;
+//   }
 
-export default ContactPatientChat;
+//   return (
+//     <div>
+//       <h3>Welcome to DevThoughts! A simple chat app for the GraphQL series!</h3>
+//       <p>ttest</p>
+//     </div>
+//   )
+// }
+
+// export default ContactPatientChat;

@@ -12,7 +12,7 @@ import DoctorEmail from './pages/Doctor/DoctorEmail';
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ApolloClient,InMemoryCache,ApolloProvider,createHttpLink} from '@apollo/client';
-import { WebSocketLink } from '@apollo/client/link/ws';
+
 
 import { setContext } from '@apollo/client/link/context';
 import ContactDoctor from './pages/Patient/ContactDoc';
@@ -23,12 +23,7 @@ const httpLink = createHttpLink({
   uri: 'http://localhost:3001/graphql',
 });
 
-const wsLink = new WebSocketLink({
-  uri: `ws://localhost:3001/graphql`,
-  options: {
-    reconnect: true,
-  }
-});
+
 
 const authLink = setContext((_, { headers }) => {
   const token = localStorage.getItem('id_token');
@@ -40,10 +35,6 @@ const authLink = setContext((_, { headers }) => {
   };
 });
 
-const chatClient = new ApolloClient({
-  link: wsLink,
-  cache: new InMemoryCache(),
-});
 
 const client = new ApolloClient({
   link: authLink.concat(httpLink),
@@ -53,13 +44,7 @@ const client = new ApolloClient({
 function App() {
   return (
     <>
-      <ApolloProvider client={chatClient}>
-        <Router>
-          <Routes>
-            <Route path="/chat" element={<ContactPatientChat />} />
-          </Routes>        
-        </Router>
-      </ApolloProvider>
+  
       <ApolloProvider client={client}>
         <Router>
           <AppHeader />

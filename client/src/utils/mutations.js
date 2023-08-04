@@ -77,7 +77,7 @@ export const LOGIN_USER = gql`
 `;
 
 export const ADD_CHAT_MESSAGE = gql`
-  mutation addMessage($message: String) {
+  mutation addChatMessage($message: ChatMessageInput) {
     addMessage(message: $message) {
       id
       text

@@ -1,21 +1,26 @@
 import { useMutation, useQuery } from "@apollo/client"
-import { CHANNEL_DETAILS } from "./utils/queries"
-import { ADD_MESSAGE } from "./utils/mutations"
+import { CHANNEL_DETAILS } from "../utils/queries"
+import { ADD_CHAT_MESSAGE } from "../utils/mutations"
+import Auth from "../utils/auth"
 
 export default function Channel() {
 
+    const id = "1"
 
     const { data, loading, error } = useQuery(CHANNEL_DETAILS, {
-        pollInterval: 2000,    
+        variables: { channelId: id },
+        pollInterval: 3000,  
+      
     })  
     console.log(data);
-
-    const [addMessage] = useMutation(ADD_MESSAGE,{
+    // example of updating the cache when you have a query that has an arg
+    // and a mutation that needs to modify the object (channel has array)
+    const [addChatMessage] = useMutation(ADD_CHAT_MESSAGE,{
       update: (cache, {data})=> {
         cache.modify({
             id: cache.identify({
                 __typename: "Channel",
-                id: "1",
+                id: id,
             }),
             fields:{
                 messages: (previous, {toReference}) => [...previous, toReference(data.addMessage) ]
@@ -30,8 +35,8 @@ export default function Channel() {
 
     const handleKeyUp = async (evt) => {
         if (evt.keyCode === 13) {
-    
-            await addMessage({
+            // ADD CACHE AND OP UI
+            await addChatMessage({
                 variables: {
                     message: {
                         channelId: id,
@@ -45,20 +50,23 @@ export default function Channel() {
     }
     return (
         <>
-            {data && (
+            {data && Auth.loggedIn() ?(
                 <>
-                    <h1>{data.channel.name} Channel</h1>
+                    <h1>{data.channel.name} </h1>
+                    <h4>{Auth.getProfile().data.username}: {" "}</h4>
                     {data.channel.messages.length ? data.channel.messages.map(msg => (
                         <p key={msg.id}>{msg.text}</p>)) : "No messages"}
                     <br />
                     <br />
-                </>
-            )}
-            <input
+           
+                <input
                 type="text"
                 placeholder="+ New message"
                 onKeyUp={handleKeyUp}
             />
+               </>
+            ) :(<div>You must be logged in to chat. </div>)}
+            
             {error && <div>ERROR: {error.message}</div>}
         </>
     )

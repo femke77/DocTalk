@@ -2,14 +2,24 @@ const { AuthenticationError } = require('apollo-server-express');
 const { User, Message, Chat } = require('../models');
 const { signToken } = require('../utils/auth');
 
-const channel = {
+let channels = [{
   id: "1",
-  name: "Chat with Doctor",
-  messages: [{
+  name: 'Chat with a doctor',
+  messages:[{
     id: "1",
-    text: "The doctor will be with you shortly ..."
+    text: 'The doctor will be with you shortly...'
   }]
-}
+}, {
+  id: "2",
+  name: 'Technical Support',
+  messages:[{
+    id: "1",
+    text: 'The tech support will be with you shortly...'
+  }
+]
+}]
+
+
 let nextMessageId = "2";
 
 const resolvers = {
@@ -32,18 +42,14 @@ const resolvers = {
         throw new Error('Error fetching user by email');
       }
     },
-    channel: async()=> {
-      return channel;
+    channels: () => {
+      return channels;
     },
-    getChats: async (parent, args) => {
-      try {
-        const chats = await Chat.find().populate('user');
-        return chats;
-      } catch (error) {
-        console.error(error);
-        throw new Error('Error fetching chats');
-      }
+    channel: (parent, {id})=> {
+   
+      return (channels.find(ch => ch.id === id)) 
     }
+   
   },
   Mutation: {
     addUser: async (parent, { username, email, password, firstName, lastName, patient, doctor }) => {
@@ -107,16 +113,16 @@ const resolvers = {
       const token = signToken(user);
 
       return { token, user };
-    },
-    addMessage: async (parent, {message}) => {     
-      const newMessage = {id: String(nextMessageId++), text: message}
-      channel.messages.push(newMessage)
-      return newMessage;
-    },
-    postChat: async (parent, { userId, text }) => {
-      const chat = await Chat.create({ user: userId, text });
-      return chat;
-    },
+    },  
+      addMessage: async (parent, {message}) => {
+        const channel = channels.find(ch => ch.id === message.channelId)
+        if (!channel)
+        throw new Error("Channel does not exist")
+        
+        const newMessage = {id: String(nextMessageId++), text: message.text}
+        channel.messages.push(newMessage)
+        return newMessage;
+      }
   },
 };
 
