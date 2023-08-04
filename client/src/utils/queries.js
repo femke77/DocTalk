@@ -12,7 +12,7 @@ export const QUERY_ALL_USERS = gql`
         username
       }
     }
-  }
+
 `;
 
 export const GET_EMAILS_QUERY = gql`

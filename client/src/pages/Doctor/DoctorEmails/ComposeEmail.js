@@ -1,7 +1,10 @@
 import { useState } from "react";
 import { TextField, Button, Typography, Box } from "@mui/material";
 import { useMutation } from '@apollo/client';
-import { gql } from '@apollo/client'; 
+import { gql } from '@apollo/client';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Auth from '../../utils/auth';
 
 const SEND_EMAIL_MUTATION = gql`
   mutation SendEmail($emailInput: EmailInput!) {
@@ -21,32 +24,46 @@ export default function ComposeEmail() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
-
-  const [sendEmail] = useMutation(SEND_EMAIL_MUTATION);
+  const [sendEmail, { loading }] = useMutation(SEND_EMAIL_MUTATION);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
+
+    if (!email.trim() || !message.trim()) {
+      return toast.error("Please enter a valid email and message");
+    }
+
     const emailInput = {
       subject: "Your Subject",
-      sender: email,
+      sender: Auth.getProfile().data.email,
       recipients: [],
       body: message,
       timestamp: new Date().toISOString(),
       status: "DRAFT",
     };
 
+    // const [formState, setFormState] = useState({
+
+    // });
+
     sendEmail({ variables: { emailInput } })
       .then((result) => {
         console.log("Email sent successfully:", result.data.sendEmail);
+    
+        setEmail("");
+        setMessage("");
+        toast.success("Email sent successfully");
       })
       .catch((error) => {
         console.error("Error sending email:", error.message);
+        toast.error("Error sending email");
       });
   };
 
   return (
     <div>
+      <ToastContainer />
       <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", height: "100vh" }}>
         <img
           src="/images/hero.jpg"
@@ -86,7 +103,7 @@ export default function ComposeEmail() {
               rows={4}
             />
             <Button variant="contained" type="submit" sx={{ mt: 2 }}>
-              Send
+              {loading ? "Sending..." : "Send"}
             </Button>
           </form>
         </Box>

@@ -22,18 +22,35 @@ const resolvers = {
         throw new Error('Error fetching user by email');
       }
     },
-    getAllEmails: async () => {
+    getAllEmails: async (parent, args, context) => {
+
+      console.log(context.user);
+
       try {
-        const emails = await Email.find();
-        return emails.map(async (email) => {
-          const sender = await User.findById(email.sender);
-          return { ...email._doc, sender };
+        const emails = await Email.find({
+          recipients: { $elemMatch: { $eq: context.user.email } },
         });
+        // return emails.map(async (email) => {
+        //   const sender = await User.findById(email.sender);
+        //   return { ...email._doc, sender };
+        // });
+        return emails;
       } catch (error) {
         console.log(error);
         throw new Error('Error fetching all emails');
       }
     },
+    getOneEmail: async (parent, { id }) => {
+      try {
+        const email = await Email.findById(id);
+        return email;
+      } catch (error) {
+        console.log(error);
+        throw new Error('Error fetching email by id');
+      }
+    },
+
+
   },
   Mutation: {
     addUser: async (parent, { username, email, password, firstName, lastName, patient, doctor }) => {
@@ -100,8 +117,11 @@ const resolvers = {
     },
 
     sendEmail: async (parent, { emailInput }, context) => {
+
+      console.log("Authenticated User:", context.user);
+      // Check if the sender is logged in (assuming you have a user property in the context)
       if (!context.user) {
-        throw new AuthenticationError('You must be logged in to send an email');
+        throw new Error('You must be logged in to send an email');
       }
 
       const { subject, recipients, body } = emailInput;

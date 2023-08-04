@@ -41,6 +41,7 @@ const typeDefs = gql`
     users: [User!]!
     userByEmail(email: String!): User
     getAllEmails: [Email] 
+    getOneEmail(id: ID!): Email
 
   }
 
@@ -49,7 +50,7 @@ const typeDefs = gql`
     login(email: String!, password: String!): Auth
     updateUser(_id: ID!, input: UpdateUserInput!): User!
     message(messageData:MessageInput):Message
-    sendEmail(emailInput: EmailInput!): Email
+    sendEmail(emailInput: EmailInput!): Email 
   }
 
   input UpdateUserInput {
@@ -61,6 +62,7 @@ const typeDefs = gql`
     patient: Boolean
     doctor: Boolean
   }
+
   input EmailInput {
     subject: String!
     recipients: [String!]!
@@ -70,7 +72,7 @@ const typeDefs = gql`
   type Email {
     id: ID
     subject: String
-    sender: User
+    sender: String
     recipients: [String]
     body: String
     timestamp: String

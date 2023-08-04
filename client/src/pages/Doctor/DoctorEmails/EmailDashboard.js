@@ -33,6 +33,7 @@ export const GET_EMAILS_QUERY = gql`
 `;
 
 
+
 const EmailDashboard = () => {
   const [emails, setEmails] = useState([
     {
