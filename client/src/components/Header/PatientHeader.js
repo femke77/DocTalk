@@ -15,11 +15,10 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
+import { Link } from 'react-router-dom';
 import ChatIcon from '@mui/icons-material/Chat';
 import CallIcon from '@mui/icons-material/Call';
-import { Link } from 'react-router-dom';
 import AuthService from '../../utils/auth';
-
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -114,6 +113,8 @@ export default function PrimarySearchAppBar() {
             <MenuItem onClick={handleMenuClose}>Payment</MenuItem>
             <MenuItem onClick={handleMenuClose}>Previous Consult</MenuItem>
             <MenuItem onClick={handleLogout}>Logout</MenuItem>
+            <MenuItem onClick={handleMenuClose}><Link to="/MyAccount">My Account</Link></MenuItem>
+            <MenuItem onClick={handleMenuClose}><Link to="/billing">Billing</Link></MenuItem>
             
         </Menu>
     );
@@ -263,7 +264,9 @@ export default function PrimarySearchAppBar() {
               onClick={handleProfileMenuOpen}
               color="inherit"
             >
-              <AccountCircle />
+              <Link to="/PatientProfile" style={{ color: 'inherit' }}>
+                <AccountCircle />
+              </Link>
             </IconButton>
           </Box>
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
