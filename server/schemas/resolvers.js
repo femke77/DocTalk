@@ -7,6 +7,7 @@ let channels = [{
   name: 'Chat with a doctor',
   messages:[{
     id: "1",
+    username: "Doctor",
     text: 'The doctor will be with you shortly...'
   }]
 }, {
@@ -14,6 +15,7 @@ let channels = [{
   name: 'Technical Support',
   messages:[{
     id: "1",
+    username: "Tech Support",
     text: 'The tech support will be with you shortly...'
   }
 ]
@@ -45,8 +47,7 @@ const resolvers = {
     channels: () => {
       return channels;
     },
-    channel: (parent, {id})=> {
-   
+    channel: (parent, {id})=> {  
       return (channels.find(ch => ch.id === id)) 
     }
    
@@ -114,12 +115,12 @@ const resolvers = {
 
       return { token, user };
     },  
-      addMessage: async (parent, {message}) => {
+      addMessage: async (parent, {message}, context) => {
         const channel = channels.find(ch => ch.id === message.channelId)
         if (!channel)
         throw new Error("Channel does not exist")
         
-        const newMessage = {id: String(nextMessageId++), text: message.text}
+        const newMessage = {id: String(nextMessageId++), username: context.user.username, text: message.text}
         channel.messages.push(newMessage)
         return newMessage;
       }

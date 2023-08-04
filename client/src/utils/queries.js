@@ -20,6 +20,7 @@ export const CHANNEL_DETAILS = gql`
       name
       messages {
         id
+        username
         text
       }
     }

@@ -20,6 +20,7 @@ const typeDefs = gql`
 
   type ChatMessage {
     id: ID!
+    username: String
     text: String
   }
 
@@ -49,6 +50,7 @@ const typeDefs = gql`
 
   input ChatMessageInput{
    channelId: ID!
+   username: String
    text: String
  }
 
