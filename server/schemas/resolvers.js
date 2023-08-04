@@ -2,6 +2,35 @@ const { AuthenticationError } = require('apollo-server-express');
 const { User, Message, Email } = require('../models');
 const { signToken } = require('../utils/auth');
 
+const emails = [
+  {
+    id: '1',
+    subject: 'Sample Email 1',
+    sender: 'sender@example.com',
+    recipients: ['recipient1@example.com', 'recipient2@example.com'],
+    body: 'This is the content of the email.',
+    timestamp: '2023-08-04T12:00:00.000Z',
+    status: 'received',
+    user: {
+      patient: null,
+      doctor: null,
+    },
+  },
+  {
+    id: '2',
+    subject: 'Sample Email 2',
+    sender: 'sender@example.com',
+    recipients: ['recipient3@example.com'],
+    body: 'This is another email.',
+    timestamp: '2023-08-05T09:30:00.000Z',
+    status: 'received',
+    user: {
+      patient: null,
+      doctor: null,
+    },
+  },
+  // Add more email objects as needed
+];
 const resolvers = {
   Query: {
     users: async () => {
@@ -22,24 +51,33 @@ const resolvers = {
         throw new Error('Error fetching user by email');
       }
     },
-    getAllEmails: async (parent, args, context) => {
+    // getAllEmails: async (parent, args, context) => {
 
-      console.log(context.user);
+    //   console.log(context.user.email);
 
+    //   try {
+    //     const emails = await Email.find(); // Fetch all emails without filtering
+    //     return emails;
+    //   } catch (error) {
+    //     console.log(error);
+    //     throw new Error('Error fetching all emails');
+    //   }
+    // },
+
+    getAllEmails: async (parent, { inbox }, context) => {
       try {
-        const emails = await Email.find({
-          recipients: { $elemMatch: { $eq: context.user.email } },
-        });
-        // return emails.map(async (email) => {
-        //   const sender = await User.findById(email.sender);
-        //   return { ...email._doc, sender };
-        // });
+        const query = inbox
+          ? { recipients: { $elemMatch: { $eq: context.user.email } } }
+          : { sender: context.user.email };
+
+        const emails = await Email.find(query);
         return emails;
       } catch (error) {
         console.log(error);
-        throw new Error('Error fetching all emails');
+        throw new Error('Error fetching emails');
       }
     },
+
     getOneEmail: async (parent, { id }) => {
       try {
         const email = await Email.findById(id);
@@ -50,6 +88,20 @@ const resolvers = {
       }
     },
 
+    getSentEmails: async (parent, args, context) => {
+      if (!context.user) {
+        throw new AuthenticationError('You must be logged in to view sent emails');
+      }
+
+      try {
+        const sentEmails = await Email.find({ sender: context.user.email });
+        return sentEmails;
+      } catch (error) {
+        console.log(error);
+        throw new Error('Error fetching sent emails');
+      }
+    },
+    getReceivedEmails: () => emails.filter((email) => email.status === 'received'),
 
   },
   Mutation: {
@@ -116,17 +168,45 @@ const resolvers = {
       return { token, user };
     },
 
-    sendEmail: async (parent, { emailInput }, context) => {
+    // sendEmail: async (parent, { emailInput }, context) => {
 
-      console.log("Authenticated User:", context.user);
+    //   console.log("Authenticated User:", context.user);
+    //   // Check if the sender is logged in (assuming you have a user property in the context)
+    //   if (!context.user) {
+    //     throw new Error('You must be logged in to send an email');
+    //   }
+
+    //   const { subject, recipients, body } = emailInput;
+    //   const sender = context.user.email;
+
+    //   const email = new Email({
+    //     subject,
+    //     sender,
+    //     recipients,
+    //     body,
+    //     timestamp: new Date().toISOString(),
+    //     status: 'sent',
+    //     user: context.user._id,
+    //   });
+
+    //   try {
+    //     const savedEmail = await email.save();
+    //     return savedEmail;
+    //   } catch (error) {
+    //     console.error('Error sending email:', error);
+    //     throw new Error('Failed to send email');
+    //   }
+    // },
+
+    sendEmail: async (parent, { emailInput }, context) => {
       // Check if the sender is logged in (assuming you have a user property in the context)
       if (!context.user) {
         throw new Error('You must be logged in to send an email');
       }
-
+    
       const { subject, recipients, body } = emailInput;
-      const sender = context.user.email;
-
+      const sender = context.user.email; // Set sender as the logged-in user's email
+    
       const email = new Email({
         subject,
         sender,
@@ -134,11 +214,18 @@ const resolvers = {
         body,
         timestamp: new Date().toISOString(),
         status: 'sent',
-        user: context.user._id,
+        user: context.user._id, // Link the email to the logged-in user
       });
-
+    
       try {
         const savedEmail = await email.save();
+    
+        // Assuming you have a "sent" folder for each user, you can save the email ID to the user's sent folder.
+        // For example, assuming you have a field called "sentEmails" in the User model:
+        const user = await User.findById(context.user._id);
+        user.sentEmails.push(savedEmail._id);
+        await user.save();
+    
         return savedEmail;
       } catch (error) {
         console.error('Error sending email:', error);

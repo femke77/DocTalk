@@ -36,6 +36,12 @@ const userSchema = new Schema({
     type: Boolean,
     default: false
   },
+  sentEmails: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Email',
+    },
+  ],
 });
 
 userSchema.pre('save', async function (next) {

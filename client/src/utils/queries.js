@@ -16,8 +16,25 @@ export const QUERY_ALL_USERS = gql`
 `;
 
 export const GET_EMAILS_QUERY = gql`
-  query getAllEmails {
-    getAllEmails {
+  query getAllEmails($inbox: Boolean!) {
+  getAllEmails(inbox: $inbox) {
+    id
+    subject
+    sender
+    recipients
+    body
+    timestamp
+    status
+    user {
+      patient
+      doctor
+    }
+  }
+}
+`;
+const GET_SENT_EMAILS_QUERY = gql`
+  query getSentEmails {
+    getSentEmails {
       id
       subject
       sender
@@ -25,8 +42,10 @@ export const GET_EMAILS_QUERY = gql`
       body
       timestamp
       status
-      patient
-      doctor
+      user {
+        patient
+        doctor
+      }
     }
   }
 `;

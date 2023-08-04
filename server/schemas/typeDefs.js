@@ -42,6 +42,8 @@ const typeDefs = gql`
     userByEmail(email: String!): User
     getAllEmails: [Email] 
     getOneEmail(id: ID!): Email
+    getSentEmails: [Email]
+    getReceivedEmails: [Email!]!
 
   }
 
@@ -77,6 +79,7 @@ const typeDefs = gql`
     body: String
     timestamp: String
     status: String
+    user: User
   }
 `;
 
