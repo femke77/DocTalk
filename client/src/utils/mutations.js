@@ -75,3 +75,41 @@ export const LOGIN_USER = gql`
     }
   }
 `;
+
+export const ADD_CHAT_MESSAGE = gql`
+  mutation addChatMessage($message: ChatMessageInput) {
+    addMessage(message: $message) {
+      id
+      text
+    }
+  }
+`;
+
+export const ADD_APPOINTMENT = gql`
+  mutation AddAppointment(
+    $firstName: String!
+    $lastName: String!
+    $email: String!
+    $phone: String!
+    $appointmentDate: String!
+    $appointmentTime: String!
+  ) {
+    addAppointment(
+      firstName: $firstName
+      lastName: $lastName
+      email: $email
+      phone: $phone
+      appointmentDate: $appointmentDate
+      appointmentTime: $appointmentTime
+    ) {
+      id
+      firstName
+      lastName
+      email
+      phone
+      appointmentDate
+      appointmentTime
+    }
+  }
+`;
+
