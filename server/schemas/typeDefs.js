@@ -56,14 +56,15 @@ const typeDefs = gql`
   type Query {
     users: [User!]!
     userByEmail(email: String!): User
-    channels: [Channel]  
-    # query the chat channel
-    channel(id: ID!): Channel
     getAllEmails: [Email] 
     getOneEmail(id: ID!): Email
     getSentEmails: [Email]
     getReceivedEmails: [Email!]!
-
+ 
+    channels: [Channel]  
+    # query the chat channel
+    channel(id: ID!): Channel
+    
   }
 
   type Mutation {
