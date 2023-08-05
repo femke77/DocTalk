@@ -1,4 +1,4 @@
-const { gql } = require('apollo-server-express');
+const { gql } = require("apollo-server-express");
 
 const typeDefs = gql`
   type User {
@@ -10,6 +10,17 @@ const typeDefs = gql`
     lastName: String
     patient: Boolean
     doctor: Boolean
+  }
+
+  type Channel {
+    id: ID!
+    name: String!
+    messages: [ChatMessage]
+  }
+
+  type ChatMessage {
+    id: ID!
+    text: String
   }
 
   type Message {
@@ -37,9 +48,17 @@ const typeDefs = gql`
     email: String
   }
 
+  input ChatMessageInput{
+   channelId: ID!
+   text: String
+ }
+
   type Query {
     users: [User!]!
     userByEmail(email: String!): User
+    channels: [Channel]  
+    # query the chat channel
+    channel(id: ID!): Channel
     getAllEmails: [Email] 
     getOneEmail(id: ID!): Email
     getSentEmails: [Email]
@@ -48,10 +67,22 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    addUser(username: String!, email: String!, password: String!, firstName: String!, lastName: String!, patient: Boolean, doctor: Boolean): Auth
+    addUser(
+      username: String!
+      email: String!
+      password: String!
+      firstName: String!
+      lastName: String!
+      patient: Boolean
+      doctor: Boolean
+    ): Auth
     login(email: String!, password: String!): Auth
     updateUser(_id: ID!, input: UpdateUserInput!): User!
-    message(messageData:MessageInput):Message
+    # add a message to the chat channel
+    addMessage(message: ChatMessageInput): ChatMessage
+
+    # send a message to the doctor (not chat)
+    message(messageData: MessageInput): Message
     sendEmail(emailInput: EmailInput!): Email 
   }
 
@@ -84,6 +115,3 @@ const typeDefs = gql`
 `;
 
 module.exports = typeDefs;
-
-
-

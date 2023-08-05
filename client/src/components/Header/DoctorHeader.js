@@ -22,6 +22,8 @@ import ChatIcon from '@mui/icons-material/Chat';
 import CallIcon from '@mui/icons-material/Call';
 
 
+import DoctorEmail from '../../pages/Doctor/DoctorEmail';
+import DoctorProfile from '../../pages/Doctor/DoctorProfile';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -119,6 +121,8 @@ export default function PrimarySearchAppBar() {
       onClose={handleMenuClose}
     >
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+      <MenuItem onClick={handleMenuClose}>DashBoard</MenuItem>
+      <MenuItem onClick={handleMenuClose}><Link to="/DoctorProfile">Profile</Link></MenuItem>
       <MenuItem onClick={handleMenuClose}>Billing</MenuItem>
       <MenuItem onClick={handleLogout}>Logout</MenuItem>
     </Menu>
@@ -260,10 +264,10 @@ export default function PrimarySearchAppBar() {
             </Link>
 
             <IconButton size="large" aria-label="" color="inherit">
-              <Badge>
-                <ChatIcon />
-              </Badge>
-            </IconButton>
+                <Badge>
+                  <Link to="/ContactPatientChat"><ChatIcon /></Link>
+                </Badge>
+              </IconButton>
 
             <IconButton size="large" aria-label="" color="inherit">
               <Badge>

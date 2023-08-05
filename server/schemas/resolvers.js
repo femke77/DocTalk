@@ -31,6 +31,29 @@ const emails = [
   },
   // Add more email objects as needed
 ];
+const { User, Message, Chat } = require('../models');
+const { signToken } = require('../utils/auth');
+
+let channels = [{
+  id: "1",
+  name: 'Chat with a doctor',
+  messages: [{
+    id: "1",
+    text: 'The doctor will be with you shortly...'
+  }]
+}, {
+  id: "2",
+  name: 'Technical Support',
+  messages: [{
+    id: "1",
+    text: 'The tech support will be with you shortly...'
+  }
+  ]
+}]
+
+
+let nextMessageId = "2";
+
 const resolvers = {
   Query: {
     users: async () => {
@@ -103,6 +126,14 @@ const resolvers = {
     },
     getReceivedEmails: () => emails.filter((email) => email.status === 'received'),
 
+    channels: () => {
+      return channels;
+    },
+    channel: (parent, { id }) => {
+
+      return (channels.find(ch => ch.id === id))
+    }
+
   },
   Mutation: {
     addUser: async (parent, { username, email, password, firstName, lastName, patient, doctor }) => {
@@ -121,12 +152,12 @@ const resolvers = {
       return { token, user };
     },
 
-    message: async (parent, {messageData}, context) => {
+    message: async (parent, { messageData }, context) => {
       if (context.user) {
-        const message = await Message.create({...messageData, patient:context.user._id})
+        const message = await Message.create({ ...messageData, patient: context.user._id })
         return message
-      } 
-        throw new AuthenticationError('You must be logged in!');
+      }
+      throw new AuthenticationError('You must be logged in!');
     },
 
     updateUser: async (parent, { _id, input }) => {
@@ -203,10 +234,10 @@ const resolvers = {
       if (!context.user) {
         throw new Error('You must be logged in to send an email');
       }
-    
+
       const { subject, recipients, body } = emailInput;
       const sender = context.user.email; // Set sender as the logged-in user's email
-    
+
       const email = new Email({
         subject,
         sender,
@@ -216,16 +247,16 @@ const resolvers = {
         status: 'sent',
         user: context.user._id, // Link the email to the logged-in user
       });
-    
+
       try {
         const savedEmail = await email.save();
-    
+
         // Assuming you have a "sent" folder for each user, you can save the email ID to the user's sent folder.
         // For example, assuming you have a field called "sentEmails" in the User model:
         const user = await User.findById(context.user._id);
         user.sentEmails.push(savedEmail._id);
         await user.save();
-    
+
         return savedEmail;
       } catch (error) {
         console.error('Error sending email:', error);
@@ -234,6 +265,15 @@ const resolvers = {
     },
 
   },
+  addMessage: async (parent, { message }) => {
+    const channel = channels.find(ch => ch.id === message.channelId);
+    if (!channel)
+      throw new Error("Channel does not exist");
+
+    const newMessage = { id: String(nextMessageId++), text: message.text };
+    channel.messages.push(newMessage);
+    return newMessage;
+  }
 };
 
 module.exports = resolvers;
