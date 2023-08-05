@@ -1,6 +1,9 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Message, Email } = require('../models');
+// const { User, Message, Email } = require('../models');
 const { signToken } = require('../utils/auth');
+const User = require('../models/User');
+const Message = require('../models/Message');
+const Email = require('../models/Email');
 
 const emails = [
   {
@@ -51,18 +54,7 @@ const resolvers = {
         throw new Error('Error fetching user by email');
       }
     },
-    // getAllEmails: async (parent, args, context) => {
 
-    //   console.log(context.user.email);
-
-    //   try {
-    //     const emails = await Email.find(); // Fetch all emails without filtering
-    //     return emails;
-    //   } catch (error) {
-    //     console.log(error);
-    //     throw new Error('Error fetching all emails');
-    //   }
-    // },
 
     getAllEmails: async (parent, { inbox }, context) => {
       try {
@@ -167,36 +159,6 @@ const resolvers = {
 
       return { token, user };
     },
-
-    // sendEmail: async (parent, { emailInput }, context) => {
-
-    //   console.log("Authenticated User:", context.user);
-    //   // Check if the sender is logged in (assuming you have a user property in the context)
-    //   if (!context.user) {
-    //     throw new Error('You must be logged in to send an email');
-    //   }
-
-    //   const { subject, recipients, body } = emailInput;
-    //   const sender = context.user.email;
-
-    //   const email = new Email({
-    //     subject,
-    //     sender,
-    //     recipients,
-    //     body,
-    //     timestamp: new Date().toISOString(),
-    //     status: 'sent',
-    //     user: context.user._id,
-    //   });
-
-    //   try {
-    //     const savedEmail = await email.save();
-    //     return savedEmail;
-    //   } catch (error) {
-    //     console.error('Error sending email:', error);
-    //     throw new Error('Failed to send email');
-    //   }
-    // },
 
     sendEmail: async (parent, { emailInput }, context) => {
       // Check if the sender is logged in (assuming you have a user property in the context)

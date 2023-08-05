@@ -22,7 +22,7 @@ import PatientProfile from './pages/Patient/PatientProfile';
 import BookAppointment from './pages/Patient/BookAppointment';
 import Appointments from './pages/Patient/Appointments';
 import MyAccount from './pages/Patient/MyAccount';
-import FindDoctor from './pages/Patient/FindDoctor';
+// import FindDoctor from './pages/Patient/FindDoctor';
 import DoctorProfile from './pages/Doctor/DoctorProfile';
 
 
@@ -30,7 +30,7 @@ import DoctorProfile from './pages/Doctor/DoctorProfile';
 
 // import ContactDoctor from './pages/Patient/ContactDoc';
 // import ContactPatient from './pages/Doctor/ContactPatient';
-import ContactPatientChat from './pages/Doctor/ContactPatientChat';
+// import ContactPatientChat from './pages/Doctor/ContactPatientChat';
 
 
 
@@ -81,12 +81,12 @@ function App() {
 
 
 
-        
-            <Route path="/contactpatientchat" element={<ContactPatientChat />} />
+{/*         
+            <Route path="/contactpatientchat" element={<ContactPatientChat />} /> */}
 
             <Route path="/PatientProfile" element={<PatientProfile />} />
             <Route path="/BookAppointment" element={<BookAppointment />} />
-            <Route path="/FindDoctor" element={<FindDoctor />} />
+            {/* <Route path="/FindDoctor" element={<FindDoctor />} /> */}
             <Route path="/Appointments" element={<Appointments />} />
             <Route path="/MyAccount" element={<MyAccount />} />
 
