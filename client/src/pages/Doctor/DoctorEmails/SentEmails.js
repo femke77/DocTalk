@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Table from '@mui/material/Table';
@@ -8,6 +8,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { useQuery, gql } from '@apollo/client';
+import AuthService from '../../../utils/auth';
 
 const GET_SENT_EMAILS_QUERY = gql`
   query getSentEmails {
@@ -32,12 +33,12 @@ const SentEmails = () => {
   const { loading, error, data } = useQuery(GET_SENT_EMAILS_QUERY, {
     context: {
       headers: {
-        Authorization: `Bearer YOUR_AUTH_TOKEN_HERE`,
+        authorization: `Bearer ${AuthService.getToken()}`,
       },
     },
   });
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (data) {
       setSentEmails(data.getSentEmails);
     }

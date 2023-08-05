@@ -21,16 +21,19 @@ const SEND_EMAIL_MUTATION = gql`
 `;
 
 export default function ComposeEmail() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
+
+  const [formState, setFormState] = useState({
+    fullName: "",
+    email: "",
+    message: ""
+  });
+  
   const [sendEmail, { loading }] = useMutation(SEND_EMAIL_MUTATION);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-
-    if (!email.trim() || !message.trim()) {
+    if (!formState.email.trim() || !formState.message.trim()) {
       return toast.error("Please enter a valid email and message");
     }
 
@@ -38,21 +41,19 @@ export default function ComposeEmail() {
       subject: "Your Subject",
       sender: Auth.getProfile().data.email,
       recipients: [],
-      body: message,
+      body: formState.message,
       timestamp: new Date().toISOString(),
       status: "DRAFT",
     };
 
-    // const [formState, setFormState] = useState({
-
-    // });
-
     sendEmail({ variables: { emailInput } })
       .then((result) => {
         console.log("Email sent successfully:", result.data.sendEmail);
-    
-        setEmail("");
-        setMessage("");
+        setFormState({
+          ...formState,
+          email: "",
+          message: ""
+        });
         toast.success("Email sent successfully");
       })
       .catch((error) => {
@@ -78,16 +79,16 @@ export default function ComposeEmail() {
             <TextField
               fullWidth
               label="Name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              value={formState.fullName}
+              onChange={(e) => setFormState({ ...formState, fullName: e.target.value })}
               margin="normal"
               required
             />
             <TextField
               fullWidth
               label="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              value={formState.email}
+              onChange={(e) => setFormState({ ...formState, email: e.target.value })}
               margin="normal"
               required
               type="email"
@@ -95,8 +96,8 @@ export default function ComposeEmail() {
             <TextField
               fullWidth
               label="Message"
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
+              value={formState.message}
+              onChange={(e) => setFormState({ ...formState, message: e.target.value })}
               margin="normal"
               required
               multiline

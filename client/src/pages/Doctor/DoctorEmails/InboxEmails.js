@@ -6,7 +6,7 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-
+import AuthService from '../../../utils/auth';
 const GET_RECEIVED_EMAILS_QUERY = gql`
   query getReceivedEmails {
     getReceivedEmails {
@@ -26,11 +26,13 @@ const GET_RECEIVED_EMAILS_QUERY = gql`
 `;
 
 const InboxEmails = ({ setSelectedEmail }) => {
+
+
   const { loading, error, data } = useQuery(GET_RECEIVED_EMAILS_QUERY, {
     // Include the authentication token in the request headers
     context: {
       headers: {
-        Authorization: `Bearer YOUR_AUTH_TOKEN_HERE`,
+        authorization: `Bearer ${AuthService.getToken()}`,
       },
     },
   });
