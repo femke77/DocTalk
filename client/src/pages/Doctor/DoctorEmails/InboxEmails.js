@@ -25,7 +25,7 @@ const GET_RECEIVED_EMAILS_QUERY = gql`
   }
 `;
 
-const InboxEmails = ({ setSelectedEmail }) => {
+const InboxEmails = ({setSelectedEmail }) => {
 
 
   const { loading, error, data } = useQuery(GET_RECEIVED_EMAILS_QUERY, {
@@ -49,21 +49,21 @@ const InboxEmails = ({ setSelectedEmail }) => {
 
   return (
     <TableContainer component={Paper}>
-      <Table>
-        <TableBody>
-          {emails.map((email) => (
-            <TableRow key={email.id}>
-              <TableCell
-                style={{ fontWeight: email.read ? 'normal' : 'bold' }}
-                onClick={() => setSelectedEmail(email)}
-              >
-                {email.subject}
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <Table>
+      <TableBody>
+        {emails.map((email) => (
+          <TableRow key={email.id}>
+            <TableCell
+              style={{ fontWeight: email.read ? 'normal' : 'bold' }}
+              onClick={() => setSelectedEmail(email)}
+            >
+              {email.subject}
+            </TableCell>
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
+  </TableContainer>
   );
 };
 

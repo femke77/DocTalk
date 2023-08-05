@@ -1,18 +1,11 @@
 import React, { useState } from 'react';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
-// import Table from '@mui/material/Table';
-// import TableBody from '@mui/material/TableBody';
-// import TableCell from '@mui/material/TableCell';
-// import TableContainer from '@mui/material/TableContainer';
-// import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import MailIcon from '@mui/icons-material/Mail';
 import DraftsIcon from '@mui/icons-material/Drafts';
 import SendIcon from '@mui/icons-material/Send';
 import { Link } from 'react-router-dom';
-// import EmailDetails from './EmailDetails';
 import { useQuery, gql } from '@apollo/client';
 import InboxEmails from './InboxEmails';
 import SentEmails from './SentEmails';
@@ -31,6 +24,8 @@ const GET_RECEIVED_EMAILS_QUERY = gql`
       user {
         patient
         doctor
+        firstName
+        lastName
       }
     }
   }
@@ -56,6 +51,8 @@ const EmailDashboard = () => {
   if (emailsError) {
     return <p>Error: {emailsError.message}</p>;
   }
+  const receivedEmails = emailsData.getReceivedEmails; 
+  const inboxEmails = receivedEmails.filter((email) => email.status === 'received'); 
 
   return (
     <Container maxWidth="lg">
@@ -92,10 +89,14 @@ const EmailDashboard = () => {
           </Button>
         </div>
         <div style={{ flex: 2, paddingLeft: '20px' }}>
-        {selectedEmail === 'sent' ? <SentEmails /> : <InboxEmails emails={emailsData.getReceivedEmails} setSelectedEmail={setSelectedEmail} />}
+        {selectedEmail === 'sent' ? (
+          <SentEmails />
+        ) : (
+          <InboxEmails emails={inboxEmails} setSelectedEmail={setSelectedEmail} />
+        )}
       </div>
       </div>
-      {/* {selectedEmail && <InboxEmails email={selectedEmail} />} */}
+
     </Container>
   );
 };

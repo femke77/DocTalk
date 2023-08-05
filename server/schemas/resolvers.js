@@ -93,7 +93,16 @@ const resolvers = {
         throw new Error('Error fetching sent emails');
       }
     },
-    getReceivedEmails: () => emails.filter((email) => email.status === 'received'),
+    getReceivedEmails: async () => {
+      try {
+
+        const receivedEmails = await Email.find({ status: 'received' });
+
+        return receivedEmails;
+      } catch (error) {
+        throw new Error('Failed to fetch received emails');
+      }
+    },
 
   },
   Mutation: {
