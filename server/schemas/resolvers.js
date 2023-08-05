@@ -31,8 +31,6 @@ const emails = [
   },
   // Add more email objects as needed
 ];
-const { User, Message, Chat } = require('../models');
-const { signToken } = require('../utils/auth');
 
 let channels = [{
   id: "1",
@@ -265,15 +263,14 @@ const resolvers = {
     },
 
   },
-  addMessage: async (parent, { message }) => {
-    const channel = channels.find(ch => ch.id === message.channelId);
-    if (!channel)
-      throw new Error("Channel does not exist");
+addMessage: async (parent, { message }) => {
+      const channel = channels.find((ch) => ch.id === message.channelId);
+      if (!channel) throw new Error("Channel does not exist");
 
-    const newMessage = { id: String(nextMessageId++), text: message.text };
-    channel.messages.push(newMessage);
-    return newMessage;
-  }
+      const newMessage = { id: String(nextMessageId++), text: message.text };
+      channel.messages.push(newMessage);
+      return newMessage;
+    },
 };
 
 module.exports = resolvers;
