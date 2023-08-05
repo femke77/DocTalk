@@ -112,9 +112,10 @@ export default function PrimarySearchAppBar() {
             <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
             <MenuItem onClick={handleMenuClose}>Payment</MenuItem>
             <MenuItem onClick={handleMenuClose}>Previous Consult</MenuItem>
-            <MenuItem onClick={handleLogout}>Logout</MenuItem>
+          
             <MenuItem onClick={handleMenuClose}><Link to="/MyAccount">My Account</Link></MenuItem>
             <MenuItem onClick={handleMenuClose}><Link to="/billing">Billing</Link></MenuItem>
+            <MenuItem onClick={handleLogout}>Logout</MenuItem>
             
         </Menu>
     );
@@ -230,7 +231,7 @@ export default function PrimarySearchAppBar() {
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <IconButton size="large" aria-label="show 4 new mails" color="inherit">
               <Badge badgeContent={4} color="error">
-              <Link to="/patient-emaildashboard"><MailIcon /></Link>
+              <Link to="/email-dashboard"><MailIcon /></Link>
               </Badge>
             </IconButton>
 

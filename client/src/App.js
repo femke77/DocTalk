@@ -24,16 +24,12 @@ import Appointments from './pages/Patient/Appointments';
 import MyAccount from './pages/Patient/MyAccount';
 import FindDoctor from './pages/Patient/FindDoctor';
 import DoctorProfile from './pages/Doctor/DoctorProfile';
-import DoctorEmail from './pages/Doctor/DoctorEmail';
-
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { ApolloClient,InMemoryCache,ApolloProvider,createHttpLink} from '@apollo/client';
 
 
 
-import { setContext } from '@apollo/client/link/context';
-import ContactDoctor from './pages/Patient/ContactDoc';
-import ContactPatient from './pages/Doctor/ContactPatient';
+
+// import ContactDoctor from './pages/Patient/ContactDoc';
+// import ContactPatient from './pages/Doctor/ContactPatient';
 import ContactPatientChat from './pages/Doctor/ContactPatientChat';
 
 
@@ -76,16 +72,13 @@ function App() {
             <Route path="/contactus" element={<ContactForm />} />
             <Route path="/services" element={<Services />} />
             <Route path="/billing" element={<Billing />} />
-            <Route path="/contactdoctor" element={<ContactDoctor />} />
+            {/* <Route path="/contactdoctor" element={<ContactDoctor />} /> */}
             <Route path="/compose" element={<ComposeEmail />} />
             <Route path="/email-dashboard" element={<EmailDashboard />} />
             <Route path='/emaillist' element={<EmailList />} />
             <Route path="/emaildetails" element={<EmailDetails />} />
             <Route path="/callpatient" element={<CallPatient />} />
 
-
-            
-            <Route path="/contactpatient" element={<ContactPatient />} />
 
 
         
@@ -96,7 +89,8 @@ function App() {
             <Route path="/FindDoctor" element={<FindDoctor />} />
             <Route path="/Appointments" element={<Appointments />} />
             <Route path="/MyAccount" element={<MyAccount />} />
-            <Route path="/doctor-email" element={<DoctorEmail />} />
+
+
             <Route path="/DoctorProfile" element={<DoctorProfile />} />
 
 

@@ -22,7 +22,7 @@ import ChatIcon from '@mui/icons-material/Chat';
 import CallIcon from '@mui/icons-material/Call';
 
 
-import DoctorEmail from '../../pages/Doctor/DoctorEmail';
+
 import DoctorProfile from '../../pages/Doctor/DoctorProfile';
 
 const Search = styled('div')(({ theme }) => ({
