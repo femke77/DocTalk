@@ -1,10 +1,7 @@
-import React, { useState } from "react";
-import { TextField, Button, Typography, Box } from "@mui/material";
+import React, { useState } from 'react';
+import { TextField, Button, Container } from '@mui/material';
 import { useMutation } from '@apollo/client';
-import { gql } from '@apollo/client';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import Auth from '../../../utils/auth';
+import { useQuery, gql } from '@apollo/client';
 
 const SEND_EMAIL_MUTATION = gql`
   mutation SendEmail($emailInput: EmailInput!) {
@@ -19,95 +16,85 @@ const SEND_EMAIL_MUTATION = gql`
     }
   }
 `;
+const ComposeEmail = () => {
 
-export default function ComposeEmail() {
-  const [formState, setFormState] = useState({
-    fullName: "",
-    email: "",
-    message: ""
-  });
+  const [recipient, setRecipient] = useState('');
+  const [subject, setSubject] = useState('');
+  const [content, setContent] = useState('');
+  const [sendEmailMutation] = useMutation(SEND_EMAIL_MUTATION);
 
-  const [sendEmail, { loading }] = useMutation(SEND_EMAIL_MUTATION);
+  const handleRecipientChange = (event) => {
+    setRecipient(event.target.value);
+  };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubjectChange = (event) => {
+    setSubject(event.target.value);
+  };
 
-    if (!formState.email.trim() || !formState.message.trim()) {
-      return toast.error("Please enter a valid email and message");
-    }
+  const handleContentChange = (event) => {
+    setContent(event.target.value);
+  };
 
-    const emailInput = {
-      subject: "Your Subject",
-      sender: Auth.getProfile().data.email,
-      recipients: [],
-      body: formState.message,
-      timestamp: new Date().toISOString(),
-      status: "DRAFT",
-    };
-
-    sendEmail({ variables: { emailInput } })
-      .then((result) => {
-        console.log("Email sent successfully:", result.data.sendEmail);
-        setFormState({
-          ...formState,
-          email: "",
-          message: ""
-        });
-        toast.success("Email sent successfully");
-      })
-      .catch((error) => {
-        console.error("Error sending email:", error.message);
-        toast.error("Error sending email");
+  const handleComposeEmail = async () => {
+    try {
+      const { data } = await sendEmailMutation({
+        variables: {
+          emailInput: {
+            recipients: [recipient],
+            subject,
+            body: content, 
+          },
+        },
       });
+  
+ 
+      console.log('Sent Email:', data.sendEmail);
+  
+
+      setRecipient('');
+      setSubject('');
+      setContent('');
+    } catch (error) {
+      console.error('Error sending email:', error.message);
+    }
   };
 
   return (
-    <div>
-      <ToastContainer />
-      <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", height: "100vh" }}>
-        <img
-          src="/images/hero.jpg"
-          alt="contact"
-          style={{ width: '100%', maxWidth: '800px', height: 'auto', marginBottom: '20px' }}
+    <Container maxWidth="md">
+      <h2>Compose Email</h2>
+      <form>
+        <TextField
+          fullWidth
+          label="Recipient"
+          value={recipient}
+          onChange={handleRecipientChange}
+          variant="outlined"
+          margin="normal"
         />
-        <Box sx={{ maxWidth: 600, mx: "auto", p: 2 }}>
-          <Typography variant="h4" align="center" mb={2}>
-            Contact Us
-          </Typography>
-          <form onSubmit={handleSubmit}>
-            <TextField
-              fullWidth
-              label="Name"
-              value={formState.fullName}
-              onChange={(e) => setFormState({ ...formState, fullName: e.target.value })}
-              margin="normal"
-              required
-            />
-            <TextField
-              fullWidth
-              label="Email"
-              value={formState.email}
-              onChange={(e) => setFormState({ ...formState, email: e.target.value })}
-              margin="normal"
-              required
-              type="email"
-            />
-            <TextField
-              fullWidth
-              label="Message"
-              value={formState.message}
-              onChange={(e) => setFormState({ ...formState, message: e.target.value })}
-              margin="normal"
-              required
-              multiline
-              rows={4}
-            />
-            <Button variant="contained" type="submit" sx={{ mt: 2 }}>
-              {loading ? "Sending..." : "Send"}
-            </Button>
-          </form>
-        </Box>
-      </Box>
-    </div>
+        <TextField
+          fullWidth
+          label="Subject"
+          value={subject}
+          onChange={handleSubjectChange}
+          variant="outlined"
+          margin="normal"
+        />
+        <TextField
+          fullWidth
+          label="Content"
+          multiline
+          rows={5}
+          value={content}
+          onChange={handleContentChange}
+          variant="outlined"
+          margin="normal"
+        />
+        <Button variant="contained" color="primary" onClick={handleComposeEmail}>
+          Send
+        </Button>
+      </form>
+    </Container>
   );
-}
+};
+
+export default ComposeEmail;
