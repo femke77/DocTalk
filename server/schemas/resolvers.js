@@ -1,6 +1,60 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Message } = require('../models');
+// const { User, Message, Email } = require('../models');
 const { signToken } = require('../utils/auth');
+const User = require('../models/User');
+const Message = require('../models/Message');
+const Email = require('../models/Email');
+
+const emails = [
+  {
+    id: '1',
+    subject: 'Sample Email 1',
+    sender: 'sender@example.com',
+    recipients: ['recipient1@example.com', 'recipient2@example.com'],
+    body: 'This is the content of the email.',
+    timestamp: '2023-08-04T12:00:00.000Z',
+    status: 'received',
+    user: {
+      patient: null,
+      doctor: null,
+    },
+  },
+  {
+    id: '2',
+    subject: 'Sample Email 2',
+    sender: 'sender@example.com',
+    recipients: ['recipient3@example.com'],
+    body: 'This is another email.',
+    timestamp: '2023-08-05T09:30:00.000Z',
+    status: 'received',
+    user: {
+      patient: null,
+      doctor: null,
+    },
+  },
+  // Add more email objects as needed
+];
+let channels = [{
+  id: "1",
+  name: 'Chat with a doctor',
+  messages:[{
+    id: "1",
+    username: "Doctor",
+    text: 'The doctor will be with you shortly...'
+  }]
+}, {
+  id: "2",
+  name: 'Technical Support',
+  messages:[{
+    id: "1",
+    username: "Tech Support",
+    text: 'The tech support will be with you shortly...'
+  }
+]
+}]
+
+
+let nextMessageId = "2";
 
 const resolvers = {
   Query: {
@@ -22,13 +76,60 @@ const resolvers = {
         throw new Error('Error fetching user by email');
       }
     },
-    messages: async (parent, args, context) => {
-      if (context.user.doctor) {
-        return await Message.find({}).populate('patient');
-      } else {
-        throw new AuthenticationError('You must be a doctor!');
+
+
+    getAllEmails: async (parent, { inbox }, context) => {
+      try {
+        const query = inbox
+          ? { recipients: { $elemMatch: { $eq: context.user.email } } }
+          : { sender: context.user.email };
+
+        const emails = await Email.find(query);
+        return emails;
+      } catch (error) {
+        console.log(error);
+        throw new Error('Error fetching emails');
       }
+    },
+
+    getOneEmail: async (parent, { id }) => {
+      try {
+        const email = await Email.findById(id);
+        return email;
+      } catch (error) {
+        console.log(error);
+        throw new Error('Error fetching email by id');
+      }
+    },
+
+    getSentEmails: async (parent, args, context) => {
+      if (!context.user) {
+        throw new AuthenticationError('You must be logged in to view sent emails');
+      }
+
+      try {
+        const sentEmails = await Email.find({ sender: context.user.email });
+        return sentEmails;
+      } catch (error) {
+        console.log(error);
+        throw new Error('Error fetching sent emails');
+      }
+    },
+    getReceivedEmails: async () => {
+      try {
+
+        const receivedEmails = await Email.find({ status: 'received' });
+
+        return receivedEmails;
+      } catch (error) {
+        throw new Error('Failed to fetch received emails');
+      }
+    },
+
+    channel: (parent, {id})=> {  
+      return (channels.find(ch => ch.id === id)) 
     }
+   
   },
   Mutation: {
     addUser: async (parent, { username, email, password, firstName, lastName, patient, doctor }) => {
@@ -93,6 +194,51 @@ const resolvers = {
 
       return { token, user };
     },
+
+    sendEmail: async (parent, { emailInput }, context) => {
+      // Check if the sender is logged in (assuming you have a user property in the context)
+      if (!context.user) {
+        throw new Error('You must be logged in to send an email');
+    } 
+      
+      const { subject, recipients, body } = emailInput;
+      const sender = context.user.email; // Set sender as the logged-in user's email
+    
+      const email = new Email({
+        subject,
+        sender,
+        recipients,
+        body,
+        timestamp: new Date().toISOString(),
+        status: 'sent',
+        user: context.user._id, // Link the email to the logged-in user
+      });
+    
+      try {
+        const savedEmail = await email.save();
+    
+        // Assuming you have a "sent" folder for each user, you can save the email ID to the user's sent folder.
+        // For example, assuming you have a field called "sentEmails" in the User model:
+        const user = await User.findById(context.user._id);
+        user.sentEmails.push(savedEmail._id);
+        await user.save();
+    
+        return savedEmail;
+      } catch (error) {
+        console.error('Error sending email:', error);
+        throw new Error('Failed to send email');
+      }
+    },
+    addMessage: async (parent, {message}) => {
+      const channel = channels.find(ch => ch.id === message.channelId)
+      if (!channel)
+      throw new Error("Channel does not exist")
+      
+      const newMessage = {id: String(nextMessageId++), text: message.text}
+      channel.messages.push(newMessage)
+      return newMessage;
+    }
+
   },
 };
 

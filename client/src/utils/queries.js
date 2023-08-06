@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 export const QUERY_ALL_USERS = gql`
   query allUsers {
@@ -29,9 +29,75 @@ export const MESSAGES = gql`
         firstName
         lastName
         patient
+        username
+        }
+      }
+    }
+  `;
+
+
+export const CHANNEL_DETAILS = gql`
+  query ChannelDetailsQuery($channelId: ID!) {
+    channel(id: $channelId) {
+      id
+      name
+      messages {
+        id
+        username
+        text
+      }
+    }
+  }
+`;
+
+export const GET_EMAILS_QUERY = gql`
+  query getAllEmails($inbox: Boolean!) {
+  getAllEmails(inbox: $inbox) {
+    id
+    subject
+    sender
+    recipients
+    body
+    timestamp
+    status
+    user {
+      patient
+      doctor
+    }
+  }
+}
+`;
+const GET_SENT_EMAILS_QUERY = gql`
+  query getSentEmails {
+    getSentEmails {
+      id
+      subject
+      sender
+      recipients
+      body
+      timestamp
+      status
+      user {
+        patient
         doctor
       }
       message
     }
   }
 `;
+
+// export const GET_EMAIL_QUERY = gql`
+//   query GetEmail($id: ID!) {
+//     getEmail(id: $id) {
+//       id
+//       subject
+//       sender
+//       recipients
+//       body
+//       timestamp
+//       status
+//     }
+//   }
+// `
+;
+
