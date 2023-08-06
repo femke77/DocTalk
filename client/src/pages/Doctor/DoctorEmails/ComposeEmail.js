@@ -21,13 +21,12 @@ const SEND_EMAIL_MUTATION = gql`
 `;
 
 export default function ComposeEmail() {
-
   const [formState, setFormState] = useState({
     fullName: "",
     email: "",
     message: ""
   });
-  
+
   const [sendEmail, { loading }] = useMutation(SEND_EMAIL_MUTATION);
 
   const handleSubmit = (e) => {
