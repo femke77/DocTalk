@@ -34,6 +34,28 @@ const emails = [
   },
   // Add more email objects as needed
 ];
+let channels = [{
+  id: "1",
+  name: 'Chat with a doctor',
+  messages:[{
+    id: "1",
+    username: "Doctor",
+    text: 'The doctor will be with you shortly...'
+  }]
+}, {
+  id: "2",
+  name: 'Technical Support',
+  messages:[{
+    id: "1",
+    username: "Tech Support",
+    text: 'The tech support will be with you shortly...'
+  }
+]
+}]
+
+
+let nextMessageId = "2";
+
 const resolvers = {
   Query: {
     users: async () => {
@@ -104,6 +126,10 @@ const resolvers = {
       }
     },
 
+    channel: (parent, {id})=> {  
+      return (channels.find(ch => ch.id === id)) 
+    }
+   
   },
   Mutation: {
     addUser: async (parent, { username, email, password, firstName, lastName, patient, doctor }) => {
@@ -173,8 +199,8 @@ const resolvers = {
       // Check if the sender is logged in (assuming you have a user property in the context)
       if (!context.user) {
         throw new Error('You must be logged in to send an email');
-      }
-    
+    } 
+      
       const { subject, recipients, body } = emailInput;
       const sender = context.user.email; // Set sender as the logged-in user's email
     

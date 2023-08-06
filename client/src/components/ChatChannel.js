@@ -53,9 +53,8 @@ export default function Channel() {
             {data && Auth.loggedIn() ?(
                 <>
                     <h1>{data.channel.name} </h1>
-                    <h4>{Auth.getProfile().data.username}: {" "}</h4>
                     {data.channel.messages.length ? data.channel.messages.map(msg => (
-                        <p key={msg.id}>{msg.text}</p>)) : "No messages"}
+                        <p key={msg.id}>{msg.username}: {msg.text}</p>)) : "No messages"}
                     <br />
                     <br />
            
