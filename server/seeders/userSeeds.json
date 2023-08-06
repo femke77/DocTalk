@@ -1,29 +1,109 @@
-[
+{
+  "users": [
     {
-      "username": "user1",
-      "email": "user1@example.com",
+      "id": 1,
+      "username": "john_doe",
+      "email": "john.doe@example.com",
       "password": "password123",
       "firstName": "John",
       "lastName": "Doe",
-      "patient": true,
-      "doctor": false
+      "isDoctor": false,
+      "avatar": "https://randomuser.me/api/portraits/men/1.jpg"
     },
     {
-      "username": "user2",
-      "email": "user2@example.com",
+      "id": 2,
+      "username": "jane_smith",
+      "email": "jane.smith@example.com",
       "password": "password456",
       "firstName": "Jane",
       "lastName": "Smith",
-      "patient": true,
-      "doctor": false
+      "isDoctor": false,
+      "avatar": "https://randomuser.me/api/portraits/women/2.jpg"
     },
     {
-      "username": "user3",
-      "email": "user3@example.com",
+      "id": 3,
+      "username": "peter_pan",
+      "email": "peter.pan@example.com",
       "password": "password789",
       "firstName": "Peter",
       "lastName": "Pan",
-      "patient": false,
-      "doctor": true
+      "isDoctor": true,
+      "title": "Cardiologist",
+      "avatar": "https://randomuser.me/api/portraits/men/3.jpg"
+    },
+    {
+      "id": 4,
+      "username": "emily_johnson",
+      "email": "emily.johnson@example.com",
+      "password": "password987",
+      "firstName": "Emily",
+      "lastName": "Johnson",
+      "isDoctor": false,
+      "avatar": "https://randomuser.me/api/portraits/women/4.jpg"
+    },
+    {
+      "id": 5,
+      "username": "michael_brown",
+      "email": "michael.brown@example.com",
+      "password": "password654",
+      "firstName": "Michael",
+      "lastName": "Brown",
+      "isDoctor": false,
+      "avatar": "https://randomuser.me/api/portraits/men/5.jpg"
+    },
+    {
+      "id": 6,
+      "username": "olivia_miller",
+      "email": "olivia.miller@example.com",
+      "password": "password321",
+      "firstName": "Olivia",
+      "lastName": "Miller",
+      "isDoctor": true,
+      "title": "Dermatologist",
+      "avatar": "https://randomuser.me/api/portraits/women/6.jpg"
+    },
+    {
+      "id": 7,
+      "username": "william_lee",
+      "email": "william.lee@example.com",
+      "password": "password012",
+      "firstName": "William",
+      "lastName": "Lee",
+      "isDoctor": false,
+      "avatar": "https://randomuser.me/api/portraits/men/7.jpg"
+    },
+    {
+      "id": 8,
+      "username": "sophia_clark",
+      "email": "sophia.clark@example.com",
+      "password": "password345",
+      "firstName": "Sophia",
+      "lastName": "Clark",
+      "isDoctor": false,
+      "avatar": "https://randomuser.me/api/portraits/women/8.jpg"
+    },
+    {
+      "id": 9,
+      "username": "james_garcia",
+      "email": "james.garcia@example.com",
+      "password": "password678",
+      "firstName": "James",
+      "lastName": "Garcia",
+      "isDoctor": true,
+      "title": "Pediatrician",
+      "avatar": "https://randomuser.me/api/portraits/men/9.jpg"
+    },
+    {
+      "id": 10,
+      "username": "isabella_martinez",
+      "email": "isabella.martinez@example.com",
+      "password": "password543",
+      "firstName": "Isabella",
+      "lastName": "Martinez",
+      "isDoctor": false,
+      "avatar": "https://randomuser.me/api/portraits/women/10.jpg"
     }
+   
   ]
+}
+
