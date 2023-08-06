@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { useTheme } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
@@ -21,8 +21,8 @@ export default function HomePage() {
         padding: 0,
         position: 'relative',
         overflow: 'hidden',
-        background: '#1976d2', // Background color for the entire page
-        color: '#fff', // Text color for the entire page
+        background: '#1976d2', 
+        color: '#fff',
         fontFamily: 'Arial, sans-serif',
         fontSize: '18px',
         fontWeight: 'bold',
