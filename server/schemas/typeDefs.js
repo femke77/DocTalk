@@ -45,6 +45,7 @@ const typeDefs = gql`
   type Auth {
     token: ID!
     user: User
+    email: String
   }
 
   input ChatMessageInput{
@@ -55,9 +56,11 @@ const typeDefs = gql`
   type Query {
     users: [User!]!
     userByEmail(email: String!): User
-    channels: [Channel]  
-    # query the chat channel
-    channel(id: ID!): Channel
+    getAllEmails: [Email] 
+    getOneEmail(id: ID!): Email
+    getSentEmails: [Email]
+    getReceivedEmails: [Email!]!
+
   }
 
   type Mutation {
@@ -77,6 +80,7 @@ const typeDefs = gql`
 
     # send a message to the doctor (not chat)
     message(messageData: MessageInput): Message
+    sendEmail(emailInput: EmailInput!): Email 
   }
 
   input UpdateUserInput {
@@ -87,6 +91,23 @@ const typeDefs = gql`
     password: String
     patient: Boolean
     doctor: Boolean
+  }
+
+  input EmailInput {
+    subject: String!
+    recipients: [String!]!
+    body: String!
+  }
+  
+  type Email {
+    id: ID
+    subject: String
+    sender: String
+    recipients: [String]
+    body: String
+    timestamp: String
+    status: String
+    user: User
   }
 `;
 

@@ -1,0 +1,16 @@
+milestones pending:
+
+patient receives bill, 
+doctor send bill, 
+stripe payment: patient is able to payment
+
+Emails:
+emails are able to fetch in inbox
+DRAFT:
+if emails are drafted but not sent keep them in Drafts saved.
+
+Optional: 
+Profile of Doctor/Patient:
+
+profile could be fetched through query for doctor and patient.
+optional :
