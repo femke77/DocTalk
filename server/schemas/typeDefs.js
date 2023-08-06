@@ -62,7 +62,8 @@ const typeDefs = gql`
     getOneEmail(id: ID!): Email
     getSentEmails: [Email]
     getReceivedEmails: [Email!]!
-
+    channels: [Channel]  
+    channel(id: ID!): Channel
   }
 
   type Mutation {
