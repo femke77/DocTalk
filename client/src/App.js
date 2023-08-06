@@ -30,7 +30,7 @@ import DoctorProfile from './pages/Doctor/DoctorProfile';
 
 // import ContactDoctor from './pages/Patient/ContactDoc';
 // import ContactPatient from './pages/Doctor/ContactPatient';
-// import ContactPatientChat from './pages/Doctor/ContactPatientChat';
+import ContactPatientChat from './pages/Doctor/ContactPatientChat';
 
 
 
@@ -81,8 +81,8 @@ function App() {
 
 
 
-{/*         
-            <Route path="/contactpatientchat" element={<ContactPatientChat />} /> */}
+         
+            <Route path="/contactpatientchat" element={<ContactPatientChat />} /> 
 
             <Route path="/PatientProfile" element={<PatientProfile />} />
             <Route path="/BookAppointment" element={<BookAppointment />} />
