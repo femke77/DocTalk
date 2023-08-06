@@ -203,6 +203,15 @@ const resolvers = {
         throw new Error('Failed to send email');
       }
     },
+    addMessage: async (parent, {message}) => {
+      const channel = channels.find(ch => ch.id === message.channelId)
+      if (!channel)
+      throw new Error("Channel does not exist")
+      
+      const newMessage = {id: String(nextMessageId++), text: message.text}
+      channel.messages.push(newMessage)
+      return newMessage;
+    }
 
   },
 };
