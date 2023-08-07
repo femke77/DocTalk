@@ -1,5 +1,4 @@
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { blue, pink, green, red } from '@mui/material/colors';
 
 const theme = createTheme({
     components: {
@@ -21,12 +20,12 @@ const theme = createTheme({
       },
     },
     palette: {
-      type: 'light', // or 'dark' for dark mode
+      type: 'light', // Switching the dark mode on is a single property value change.
       primary: {
         main: '#007bff', 
       },
       secondary: {
-        main: '#05337d', 
+        main: '#abcdd6', 
       },
     },
     

@@ -11,6 +11,7 @@ import ComposeEmail from './ComposeEmail';
 import EmailDetails from './EmailDetails'; // Import the EmailDetails component
 import { useQuery, gql } from '@apollo/client';
 import AuthService from '../../utils/auth';
+import Card from '@mui/material/Card';
 
 const GET_RECEIVED_EMAILS_QUERY = gql`
   query getReceivedEmails {
@@ -27,7 +28,7 @@ const GET_RECEIVED_EMAILS_QUERY = gql`
 `;
 
 const EmailDashboard = () => {
-  const [selectedEmail, setSelectedEmail] = useState(null); // Track the selected email
+  const [selectedEmail, setSelectedEmail] = useState("inbox"); // Track the selected email
   const [receivedEmailCount, setReceivedEmailCount] = useState(0);
 
   const { loading, error, data } = useQuery(GET_RECEIVED_EMAILS_QUERY, {
@@ -45,15 +46,15 @@ const EmailDashboard = () => {
   }, [data]);
 
   const handleInboxClick = () => {
-    setSelectedEmail(null); // Clear the selected email
+    setSelectedEmail('inbox'); // Set a value to indicate Inbox button click
   };
 
   const handleSentClick = () => {
-    setSelectedEmail(null); // Clear the selected email
+    setSelectedEmail('sent'); // Set a value to indicate Sent button click
   };
 
   const handleComposeClick = () => {
-    setSelectedEmail(null); // Clear the selected email
+    setSelectedEmail('compose'); // Set a value to indicate Compose button click
   };
 
   const handleEmailDetailsClick = (email) => {
@@ -62,6 +63,7 @@ const EmailDashboard = () => {
 
   return (
     <Container maxWidth="lg" style={{ marginTop: '40px' }}>
+      <Card>
       <Typography variant="h4" gutterBottom style={{ marginBottom: '10px', marginLeft: '20px', marginTop: '0px' }}>
         Email Dashboard
       </Typography>
@@ -79,7 +81,7 @@ const EmailDashboard = () => {
           <Button
             startIcon={<MailIcon />}
             variant="contained"
-            color={selectedEmail === null ? 'secondary' : 'primary'}
+            color="primary"
             fullWidth
             onClick={handleInboxClick}
             style={{ marginBottom: '10px' }}
@@ -98,7 +100,7 @@ const EmailDashboard = () => {
           <Button
             startIcon={<SendIcon />}
             variant="contained"
-            color={selectedEmail === 'sent' ? 'secondary' : 'primary'}
+            color="primary"
             fullWidth
             onClick={handleSentClick}
             style={{ marginBottom: '10px' }}
@@ -107,15 +109,13 @@ const EmailDashboard = () => {
           </Button>
         </div>
         <div style={{ flex: 2, paddingLeft: '20px' }}>
-          {selectedEmail ? ( // Conditionally render EmailDetails when an email is selected
-            <EmailDetails email={selectedEmail} />
-          ) : selectedEmail === 'sent' ? (
-            <SentEmails onEmailClick={handleEmailDetailsClick} />
-          ) : (
-            <InboxEmails onEmailClick={handleEmailDetailsClick} />
-          )}
+          {selectedEmail === 'compose' && <ComposeEmail />}
+          {selectedEmail === 'inbox' && <InboxEmails onEmailClick={handleEmailDetailsClick} />}
+          {selectedEmail === 'sent' && <SentEmails onEmailClick={handleEmailDetailsClick} />}
+          {selectedEmail && typeof selectedEmail === 'object' && <EmailDetails email={selectedEmail} />}
         </div>
       </div>
+      </Card>
     </Container>
   );
 };

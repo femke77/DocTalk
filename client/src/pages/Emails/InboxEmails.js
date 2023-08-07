@@ -9,10 +9,11 @@ import Paper from '@mui/material/Paper';
 import { useQuery, gql } from '@apollo/client';
 import AuthService from '../../utils/auth';
 import Container from '@mui/material/Container';
-import EmailDetails from './EmailDetails'; 
+import EmailDetails from './EmailDetails';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
 
 const GET_RECEIVED_EMAILS_QUERY = gql`
   query getReceivedEmails {
@@ -110,6 +111,9 @@ const InboxEmails = () => {
         >
           <ChevronLeftIcon />
         </IconButton>
+        <Typography variant="body1" style={{ marginTop: '10px', marginRight: '10px' }}>
+          Page {currentPage + 1} of {totalPages}
+        </Typography>
         <IconButton
           onClick={handleNextPage}
           disabled={endIndex >= inboxEmails.length}
