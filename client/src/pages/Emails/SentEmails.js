@@ -1,14 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { useQuery, gql } from '@apollo/client';
 import AuthService from '../../utils/auth';
+import EmailDetails from './EmailDetails';
 
 const GET_SENT_EMAILS_QUERY = gql`
   query getSentEmails {
@@ -37,7 +39,6 @@ const SentEmails = () => {
       },
     },
   });
-
   React.useEffect(() => {
     if (data) {
       setSentEmails(data.getSentEmails);
@@ -51,7 +52,6 @@ const SentEmails = () => {
   if (error) {
     return <p>Error: {error.message}</p>;
   }
-
   return (
     <Container maxWidth="lg">
       <Typography variant="h4" gutterBottom>
@@ -64,7 +64,7 @@ const SentEmails = () => {
               {sentEmails.map((email) => (
                 <TableRow key={email.id}>
                   <TableCell>{email.subject}</TableCell>
-                  <TableCell>{email.recipient}</TableCell>
+                  <TableCell>{email.sender}</TableCell>
                   <TableCell>{email.timestamp}</TableCell>
                 </TableRow>
               ))}
@@ -75,5 +75,4 @@ const SentEmails = () => {
     </Container>
   );
 };
-
 export default SentEmails;

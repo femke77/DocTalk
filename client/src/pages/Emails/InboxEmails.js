@@ -10,7 +10,7 @@ import { useQuery, gql } from '@apollo/client';
 import AuthService from '../../utils/auth';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
-import EmailDetails from './EmailDetails'; // Import the EmailDetails component
+import EmailDetails from './EmailDetails'; 
 
 const GET_RECEIVED_EMAILS_QUERY = gql`
   query getReceivedEmails {
@@ -28,7 +28,7 @@ const GET_RECEIVED_EMAILS_QUERY = gql`
 
 const InboxEmails = () => {
   const [inboxEmails, setInboxEmails] = useState([]);
-  const [selectedEmail, setSelectedEmail] = useState(null); // Add selectedEmail state
+  const [selectedEmail, setSelectedEmail] = useState(null);
 
   const { loading, error, data } = useQuery(GET_RECEIVED_EMAILS_QUERY, {
     context: {
@@ -54,9 +54,7 @@ const InboxEmails = () => {
 
   return (
     <Container maxWidth="lg">
-      <Typography variant="h4" gutterBottom>
-        Inbox Emails
-      </Typography>
+
       <div style={{ paddingLeft: '20px', marginTop: '20px' }}>
         <TableContainer component={Paper}>
           <Table>
