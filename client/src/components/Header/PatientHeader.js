@@ -116,11 +116,11 @@ export default function ProfilePrimarySearchAppBar() {
           open={isMenuOpen}
           onClose={handleMenuClose}
       >
-          <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-          <MenuItem onClick={handleMenuClose}>Payment</MenuItem>
-          <MenuItem onClick={handleMenuClose}>Previous Consult</MenuItem>
+          <MenuItem onClick={handleMenuClose}><Link to="PatientProfile">Profile</Link></MenuItem>
+          {/* <MenuItem onClick={handleMenuClose}>Payment</MenuItem>
+          <MenuItem onClick={handleMenuClose}>Previous Consult</MenuItem> */}
         
-          <MenuItem onClick={handleMenuClose}><Link to="/MyAccount">My Account</Link></MenuItem>
+          <MenuItem onClick={handleMenuClose}><Link to="/MyAccount">Find Doctor</Link></MenuItem>
           <MenuItem onClick={handleMenuClose}><Link to="/billing">Billing</Link></MenuItem>
           <MenuItem onClick={handleLogout}>Logout</MenuItem>
           
