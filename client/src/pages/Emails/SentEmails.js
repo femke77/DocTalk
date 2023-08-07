@@ -78,7 +78,7 @@ const SentEmails = () => {
             <TableHead>
               <TableRow>
                 <TableCell style={{ paddingLeft: '20px', fontFamily:'sans-serif', fontSize:'17px', fontWeight:'bold',backgroundColor:'#007bff', color: 'whitesmoke' }}>Subject</TableCell >
-                <TableCell style={{ paddingLeft: '20px', fontFamily:'sans-serif', fontSize:'17px', fontWeight:'bold',backgroundColor:'#007bff', color: 'whitesmoke' }}>Sender</TableCell>
+                <TableCell style={{ paddingLeft: '20px', fontFamily:'sans-serif', fontSize:'17px', fontWeight:'bold',backgroundColor:'#007bff', color: 'whitesmoke' }}>Recipient</TableCell>
                 <TableCell style={{ paddingLeft: '20px', fontFamily:'sans-serif', fontSize:'17px', fontWeight:'bold',backgroundColor:'#007bff', color: 'whitesmoke' }}>Date & Time</TableCell>
               </TableRow>
             </TableHead>
@@ -91,7 +91,7 @@ const SentEmails = () => {
                   </button>
                 </TableCell>
                 <TableCell style={{ paddingLeft: '20px', fontFamily: 'sans-serif', fontSize: '15px', fontWeight: email.status === 'unread' ? 'bold' : 'normal' }}>
-                  {email.sender}
+                  {email.recipients}
                 </TableCell>
                 <TableCell style={{ paddingLeft: '20px', fontFamily: 'sans-serif', fontSize: '15px', fontWeight: email.status === 'unread' ? 'bold' : 'normal' }}>
                   {new Date(email.timestamp).toLocaleString()}

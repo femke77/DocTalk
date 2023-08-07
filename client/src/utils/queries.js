@@ -14,7 +14,7 @@ export const QUERY_ALL_USERS = gql`
   }
 `;
 export const QUERY_PROFILE_USER = gql`
- QUERY getUserProfile($email: String!) {
+ query getUserProfile($email: String!) {
   userByEmail(email: $email) {
     _id
     username
