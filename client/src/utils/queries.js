@@ -14,6 +14,23 @@ export const QUERY_ALL_USERS = gql`
   }
 `;
 
+export const QUERY_PROFILE_USER = gql`
+  query getUserProfile {
+    query getUserProfile {
+    user {
+      _id
+      username
+      email
+      firstName
+      lastName
+      patient
+      doctor
+    }
+  }
+  }
+`;
+
+
 export const MESSAGES = gql`
   query Messages {
     messages {
@@ -35,6 +52,7 @@ export const MESSAGES = gql`
       }
     }
   `;
+
 
 
 export const CHANNEL_DETAILS = gql`
@@ -87,18 +105,22 @@ const GET_SENT_EMAILS_QUERY = gql`
   }
 `;
 
-// export const GET_EMAIL_QUERY = gql`
-//   query GetEmail($id: ID!) {
-//     getEmail(id: $id) {
-//       id
-//       subject
-//       sender
-//       recipients
-//       body
-//       timestamp
-//       status
-//     }
-//   }
-// `
+export const GET_RECEIVED_EMAILS_QUERY = gql`
+  query getReceivedEmails {
+    getReceivedEmails {
+      id
+      subject
+      sender
+      recipients
+      body
+      timestamp
+      status
+      user {
+        patient
+        doctor
+      }
+    }
+  }
+  `
 ;
 

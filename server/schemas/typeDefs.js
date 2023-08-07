@@ -10,6 +10,7 @@ const typeDefs = gql`
     lastName: String
     patient: Boolean
     doctor: Boolean
+    profileImage: String
   }
 
   type Channel {
@@ -57,7 +58,7 @@ const typeDefs = gql`
 
   type Query {
     users: [User!]!
-    userByEmail(email: String!): User
+    loggedInUser: User
     messages: [Message]
     getAllEmails: [Email] 
     getOneEmail(id: ID!): Email
@@ -77,11 +78,12 @@ const typeDefs = gql`
       patient: Boolean
       doctor: Boolean
     ): Auth
+
     login(email: String!, password: String!): Auth
     updateUser(_id: ID!, input: UpdateUserInput!): User!
     # add a message to the chat channel
     addMessage(message: ChatMessageInput): ChatMessage
-
+    updateProfile(input: UserProfileInput!): User
     # send a message to the doctor (not chat)
     message(messageData: MessageInput): Message
     sendEmail(emailInput: EmailInput!): Email 
@@ -112,7 +114,17 @@ const typeDefs = gql`
     timestamp: String
     status: String
     user: User
+    recipientRole: String
+    recipientStatus: String
   }
+  
+  input UserProfileInput {
+  username: String
+  email: String
+  firstName: String
+  lastName: String
+  profileImage: String
+}
 `;
 
 module.exports = typeDefs;
