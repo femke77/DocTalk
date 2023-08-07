@@ -64,7 +64,7 @@ const SentEmails = () => {
               {sentEmails.map((email) => (
                 <TableRow key={email.id}>
                   <TableCell>{email.subject}</TableCell>
-                  <TableCell>{email.sender}</TableCell>
+                  <TableCell>{email.recipient}</TableCell>
                   <TableCell>{email.timestamp}</TableCell>
                 </TableRow>
               ))}

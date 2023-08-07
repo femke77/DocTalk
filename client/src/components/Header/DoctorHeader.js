@@ -65,7 +65,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
 }));
 
-export default function PrimarySearchAppBar() {
+export default function PrimarySearchAppBar({ unreadEmailCount }) {
   const [isLoggedIn, setIsLoggedIn] = useState(AuthService.loggedIn());
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -249,10 +249,15 @@ export default function PrimarySearchAppBar() {
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
 
-            <Link to="/email-dashboard">
-              <IconButton size="large" aria-label="show 2 new chats" color="inherit" onClick={handleEmailClick}>
-                <Badge badgeContent={2} color="error">
-                <MailIcon />
+          <Link to="/email-dashboard">
+              <IconButton
+                size="large"
+                aria-label="show 2 new chats"
+                color="inherit"
+                onClick={handleEmailClick}
+              >
+                <Badge badgeContent={unreadEmailCount} color="error">
+                  <MailIcon />
                 </Badge>
               </IconButton>
             </Link>

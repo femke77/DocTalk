@@ -5,51 +5,67 @@ import Button from '@mui/material/Button';
 import MailIcon from '@mui/icons-material/Mail';
 import DraftsIcon from '@mui/icons-material/Drafts';
 import SendIcon from '@mui/icons-material/Send';
-import { Link } from 'react-router-dom';
 import InboxEmails from './InboxEmails';
 import SentEmails from './SentEmails';
-
+import ComposeEmail from './ComposeEmail';
 
 const EmailDashboard = () => {
-  const [selectedEmail, setSelectedEmail] = useState(null);
+  const [selectedEmail, setSelectedEmail] = useState('Received');
+
+  const handleInboxClick = () => {
+    setSelectedEmail('Received');
+  };
+
+  const handleSentClick = () => {
+    setSelectedEmail('sent');
+  };
+
+  const handleComposeClick = () => {
+    setSelectedEmail('compose');
+  };
 
   return (
-    <Container maxWidth="lg">
-      <Typography variant="h4" gutterBottom>
+    <Container maxWidth="lg" style={{ marginTop: '40px' }}>
+      <Typography variant="h4" gutterBottom style={{ marginBottom: '30px', marginLeft: '20px', marginTop: '30px' }}>
         Email Dashboard
       </Typography>
-      <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <div style={{ flex: 1 }}>
+      <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '10px' }}>
+        <div style={{ flex: 1, marginTop: '80px'}}>
           <Button
             variant="contained"
             color="primary"
             fullWidth
-            component={Link}
-            to="/compose"
-            style={{ marginBottom: '20px' }}
+            onClick={handleComposeClick}
+            style={{ marginBottom: '10px' }}
           >
             Compose Email
           </Button>
           <Button
-            startIcon={<SendIcon />}
+            startIcon={<MailIcon />}
+            variant="contained"
+            color={selectedEmail === 'Received' ? 'secondary' : 'primary'}
+            fullWidth
+            onClick={handleInboxClick}
+            style={{ marginBottom: '10px' }}
+          >
+            Inbox
+          </Button>
+          <Button
+            startIcon={<DraftsIcon />}
             variant="contained"
             color="primary"
             fullWidth
             style={{ marginBottom: '10px' }}
-            onClick={() => setSelectedEmail('Received')}
           >
-            Inbox
-          </Button>
-          <Button startIcon={<DraftsIcon />} variant="contained" color="primary" fullWidth style={{ marginBottom: '10px' }}>
             Drafts
           </Button>
           <Button
             startIcon={<SendIcon />}
             variant="contained"
-            color="primary"
+            color={selectedEmail === 'sent' ? 'secondary' : 'primary'}
             fullWidth
+            onClick={handleSentClick}
             style={{ marginBottom: '10px' }}
-            onClick={() => setSelectedEmail('sent')}
           >
             Sent
           </Button>
@@ -57,9 +73,11 @@ const EmailDashboard = () => {
         <div style={{ flex: 2, paddingLeft: '20px' }}>
           {selectedEmail === 'sent' ? (
             <SentEmails />
-          ) : (
-            <InboxEmails setSelectedEmail={setSelectedEmail} />
-          )}
+          ) : selectedEmail === 'Received' ? (
+            <InboxEmails />
+          ) : selectedEmail === 'compose' ? (
+            <ComposeEmail />
+          ) : null}
         </div>
       </div>
     </Container>
