@@ -6,7 +6,7 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import AuthService from '../../../utils/auth';
+import AuthService from '../../utils/auth';
 const GET_RECEIVED_EMAILS_QUERY = gql`
   query getReceivedEmails {
     getReceivedEmails {

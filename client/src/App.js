@@ -13,10 +13,10 @@ import { ApolloClient,InMemoryCache,ApolloProvider,createHttpLink} from '@apollo
 import { setContext } from '@apollo/client/link/context';
 import CallPatient from './pages/Doctor/CallPatient';
 
-import ComposeEmail from './pages/Doctor/DoctorEmails/ComposeEmail';
-import EmailDashboard from './pages/Doctor/DoctorEmails/EmailDashboard';
-import EmailDetails from './pages/Doctor/DoctorEmails/EmailDetails';
-import EmailList from './pages/Doctor/DoctorEmails/EmailList';
+import ComposeEmail from './pages/Emails/ComposeEmail';
+import EmailDashboard from './pages/Emails/EmailDashboard';
+import EmailDetails from './pages/Emails/EmailDetails';
+import EmailList from './pages/Emails/EmailList';
 
 import PatientProfile from './pages/Patient/PatientProfile';
 import BookAppointment from './pages/Patient/BookAppointment';

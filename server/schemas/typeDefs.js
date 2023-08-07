@@ -76,6 +76,7 @@ const typeDefs = gql`
       patient: Boolean
       doctor: Boolean
     ): Auth
+
     login(email: String!, password: String!): Auth
     updateUser(_id: ID!, input: UpdateUserInput!): User!
     # add a message to the chat channel
@@ -111,6 +112,8 @@ const typeDefs = gql`
     timestamp: String
     status: String
     user: User
+    recipientRole: String
+    recipientStatus: String
   }
 `;
 

@@ -34,28 +34,6 @@ const emails = [
   },
   // Add more email objects as needed
 ];
-let channels = [{
-  id: "1",
-  name: 'Chat with a doctor',
-  messages:[{
-    id: "1",
-    username: "Doctor",
-    text: 'The doctor will be with you shortly...'
-  }]
-}, {
-  id: "2",
-  name: 'Technical Support',
-  messages:[{
-    id: "1",
-    username: "Tech Support",
-    text: 'The tech support will be with you shortly...'
-  }
-]
-}]
-
-
-let nextMessageId = "2";
-
 const resolvers = {
   Query: {
     users: async () => {
@@ -126,10 +104,6 @@ const resolvers = {
       }
     },
 
-    channel: (parent, {id})=> {  
-      return (channels.find(ch => ch.id === id)) 
-    }
-   
   },
   Mutation: {
     addUser: async (parent, { username, email, password, firstName, lastName, patient, doctor }) => {
@@ -198,11 +172,21 @@ const resolvers = {
     sendEmail: async (parent, { emailInput }, context) => {
       // Check if the sender is logged in (assuming you have a user property in the context)
       if (!context.user) {
-        throw new Error('You must be logged in to send an email');
-    } 
-      
+        throw new AuthenticationError('You must be logged in to send an email');
+      }
+    
+      // Set sender as the logged-in user's email
+      const sender = context.user.email;
+    
+      // Check if the required fields are provided in the emailInput object
       const { subject, recipients, body } = emailInput;
-      const sender = context.user.email; // Set sender as the logged-in user's email
+      if (!subject || !recipients || !body) {
+        throw new Error('Subject, recipients, and body are required fields');
+      }
+    
+      // Set status as "sent" for the logged-in user and "received" for the recipient
+      const status = 'sent';
+      const recipientStatus = 'received';
     
       const email = new Email({
         subject,
@@ -210,18 +194,38 @@ const resolvers = {
         recipients,
         body,
         timestamp: new Date().toISOString(),
-        status: 'sent',
-        user: context.user._id, // Link the email to the logged-in user
+        status,
+        user: context.user._id,
+        recipientStatus,
       });
     
       try {
         const savedEmail = await email.save();
     
-        // Assuming you have a "sent" folder for each user, you can save the email ID to the user's sent folder.
-        // For example, assuming you have a field called "sentEmails" in the User model:
+        // Update sender's sentEmails
         const user = await User.findById(context.user._id);
+        if (!user) {
+          throw new Error('User not found');
+        }
+        
+        if (!user.sentEmails) {
+          user.sentEmails = [];
+        }
         user.sentEmails.push(savedEmail._id);
         await user.save();
+    
+        // Update recipient's inbox if the recipient user exists
+        const recipientUser = await User.findOne({ email: recipients[0] });
+        if (recipientUser) {
+          if (!recipientUser.receivedEmails) {
+            recipientUser.receivedEmails = [];
+          }
+          recipientUser.receivedEmails.push(savedEmail._id);
+          await recipientUser.save();
+        } else {
+          // Handle the case when the recipient user does not exist
+          throw new Error('Recipient email is not valid');
+        }
     
         return savedEmail;
       } catch (error) {
@@ -229,15 +233,21 @@ const resolvers = {
         throw new Error('Failed to send email');
       }
     },
+    
+    
+    
+    
+    
+    
     addMessage: async (parent, {message}) => {
-      const channel = channels.find(ch => ch.id === message.channelId)
-      if (!channel)
-      throw new Error("Channel does not exist")
-      
-      const newMessage = {id: String(nextMessageId++), text: message.text}
-      channel.messages.push(newMessage)
-      return newMessage;
-    }
+        const channel = channels.find(ch => ch.id === message.channelId)
+        if (!channel)
+        throw new Error("Channel does not exist")
+        
+        const newMessage = {id: String(nextMessageId++), text: message.text}
+        channel.messages.push(newMessage)
+        return newMessage;
+      }
 
   },
 };

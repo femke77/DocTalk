@@ -19,11 +19,23 @@ const emailSchema = new Schema({
   },
   status: {
     type: String,
+    enum: ['sent', 'received'],
+    default: 'sent',
   },
   user: {
-    type: Schema.Types.ObjectId, 
-    ref: 'Patient',
+    type: Schema.Types.ObjectId,
+    ref: 'User',
   },
+  recipientRole: {
+    type: String,
+    enum: ['doctor', 'patient'],
+  },
+  recipientStatus: {
+    type: String,
+    enum: ['sent', 'received'],
+    default: 'received',
+  },
+
 });
 
 const Email = mongoose.model('Email', emailSchema);

@@ -8,7 +8,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { useQuery, gql } from '@apollo/client';
-import AuthService from '../../../utils/auth';
+import AuthService from '../../utils/auth';
 
 const GET_SENT_EMAILS_QUERY = gql`
   query getSentEmails {

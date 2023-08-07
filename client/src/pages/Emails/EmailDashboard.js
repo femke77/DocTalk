@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 import { useQuery, gql } from '@apollo/client';
 import InboxEmails from './InboxEmails';
 import SentEmails from './SentEmails';
-import AuthService from '../../../utils/auth';
+import AuthService from '../../utils/auth';
 
 const GET_RECEIVED_EMAILS_QUERY = gql`
   query getReceivedEmails {
