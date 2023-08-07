@@ -29,6 +29,8 @@ const GET_RECEIVED_EMAILS_QUERY = gql`
 const InboxEmails = () => {
   const [inboxEmails, setInboxEmails] = useState([]);
   const [selectedEmail, setSelectedEmail] = useState(null);
+  const [receivedEmailCount, setReceivedEmailCount] = useState(0);
+  
 
   const { loading, error, data } = useQuery(GET_RECEIVED_EMAILS_QUERY, {
     context: {
@@ -41,6 +43,7 @@ const InboxEmails = () => {
   useEffect(() => {
     if (data) {
       setInboxEmails(data.getReceivedEmails);
+      setReceivedEmailCount(data.getReceivedEmails.length);
     }
   }, [data]);
 
@@ -65,16 +68,17 @@ const InboxEmails = () => {
                 <TableCell style={{ paddingLeft: '20px', fontFamily:'sans-serif', fontSize:'17px', fontWeight:'bold',backgroundColor:'#007bff', color: 'whitesmoke' }}>Date & Time</TableCell>
               </TableRow>
             </TableHead>
+
             <TableBody>
               {inboxEmails.map((email) => (
                 <TableRow key={email.id} onClick={() => setSelectedEmail(email)}>
-                  <TableCell style={{ paddingLeft: '20px', fontFamily:'sans-serif', fontSize:'16px', fontWeight: email.status === 'unread' ? 'bold' : 'normal' }}>
+                  <TableCell style={{ paddingLeft: '20px', fontFamily:'sans-serif', fontSize:'14px', fontWeight: email.status === 'unread' ? 'bold' : 'normal' }}>
                     {email.subject}
                   </TableCell>
-                  <TableCell style={{ paddingLeft: '20px', fontFamily:'sans-serif', fontSize:'16px', fontWeight: email.status === 'unread' ? 'bold' : 'normal' }}>
+                  <TableCell style={{ paddingLeft: '20px', fontFamily:'sans-serif', fontSize:'14px', fontWeight: email.status === 'unread' ? 'bold' : 'normal' }}>
                     {email.sender}
                   </TableCell>
-                  <TableCell style={{ paddingLeft: '20px', fontFamily:'sans-serif', fontSize:'16px', fontWeight: email.status === 'unread' ? 'bold' : 'normal' }}>
+                  <TableCell style={{ paddingLeft: '20px', fontFamily:'sans-serif', fontSize:'14px', fontWeight: email.status === 'unread' ? 'bold' : 'normal' }}>
                     {new Date(email.timestamp).toLocaleString()}
                   </TableCell>
                 </TableRow>
@@ -83,7 +87,7 @@ const InboxEmails = () => {
           </Table>
         </TableContainer>
       </div>
-      {/* Render EmailDetails component when an email is selected */}
+
       {selectedEmail && <EmailDetails email={selectedEmail} />}
     </Container>
   );

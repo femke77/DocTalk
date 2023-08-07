@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
@@ -11,6 +11,7 @@ import ComposeEmail from './ComposeEmail';
 
 const EmailDashboard = () => {
   const [selectedEmail, setSelectedEmail] = useState('Received');
+  const [receivedEmailCount, setReceivedEmailCount] = useState(0);
 
   const handleInboxClick = () => {
     setSelectedEmail('Received');
@@ -23,7 +24,12 @@ const EmailDashboard = () => {
   const handleComposeClick = () => {
     setSelectedEmail('compose');
   };
-
+  useEffect(() => {
+    if (data) {
+ 
+      setReceivedEmailCount(data.getReceivedEmails.length);
+    }
+  }, [data]);
   return (
     <Container maxWidth="lg" style={{ marginTop: '40px' }}>
       <Typography variant="h4" gutterBottom style={{ marginBottom: '30px', marginLeft: '20px', marginTop: '30px' }}>
@@ -41,15 +47,15 @@ const EmailDashboard = () => {
             Compose Email
           </Button>
           <Button
-            startIcon={<MailIcon />}
-            variant="contained"
-            color={selectedEmail === 'Received' ? 'secondary' : 'primary'}
-            fullWidth
-            onClick={handleInboxClick}
-            style={{ marginBottom: '10px' }}
-          >
-            Inbox
-          </Button>
+          startIcon={<MailIcon />}
+          variant="contained"
+          color={selectedEmail === 'Received' ? 'secondary' : 'primary'}
+          fullWidth
+          onClick={handleInboxClick}
+          style={{ marginBottom: '10px' }}
+        >
+          Inbox ({receivedEmailCount})
+        </Button>
           <Button
             startIcon={<DraftsIcon />}
             variant="contained"

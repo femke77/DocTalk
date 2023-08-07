@@ -12,6 +12,7 @@ import { useQuery, gql } from '@apollo/client';
 import AuthService from '../../utils/auth';
 import EmailDetails from './EmailDetails';
 
+
 const GET_SENT_EMAILS_QUERY = gql`
   query getSentEmails {
     getSentEmails {
@@ -32,6 +33,7 @@ const GET_SENT_EMAILS_QUERY = gql`
 
 const SentEmails = () => {
   const [sentEmails, setSentEmails] = useState([]);
+  const [selectedEmail, setSelectedEmail] = useState(null);
   const { loading, error, data } = useQuery(GET_SENT_EMAILS_QUERY, {
     context: {
       headers: {
@@ -54,24 +56,32 @@ const SentEmails = () => {
   }
   return (
     <Container maxWidth="lg">
-      <Typography variant="h4" gutterBottom>
-        Sent Emails
-      </Typography>
+
       <div style={{ paddingLeft: '20px' }}>
         <TableContainer component={Paper}>
           <Table>
+            
+          <TableHead>
+              <TableRow>
+                <TableCell style={{ paddingLeft: '20px', fontFamily:'sans-serif', fontSize:'17px', fontWeight:'bold',backgroundColor:'#007bff', color: 'whitesmoke' }}>Subject</TableCell >
+                <TableCell style={{ paddingLeft: '20px', fontFamily:'sans-serif', fontSize:'17px', fontWeight:'bold',backgroundColor:'#007bff', color: 'whitesmoke' }}>Recipient</TableCell>
+                <TableCell style={{ paddingLeft: '20px', fontFamily:'sans-serif', fontSize:'17px', fontWeight:'bold',backgroundColor:'#007bff', color: 'whitesmoke' }}>Date & Time</TableCell>
+              </TableRow>
+            </TableHead>
+
             <TableBody>
               {sentEmails.map((email) => (
                 <TableRow key={email.id}>
-                  <TableCell>{email.subject}</TableCell>
-                  <TableCell>{email.sender}</TableCell>
-                  <TableCell>{email.timestamp}</TableCell>
+                  <TableCell style={{ paddingLeft: '20px', fontFamily:'sans-serif', fontSize:'14px' }}>{email.subject}</TableCell>
+                  <TableCell style={{ paddingLeft: '20px', fontFamily:'sans-serif', fontSize:'14px' }}>{email.sender}</TableCell>
+                  <TableCell style={{ paddingLeft: '20px', fontFamily:'sans-serif', fontSize:'14px' }}>{email.timestamp}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
           </Table>
         </TableContainer>
       </div>
+      {selectedEmail && <EmailDetails email={selectedEmail} />}
     </Container>
   );
 };
