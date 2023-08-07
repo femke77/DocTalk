@@ -14,17 +14,19 @@ export const QUERY_ALL_USERS = gql`
   }
 `;
 export const QUERY_PROFILE_USER = gql`
- query getUserProfile($email: String!) {
-  userByEmail(email: $email) {
-    _id
-    username
-    email
-    firstName
-    lastName
-    patient
-    doctor
+  query getUserProfile {
+    query getUserProfile {
+    user {
+      _id
+      username
+      email
+      firstName
+      lastName
+      patient
+      doctor
+    }
   }
-}
+  }
 `;
 
 export const CHANNEL_DETAILS = gql`

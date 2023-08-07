@@ -45,13 +45,18 @@ const resolvers = {
         throw new Error('Error fetching all users');
       }
     },
-    userByEmail: async (parent, { email }) => {
+    loggedInUser: async (_, __, { user }) => {
+      if (!user) {
+        throw new Error("Authentication required.");
+      }
+
+      
       try {
-        const user = await User.findOne({ email });
-        return user;
+        const userProfile = await User.findOne({ email: user.email });
+        return userProfile;
       } catch (error) {
         console.log(error);
-        throw new Error('Error fetching user by email');
+        throw new Error('Error fetching user profile');
       }
     },
 
