@@ -31,6 +31,7 @@ export const MESSAGES = gql`
         patient
         username
         }
+        message
       }
     }
   `;

@@ -44,7 +44,7 @@ npm run start
 
 ## Credits
   
-- sehrishkhan336 
+- sehrishkhan336
 - Vlad1slav86 
 - JoelP-11 
 - EspadaSworn
