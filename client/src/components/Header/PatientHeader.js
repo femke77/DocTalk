@@ -123,7 +123,6 @@ export default function ProfilePrimarySearchAppBar() {
           <MenuItem onClick={handleMenuClose}><Link to="/MyAccount">Find Doctor</Link></MenuItem>
           <MenuItem onClick={handleMenuClose}><Link to="/billing">Billing</Link></MenuItem>
           <MenuItem onClick={handleLogout}>Logout</MenuItem>
-          
       </Menu>
   );
 

@@ -30,7 +30,7 @@ const typeDefs = gql`
     firstName: String
     lastName: String
     phonenumber: String
-    patient: ID
+    patient: User
     message: String
   }
 
@@ -58,6 +58,7 @@ const typeDefs = gql`
   type Query {
     users: [User!]!
     userByEmail(email: String!): User
+    messages: [Message]
     getAllEmails: [Email] 
     getOneEmail(id: ID!): Email
     getSentEmails: [Email]
