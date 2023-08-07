@@ -49,17 +49,21 @@ mutation addMessage($messageData: MessageInput) {
 `;
 
 
+
+
 export const ADD_BILL = gql`
-  mutation addBill($amount: Float!, $description: String!) {
-    addBill(input: { amount: $amount, description: $description }) {
+  mutation addBill($amount: Float!, $description: String!, $doctor: String!) {
+    addBill(input: { amount: $amount, description: $description, doctor: $doctor }) {
       _id
       amount
       description
+      doctor
       createdAt
       updatedAt
     }
   }
 `;
+
 
 
 export const LOGIN_USER = gql`

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { styled, alpha } from '@mui/material/styles';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -16,67 +16,60 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
-
-import AuthService from '../../utils/auth';
 import ChatIcon from '@mui/icons-material/Chat';
 import CallIcon from '@mui/icons-material/Call';
 
-
-
-import DoctorProfile from '../../pages/Doctor/DoctorProfile';
+import AuthService from '../../utils/auth';
 
 const Search = styled('div')(({ theme }) => ({
-    position: 'relative',
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: alpha(theme.palette.common.white, 0.15),
-    '&:hover': {
-        backgroundColor: alpha(theme.palette.common.white, 0.25),
-    },
-    marginRight: theme.spacing(2),
-    marginLeft: 0,
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-        marginLeft: theme.spacing(3),
-        width: 'auto',
-    },
+  position: 'relative',
+  borderRadius: theme.shape.borderRadius,
+  backgroundColor: alpha(theme.palette.common.white, 0.15),
+  '&:hover': {
+    backgroundColor: alpha(theme.palette.common.white, 0.25),
+  },
+  marginRight: theme.spacing(2),
+  marginLeft: 0,
+  width: '100%',
+  [theme.breakpoints.up('sm')]: {
+    marginLeft: theme.spacing(3),
+    width: 'auto',
+  },
 }));
 
 const SearchIconWrapper = styled('div')(({ theme }) => ({
-    padding: theme.spacing(0, 2),
-    height: '100%',
-    position: 'absolute',
-    pointerEvents: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
+  padding: theme.spacing(0, 2),
+  height: '100%',
+  position: 'absolute',
+  pointerEvents: 'none',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
-    color: 'inherit',
-    '& .MuiInputBase-input': {
-        padding: theme.spacing(1, 1, 1, 0),
-        // vertical padding + font size from searchIcon
-        paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-        transition: theme.transitions.create('width'),
-        width: '100%',
-        [theme.breakpoints.up('md')]: {
-            width: '20ch',
-        },
+  color: 'inherit',
+  '& .MuiInputBase-input': {
+    padding: theme.spacing(1, 1, 1, 0),
+    // vertical padding + font size from searchIcon
+    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    transition: theme.transitions.create('width'),
+    width: '100%',
+    [theme.breakpoints.up('md')]: {
+      width: '20ch',
     },
+  },
 }));
 
-export default function PrimarySearchAppBar() {
+export default function DoctorHeader() {
   const [isLoggedIn, setIsLoggedIn] = useState(AuthService.loggedIn());
+  const navigate = useNavigate();
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-
-  const handleProfileMenuOpen = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
 
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
@@ -90,17 +83,28 @@ export default function PrimarySearchAppBar() {
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
-  // Logout Function for patientiside
+
   const handleLogout = () => {
     AuthService.logout();
     setIsLoggedIn(false);
     handleMenuClose();
+    navigate('/');
   };
+
   const handleEmailClick = () => {
-    // Add any additional logic you may need before navigating to the DoctorEmail page
     if (isLoggedIn) {
-      <Link to="/email-dashboard" />;
+      navigate('/email-dashboard');
     }
+  };
+
+  const handleBillingMenuClick = () => {
+    handleMenuClose();
+    navigate('/DoctorBilling');
+  };
+
+  const handleProfileMenuOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+    navigate('/DoctorProfile');
   };
 
   const menuId = 'primary-search-account-menu';
@@ -120,10 +124,8 @@ export default function PrimarySearchAppBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>DashBoard</MenuItem>
-      <MenuItem onClick={handleMenuClose}><Link to="/DoctorProfile">Profile</Link></MenuItem>
-      <MenuItem onClick={handleMenuClose}>Billing</MenuItem>
+      {/* <MenuItem onClick={handleProfileMenuOpen}>Profile</MenuItem> */}
+      <MenuItem onClick={handleBillingMenuClick}>Billing</MenuItem>
       <MenuItem onClick={handleLogout}>Logout</MenuItem>
     </Menu>
   );
@@ -188,9 +190,7 @@ export default function PrimarySearchAppBar() {
           </Badge>
         </IconButton>
         <p>Notifications</p>
-
       </MenuItem>
-
 
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
@@ -221,22 +221,22 @@ export default function PrimarySearchAppBar() {
             <MenuIcon />
           </IconButton>
           <Typography
-              variant="h6"
-              noWrap
-              component="a"
-              href="/"
-              sx={{
-                mr: 2,
-                display: { xs: 'none', md: 'flex' },
-                fontFamily: 'monospace',
-                fontWeight: 700,
-                letterSpacing: '.3rem',
-                color: 'inherit',
-                textDecoration: 'none',
-              }}
-            >
-              DocTalk
-            </Typography>
+            variant="h6"
+            noWrap
+            component="a"
+            href="/"
+            sx={{
+              mr: 2,
+              display: { xs: 'none', md: 'flex' },
+              fontFamily: 'monospace',
+              fontWeight: 700,
+              letterSpacing: '.3rem',
+              color: 'inherit',
+              textDecoration: 'none',
+            }}
+          >
+            DocTalk
+          </Typography>
           <Search>
             <SearchIconWrapper>
               <SearchIcon />
@@ -248,20 +248,19 @@ export default function PrimarySearchAppBar() {
           </Search>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-
             <Link to="/email-dashboard">
               <IconButton size="large" aria-label="show 2 new chats" color="inherit" onClick={handleEmailClick}>
                 <Badge badgeContent={2} color="error">
-                <MailIcon />
+                  <MailIcon />
                 </Badge>
               </IconButton>
             </Link>
 
             <IconButton size="large" aria-label="" color="inherit">
-                <Badge>
-                  <Link to="/ContactPatientChat"><ChatIcon /></Link>
-                </Badge>
-              </IconButton>
+              <Badge>
+                <Link to="/ContactPatientChat"><ChatIcon /></Link>
+              </Badge>
+            </IconButton>
 
             <IconButton size="large" aria-label="" color="inherit">
               <Badge>
@@ -278,7 +277,7 @@ export default function PrimarySearchAppBar() {
                 <NotificationsIcon />
               </Badge>
             </IconButton>
-            
+
             <IconButton
               size="large"
               edge="end"

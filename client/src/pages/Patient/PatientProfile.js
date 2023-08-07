@@ -1,5 +1,6 @@
 import React from "react";
 import { Typography, Box, Avatar, Button, Divider, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+import Footer from "../../components/Footer";
 
 const PatientProfile = () => {
   const patient = {
@@ -101,7 +102,9 @@ const PatientProfile = () => {
           </Table>
         </TableContainer>
       </Box>
+      <Footer />
     </Box>
+    
   );
 };
 

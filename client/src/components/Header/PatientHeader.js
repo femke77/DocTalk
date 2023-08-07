@@ -15,7 +15,7 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import ChatIcon from '@mui/icons-material/Chat';
 import CallIcon from '@mui/icons-material/Call';
 import AuthService from '../../utils/auth';
@@ -62,7 +62,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function ProfilePrimarySearchAppBar() {
   const [isLoggedIn, setIsLoggedIn] = useState(AuthService.loggedIn());
-
+  const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -91,6 +91,22 @@ export default function ProfilePrimarySearchAppBar() {
     setIsLoggedIn(false);
     handleMenuClose();
   };
+
+  const handleBillingMenuClick = () => {
+    handleMenuClose();
+    navigate('/PatientBilling');
+  };
+
+  const handleProfileMenuClick = () => {
+    handleMenuClose();
+    navigate('/PatientProfile');
+  };
+
+  const handleFindDoctorMenuClick = () => {
+    handleMenuClose();
+    navigate('/FindDoctor');
+  };
+
   
   // const handleEmailClick = () => {
   
@@ -116,12 +132,12 @@ export default function ProfilePrimarySearchAppBar() {
           open={isMenuOpen}
           onClose={handleMenuClose}
       >
-          <MenuItem onClick={handleMenuClose}><Link to="PatientProfile">Profile</Link></MenuItem>
+          <MenuItem onClick={handleProfileMenuClick}>Profile</MenuItem>
           {/* <MenuItem onClick={handleMenuClose}>Payment</MenuItem>
           <MenuItem onClick={handleMenuClose}>Previous Consult</MenuItem> */}
         
-          <MenuItem onClick={handleMenuClose}><Link to="/MyAccount">Find Doctor</Link></MenuItem>
-          <MenuItem onClick={handleMenuClose}><Link to="/billing">Billing</Link></MenuItem>
+          <MenuItem onClick={handleFindDoctorMenuClick }>Find Doctor</MenuItem>
+          <MenuItem onClick={handleBillingMenuClick}>Billing</MenuItem>
           <MenuItem onClick={handleLogout}>Logout</MenuItem>
       </Menu>
   );
