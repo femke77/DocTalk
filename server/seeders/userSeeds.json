@@ -1,109 +1,92 @@
-{
-  "users": [
-    {
-      "id": 1,
-      "username": "john_doe",
-      "email": "john.doe@example.com",
-      "password": "password123",
-      "firstName": "John",
-      "lastName": "Doe",
-      "isDoctor": false,
-      "avatar": "https://randomuser.me/api/portraits/men/1.jpg"
-    },
-    {
-      "id": 2,
-      "username": "jane_smith",
-      "email": "jane.smith@example.com",
-      "password": "password456",
-      "firstName": "Jane",
-      "lastName": "Smith",
-      "isDoctor": false,
-      "avatar": "https://randomuser.me/api/portraits/women/2.jpg"
-    },
-    {
-      "id": 3,
-      "username": "peter_pan",
-      "email": "peter.pan@example.com",
-      "password": "password789",
-      "firstName": "Peter",
-      "lastName": "Pan",
-      "isDoctor": true,
-      "title": "Cardiologist",
-      "avatar": "https://randomuser.me/api/portraits/men/3.jpg"
-    },
-    {
-      "id": 4,
-      "username": "emily_johnson",
-      "email": "emily.johnson@example.com",
-      "password": "password987",
-      "firstName": "Emily",
-      "lastName": "Johnson",
-      "isDoctor": false,
-      "avatar": "https://randomuser.me/api/portraits/women/4.jpg"
-    },
-    {
-      "id": 5,
-      "username": "michael_brown",
-      "email": "michael.brown@example.com",
-      "password": "password654",
-      "firstName": "Michael",
-      "lastName": "Brown",
-      "isDoctor": false,
-      "avatar": "https://randomuser.me/api/portraits/men/5.jpg"
-    },
-    {
-      "id": 6,
-      "username": "olivia_miller",
-      "email": "olivia.miller@example.com",
-      "password": "password321",
-      "firstName": "Olivia",
-      "lastName": "Miller",
-      "isDoctor": true,
-      "title": "Dermatologist",
-      "avatar": "https://randomuser.me/api/portraits/women/6.jpg"
-    },
-    {
-      "id": 7,
-      "username": "william_lee",
-      "email": "william.lee@example.com",
-      "password": "password012",
-      "firstName": "William",
-      "lastName": "Lee",
-      "isDoctor": false,
-      "avatar": "https://randomuser.me/api/portraits/men/7.jpg"
-    },
-    {
-      "id": 8,
-      "username": "sophia_clark",
-      "email": "sophia.clark@example.com",
-      "password": "password345",
-      "firstName": "Sophia",
-      "lastName": "Clark",
-      "isDoctor": false,
-      "avatar": "https://randomuser.me/api/portraits/women/8.jpg"
-    },
-    {
-      "id": 9,
-      "username": "james_garcia",
-      "email": "james.garcia@example.com",
-      "password": "password678",
-      "firstName": "James",
-      "lastName": "Garcia",
-      "isDoctor": true,
-      "title": "Pediatrician",
-      "avatar": "https://randomuser.me/api/portraits/men/9.jpg"
-    },
-    {
-      "id": 10,
-      "username": "isabella_martinez",
-      "email": "isabella.martinez@example.com",
-      "password": "password543",
-      "firstName": "Isabella",
-      "lastName": "Martinez",
-      "isDoctor": false,
-      "avatar": "https://randomuser.me/api/portraits/women/10.jpg"
-    }
+[
+  {
    
-  ]
-}
+    "firstName": "John",
+    "lastName": "Doe",
+    "title": "Dr.",
+    "gender": "Male",
+    "isDoctor": true,
+    "avatar": "https://example.com/avatar1.jpg"
+  },
+  {
+ 
+    "firstName": "Jane",
+    "lastName": "Smith",
+    "title": "Ms.",
+    "gender": "Female",
+    "isDoctor": false,
+    "avatar": "https://example.com/avatar2.jpg"
+  },
+  {
+   
+    "firstName": "Michael",
+    "lastName": "Johnson",
+    "title": "Mr.",
+    "gender": "Male",
+    "isDoctor": false,
+    "avatar": "https://example.com/avatar3.jpg"
+  },
+  {
 
+    "firstName": "Emily",
+    "lastName": "Williams",
+    "title": "Ms.",
+    "gender": "Female",
+    "isDoctor": false,
+    "avatar": "https://example.com/avatar4.jpg"
+  },
+  {
+
+    "firstName": "David",
+    "lastName": "Brown",
+    "title": "Mr.",
+    "gender": "Male",
+    "isDoctor": false,
+    "avatar": "https://example.com/avatar5.jpg"
+  },
+  {
+
+    "firstName": "Sophia",
+    "lastName": "Taylor",
+    "title": "Ms.",
+    "gender": "Female",
+    "isDoctor": false,
+    "avatar": "https://example.com/avatar6.jpg"
+  },
+  {
+
+    "firstName": "William",
+    "lastName": "Wilson",
+    "title": "Mr.",
+    "gender": "Male",
+    "isDoctor": false,
+    "avatar": "https://example.com/avatar7.jpg"
+  },
+  {
+
+    "firstName": "Olivia",
+    "lastName": "Lee",
+    "title": "Mrs.",
+    "gender": "Female",
+    "isDoctor": false,
+    "avatar": "https://example.com/avatar8.jpg"
+  },
+  {
+
+    "firstName": "James",
+    "lastName": "Miller",
+    "title": "Mr.",
+    "gender": "Male",
+    "isDoctor": false,
+    "avatar": "https://example.com/avatar9.jpg"
+  },
+  {
+
+    "firstName": "Emma",
+    "lastName": "Davis",
+    "title": "Ms.",
+    "gender": "Female",
+    "isDoctor": false,
+    "avatar": "https://example.com/avatar10.jpg"
+  }
+]

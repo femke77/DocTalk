@@ -26,6 +26,7 @@
   import DoctorProfile from './pages/Doctor/DoctorProfile';
   import { ThemeProvider } from '@mui/material/styles';
   import { theme, lightTheme, darkTheme } from './theme';
+  import Profile from './components/Profile';
 
 
 
@@ -79,6 +80,7 @@
               <Route path='/emaillist' element={<EmailList />} />
               <Route path="/emaildetails" element={<EmailDetails />} />
               <Route path="/callpatient" element={<CallPatient />} />
+              <Route path="/profile" element={<Profile />} />
 
 
 

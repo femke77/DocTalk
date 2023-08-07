@@ -19,6 +19,7 @@ import { Link } from 'react-router-dom';
 import ChatIcon from '@mui/icons-material/Chat';
 import CallIcon from '@mui/icons-material/Call';
 import AuthService from '../../utils/auth';
+import { useNavigate } from 'react-router-dom';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -62,7 +63,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function ProfilePrimarySearchAppBar() {
   const [isLoggedIn, setIsLoggedIn] = useState(AuthService.loggedIn());
-
+  const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -91,40 +92,50 @@ export default function ProfilePrimarySearchAppBar() {
     setIsLoggedIn(false);
     handleMenuClose();
   };
-  
-  // const handleEmailClick = () => {
-  
-  //   if (isLoggedIn) {
-  //     <Link to="/email-dashboard" />;
-  //   }
-  // };
 
+  const handleEmailClick = () => {
+
+    if (isLoggedIn) {
+      <Link to="/email-dashboard" />;
+    }
+  };
+  const handleProfileClick = () => {
+    if (isLoggedIn) {
+      navigate('/profile');
+    }
+  };
+  const handleBillingClick = () => {  
+    if (isLoggedIn) {
+      navigate('/billing');
+    }
+  };
+  
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
-      <Menu
-          anchorEl={anchorEl}
-          anchorOrigin={{
-              vertical: 'top',
-              horizontal: 'right',
-          }}
-          id={menuId}
-          keepMounted
-          transformOrigin={{
-              vertical: 'top',
-              horizontal: 'right',
-          }}
-          open={isMenuOpen}
-          onClose={handleMenuClose}
-      >
-          <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-          <MenuItem onClick={handleMenuClose}>Payment</MenuItem>
-          <MenuItem onClick={handleMenuClose}>Previous Consult</MenuItem>
-        
-          <MenuItem onClick={handleMenuClose}><Link to="/MyAccount">My Account</Link></MenuItem>
-          <MenuItem onClick={handleMenuClose}><Link to="/billing">Billing</Link></MenuItem>
-          <MenuItem onClick={handleLogout}>Logout</MenuItem>
-          
-      </Menu>
+    <Menu
+      anchorEl={anchorEl}
+      anchorOrigin={{
+        vertical: 'top',
+        horizontal: 'right',
+      }}
+      id={menuId}
+      keepMounted
+      transformOrigin={{
+        vertical: 'top',
+        horizontal: 'right',
+      }}
+      open={isMenuOpen}
+      onClose={handleMenuClose}
+    >
+      <MenuItem onClick={handleProfileClick}>Profile</MenuItem>
+
+
+
+      <MenuItem onClick={handleMenuClose}><Link to="/MyAccount">My Account</Link></MenuItem>
+      <MenuItem onClick={handleBillingClick}>Billing</MenuItem>
+      <MenuItem onClick={handleLogout}>Logout</MenuItem>
+
+    </Menu>
   );
 
   const mobileMenuId = 'primary-search-account-menu-mobile';
@@ -219,22 +230,22 @@ export default function ProfilePrimarySearchAppBar() {
             <MenuIcon />
           </IconButton>
           <Typography
-              variant="h6"
-              noWrap
-              component="a"
-              href="/"
-              sx={{
-                mr: 2,
-                display: { xs: 'none', md: 'flex' },
-                fontFamily: 'monospace',
-                fontWeight: 700,
-                letterSpacing: '.3rem',
-                color: 'inherit',
-                textDecoration: 'none',
-              }}
-            >
-              DocTalk
-            </Typography>
+            variant="h6"
+            noWrap
+            component="a"
+            href="/"
+            sx={{
+              mr: 2,
+              display: { xs: 'none', md: 'flex' },
+              fontFamily: 'monospace',
+              fontWeight: 700,
+              letterSpacing: '.3rem',
+              color: 'inherit',
+              textDecoration: 'none',
+            }}
+          >
+            DocTalk
+          </Typography>
           <Search>
             <SearchIconWrapper>
               <SearchIcon />
@@ -248,21 +259,21 @@ export default function ProfilePrimarySearchAppBar() {
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <IconButton size="large" aria-label="show 4 new mails" color="inherit">
               <Badge badgeContent={4} color="error">
-              <Link to="/email-dashboard"><MailIcon /></Link>
+                <Link to="/email-dashboard"><MailIcon /></Link>
               </Badge>
             </IconButton>
 
-              <IconButton size="large" aria-label="" color="inherit">
-                <Badge>
-                  <ChatIcon />
-                </Badge>
-              </IconButton>
+            <IconButton size="large" aria-label="" color="inherit">
+              <Badge>
+                <ChatIcon />
+              </Badge>
+            </IconButton>
 
-              <IconButton size="large" aria-label="" color="inherit">
-                <Badge>
-                  <Link to="/contactdoctor"><CallIcon /></Link>
-                </Badge>
-              </IconButton>              
+            <IconButton size="large" aria-label="" color="inherit">
+              <Badge>
+                <Link to="/contactdoctor"><CallIcon /></Link>
+              </Badge>
+            </IconButton>
 
             <IconButton
               size="large"
@@ -283,9 +294,9 @@ export default function ProfilePrimarySearchAppBar() {
               onClick={handleProfileMenuOpen}
               color="inherit"
             >
-             
-                <AccountCircle />
-             
+
+              <AccountCircle />
+
             </IconButton>
           </Box>
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
