@@ -1,4 +1,5 @@
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { blue, pink, green, red } from '@mui/material/colors';
 
 const theme = createTheme({
     components: {
@@ -22,12 +23,13 @@ const theme = createTheme({
     palette: {
       type: 'light', // or 'dark' for dark mode
       primary: {
-        main: '#007bff', // Replace with your primary color
+        main: '#007bff', 
       },
       secondary: {
-        main: '#ff4081', // Replace with your secondary color
+        main: '#05337d', 
       },
     },
+    
   });
 
 export default theme;

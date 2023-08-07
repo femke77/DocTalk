@@ -8,31 +8,61 @@ import SendIcon from '@mui/icons-material/Send';
 import InboxEmails from './InboxEmails';
 import SentEmails from './SentEmails';
 import ComposeEmail from './ComposeEmail';
+import EmailDetails from './EmailDetails'; // Import the EmailDetails component
+import { useQuery, gql } from '@apollo/client';
+import AuthService from '../../utils/auth';
+
+const GET_RECEIVED_EMAILS_QUERY = gql`
+  query getReceivedEmails {
+    getReceivedEmails {
+      id
+      subject
+      sender
+      recipients
+      body
+      timestamp
+      status
+    }
+  }
+`;
 
 const EmailDashboard = () => {
-  const [selectedEmail, setSelectedEmail] = useState('Received');
+  const [selectedEmail, setSelectedEmail] = useState(null); // Track the selected email
   const [receivedEmailCount, setReceivedEmailCount] = useState(0);
 
-  const handleInboxClick = () => {
-    setSelectedEmail('Received');
-  };
+  const { loading, error, data } = useQuery(GET_RECEIVED_EMAILS_QUERY, {
+    context: {
+      headers: {
+        authorization: `Bearer ${AuthService.getToken()}`,
+      },
+    },
+  });
 
-  const handleSentClick = () => {
-    setSelectedEmail('sent');
-  };
-
-  const handleComposeClick = () => {
-    setSelectedEmail('compose');
-  };
   useEffect(() => {
     if (data) {
- 
       setReceivedEmailCount(data.getReceivedEmails.length);
     }
   }, [data]);
+
+  const handleInboxClick = () => {
+    setSelectedEmail(null); // Clear the selected email
+  };
+
+  const handleSentClick = () => {
+    setSelectedEmail(null); // Clear the selected email
+  };
+
+  const handleComposeClick = () => {
+    setSelectedEmail(null); // Clear the selected email
+  };
+
+  const handleEmailDetailsClick = (email) => {
+    setSelectedEmail(email);
+  };
+
   return (
     <Container maxWidth="lg" style={{ marginTop: '40px' }}>
-      <Typography variant="h4" gutterBottom style={{ marginBottom: '30px', marginLeft: '20px', marginTop: '30px' }}>
+      <Typography variant="h4" gutterBottom style={{ marginBottom: '10px', marginLeft: '20px', marginTop: '0px' }}>
         Email Dashboard
       </Typography>
       <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '10px' }}>
@@ -47,15 +77,15 @@ const EmailDashboard = () => {
             Compose Email
           </Button>
           <Button
-          startIcon={<MailIcon />}
-          variant="contained"
-          color={selectedEmail === 'Received' ? 'secondary' : 'primary'}
-          fullWidth
-          onClick={handleInboxClick}
-          style={{ marginBottom: '10px' }}
-        >
-          Inbox ({receivedEmailCount})
-        </Button>
+            startIcon={<MailIcon />}
+            variant="contained"
+            color={selectedEmail === null ? 'secondary' : 'primary'}
+            fullWidth
+            onClick={handleInboxClick}
+            style={{ marginBottom: '10px' }}
+          >
+            Inbox ({receivedEmailCount})
+          </Button>
           <Button
             startIcon={<DraftsIcon />}
             variant="contained"
@@ -77,13 +107,13 @@ const EmailDashboard = () => {
           </Button>
         </div>
         <div style={{ flex: 2, paddingLeft: '20px' }}>
-          {selectedEmail === 'sent' ? (
-            <SentEmails />
-          ) : selectedEmail === 'Received' ? (
-            <InboxEmails />
-          ) : selectedEmail === 'compose' ? (
-            <ComposeEmail />
-          ) : null}
+          {selectedEmail ? ( // Conditionally render EmailDetails when an email is selected
+            <EmailDetails email={selectedEmail} />
+          ) : selectedEmail === 'sent' ? (
+            <SentEmails onEmailClick={handleEmailDetailsClick} />
+          ) : (
+            <InboxEmails onEmailClick={handleEmailDetailsClick} />
+          )}
         </div>
       </div>
     </Container>
