@@ -9,7 +9,7 @@ import Services from "./components/Services";
 import Billing from "./components/Billing";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ApolloClient,InMemoryCache,ApolloProvider,createHttpLink} from '@apollo/client';
-// import ContactDoctor from './pages/Patient/ContactDoc';
+import ContactDoc from './pages/Patient/ContactDoc';
 import { setContext } from '@apollo/client/link/context';
 import CallPatient from './pages/Doctor/CallPatient';
 
@@ -24,6 +24,7 @@ import Appointments from './pages/Patient/Appointments';
 import MyAccount from './pages/Patient/MyAccount';
 // import FindDoctor from './pages/Patient/FindDoctor';
 import DoctorProfile from './pages/Doctor/DoctorProfile';
+import MessagesPatient from './pages/Doctor/MessagesPatient';
 
 
 
@@ -72,12 +73,13 @@ function App() {
             <Route path="/contactus" element={<ContactForm />} />
             <Route path="/services" element={<Services />} />
             <Route path="/billing" element={<Billing />} />
-            {/* <Route path="/contactdoctor" element={<ContactDoctor />} /> */}
+            <Route path="/contactdoctor" element={<ContactDoc />} />
             <Route path="/compose" element={<ComposeEmail />} />
             <Route path="/email-dashboard" element={<EmailDashboard />} />
             <Route path='/emaillist' element={<EmailList />} />
             <Route path="/emaildetails" element={<EmailDetails />} />
             <Route path="/callpatient" element={<CallPatient />} />
+            <Route path="/doctor-messages" element={<MessagesPatient />} />
 
 
 

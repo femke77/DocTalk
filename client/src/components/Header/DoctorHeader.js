@@ -265,7 +265,7 @@ export default function PrimarySearchAppBar() {
 
             <IconButton size="large" aria-label="" color="inherit">
               <Badge>
-                <Link to="/callpatient"><CallIcon /></Link>
+                <Link to="/doctor-messages"><CallIcon /></Link>
               </Badge>
             </IconButton>
 
