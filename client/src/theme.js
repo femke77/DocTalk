@@ -19,6 +19,15 @@ const theme = createTheme({
         },
       },
     },
+    palette: {
+      type: 'light', // or 'dark' for dark mode
+      primary: {
+        main: '#007bff', // Replace with your primary color
+      },
+      secondary: {
+        main: '#ff4081', // Replace with your secondary color
+      },
+    },
   });
 
 export default theme;

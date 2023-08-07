@@ -94,15 +94,18 @@ const resolvers = {
       }
     },
     getReceivedEmails: async () => {
+      console.log('Fetching received emails...');
+    
       try {
-
-        const receivedEmails = await Email.find({ status: 'received' });
-
+        const receivedEmails = await Email.find({ recipientStatus: 'received' });
+        console.log('Received emails:', receivedEmails);
         return receivedEmails;
       } catch (error) {
+        console.log(error);
         throw new Error('Failed to fetch received emails');
       }
     },
+    
 
   },
   Mutation: {
