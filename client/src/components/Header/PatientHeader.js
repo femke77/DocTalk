@@ -265,7 +265,7 @@ export default function ProfilePrimarySearchAppBar() {
 
             <IconButton size="large" aria-label="" color="inherit">
               <Badge>
-                <ChatIcon />
+                <Link to="/ContactDoctorChat"><ChatIcon /></Link>
               </Badge>
             </IconButton>
 
