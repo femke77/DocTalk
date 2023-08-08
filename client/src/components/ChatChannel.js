@@ -10,7 +10,7 @@ export default function Channel() {
     const { data, loading, error } = useQuery(CHANNEL_DETAILS, {
         variables: { channelId: id },
         pollInterval: 3000,  
-      
+
     })  
     console.log(data);
     // example of updating the cache when you have a query that has an arg
@@ -28,7 +28,7 @@ export default function Channel() {
         })
       }
 
-        
+
     })
     console.log(id, data);
     if (loading) return <div>Loading....</div>
@@ -43,7 +43,7 @@ export default function Channel() {
                         text: evt.target.value
                     }
                 },
-               
+
             })
             evt.target.value = "";
         }
@@ -53,11 +53,12 @@ export default function Channel() {
             {data && Auth.loggedIn() ?(
                 <>
                     <h1>{data.channel.name} </h1>
+                    <h4>{Auth.getProfile().data.username}: {" "}</h4>
                     {data.channel.messages.length ? data.channel.messages.map(msg => (
-                        <p key={msg.id}>{msg.username}: {msg.text}</p>)) : "No messages"}
+                        <p key={msg.id}>{msg.text}</p>)) : "No messages"}
                     <br />
                     <br />
-           
+
                 <input
                 type="text"
                 placeholder="+ New message"
@@ -65,8 +66,10 @@ export default function Channel() {
             />
                </>
             ) :(<div>You must be logged in to chat. </div>)}
-            
+
             {error && <div>ERROR: {error.message}</div>}
         </>
     )
 }
+
+// still working on making name appear above the chat

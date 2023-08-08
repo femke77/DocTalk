@@ -67,8 +67,10 @@ function App() {
             <Route path="/callpatient" element={<CallPatient />} />
             <Route path="/doctor-messages" element={<MessagesPatient />} />
 
+
            <Route path="/contactpatientchat" element={<ContactPatientChat />} />
             <Route path="/Profile" element={<Profile />} />
+
             <Route path="/BookAppointment" element={<BookAppointment />} />
             <Route path="/FindDoctor" element={<FindDoctor />} />
             <Route path="/Appointments" element={<Appointments />} />
