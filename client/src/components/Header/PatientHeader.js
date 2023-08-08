@@ -190,19 +190,7 @@ export default function ProfilePrimarySearchAppBar() {
         <p>Call</p>
       </MenuItem>
 
-      {/* <MenuItem>
-        <IconButton
-          size="large"
-          aria-label="show 17 new notifications"
-          color="inherit"
-        >
-          <Badge badgeContent={17} color="error">
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
-        <p>Notifications</p>
-      </MenuItem> */}
-
+   
       <MenuItem>
         <Link to="/PatientProfile" style={{ textDecoration: 'none', color: 'inherit' }}>
           <IconButton
@@ -224,15 +212,7 @@ export default function ProfilePrimarySearchAppBar() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton>
+         
           <Typography
             variant="h6"
             noWrap
@@ -270,16 +250,7 @@ export default function ProfilePrimarySearchAppBar() {
                 </Badge>
               </IconButton>              
 
-            {/* <IconButton
-              size="large"
-              aria-label="show 17 new notifications"
-              color="inherit"
-            >
-              <Badge badgeContent={17} color="error">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton> */}
-
+          
             <IconButton
               size="large"
               edge="end"
