@@ -71,8 +71,8 @@ function App() {
 
 
 
-{/*         
-            <Route path="/contactpatientchat" element={<ContactPatientChat />} /> */}
+        
+            <Route path="/contactpatientchat" element={<ContactPatientChat />} />
 
             <Route path="/PatientProfile" element={<PatientProfile />} />
             <Route path="/BookAppointment" element={<BookAppointment />} />
