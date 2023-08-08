@@ -6,17 +6,17 @@ import AppHeader from "./components/Header/AppHeader";
 import AboutUs from "./components/AboutUs";
 import Home from "./components/Home/Home";
 import Services from "./components/Services";
-import Billing from "./pages/Doctor/DoctorBilling";
-import PatientBilling from './pages/Patient/PatientBilling';
+// import Billing from "./pages/Doctor/DoctorBilling";
+// import PatientBilling from './pages/Patient/PatientBilling';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ApolloClient,InMemoryCache,ApolloProvider,createHttpLink} from '@apollo/client';
 import ContactDoc from './pages/Patient/ContactDoc';
 import { setContext } from '@apollo/client/link/context';
 import CallPatient from './pages/Doctor/CallPatient';
-import ComposeEmail from './pages/Doctor/DoctorEmails/ComposeEmail';
-import EmailDashboard from './pages/Doctor/DoctorEmails/EmailDashboard';
-import EmailDetails from './pages/Doctor/DoctorEmails/EmailDetails';
-import EmailList from './pages/Doctor/DoctorEmails/EmailList';
+import ComposeEmail from './pages/Emails/ComposeEmail';
+import EmailDashboard from './pages/Emails/EmailDashboard';
+import EmailDetails from './pages/Emails/EmailDetails';
+import EmailList from './pages/Emails/EmailList';
 import PatientProfile from './pages/Patient/PatientProfile';
 import BookAppointment from './pages/Patient/BookAppointment';
 import Appointments from './pages/Patient/Appointments';
@@ -56,8 +56,8 @@ function App() {
             <Route path="/signup" element={<Signup />} />
             <Route path="/contactus" element={<ContactForm />} />
             <Route path="/services" element={<Services />} />
-            <Route path="/DoctorBilling" element={<Billing />} />
-            <Route path="/PatientBilling" element={<PatientBilling />} />
+            {/* <Route path="/DoctorBilling" element={<Billing />} />
+            <Route path="/PatientBilling" element={<PatientBilling />} /> */}
             <Route path="/contactdoctor" element={<ContactDoc />} />
             <Route path="/compose" element={<ComposeEmail />} />
             <Route path="/email-dashboard" element={<EmailDashboard />} />
@@ -69,7 +69,7 @@ function App() {
             <Route path="/contactpatientchat" element={<ContactPatientChat />} /> */}
             <Route path="/PatientProfile" element={<PatientProfile />} />
             <Route path="/BookAppointment" element={<BookAppointment />} />
-            {/* <Route path="/FindDoctor" element={<FindDoctor />} /> */}
+            <Route path="/FindDoctor" element={<FindDoctor />} />
             <Route path="/Appointments" element={<Appointments />} />
             <Route path="/MyAccount" element={<MyAccount />} />
             <Route path="/FindDoctor" element={<FindDoctor />} />
