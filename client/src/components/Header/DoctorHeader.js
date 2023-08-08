@@ -16,10 +16,11 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
-import ChatIcon from '@mui/icons-material/Chat';
-import CallIcon from '@mui/icons-material/Call';
 
 import AuthService from '../../utils/auth';
+import ChatIcon from '@mui/icons-material/Chat';
+import CallIcon from '@mui/icons-material/Call';
+// import DoctorProfile from '../../pages/Doctor/DoctorProfile';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -61,10 +62,13 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function DoctorHeader() {
+// export default function DoctorHeader() {
+//   const [isLoggedIn, setIsLoggedIn] = useState(AuthService.loggedIn());
+//   const navigate = useNavigate();
+
+export default function PrimarySearchAppBar({ unreadEmailCount }) {
   const [isLoggedIn, setIsLoggedIn] = useState(AuthService.loggedIn());
   const navigate = useNavigate();
-
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -107,6 +111,17 @@ export default function DoctorHeader() {
     navigate('/DoctorProfile');
   };
 
+  const handleProfileClick = () => {
+    if (isLoggedIn) {
+      navigate('/profile');
+    }
+  };
+  const handleBillingClick = () => {
+    if (isLoggedIn) {
+      navigate('/billing');
+    }
+  };
+
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
     <Menu
@@ -124,12 +139,24 @@ export default function DoctorHeader() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
+
+
+
+
+
       {/* <MenuItem onClick={handleProfileMenuOpen}>Profile</MenuItem> */}
       <MenuItem onClick={handleBillingMenuClick}>Billing</MenuItem>
+      <MenuItem onClick={handleProfileClick}>Profile</MenuItem>
+      {/* <MenuItem onClick={handleBillingClick}>Billing</MenuItem> */}
       <MenuItem onClick={handleLogout}>Logout</MenuItem>
     </Menu>
   );
 
+
+
+
+
+  
   const mobileMenuId = 'primary-search-account-menu-mobile';
   const renderMobileMenu = (
     <Menu
@@ -189,6 +216,7 @@ export default function DoctorHeader() {
           color="inherit"
         >
           <AccountCircle />
+
         </IconButton>
         <p>Profile</p>
       </MenuItem>
@@ -229,24 +257,32 @@ export default function DoctorHeader() {
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <Link to="/email-dashboard">
-              <IconButton size="large" aria-label="show 2 new chats" color="inherit" onClick={handleEmailClick}>
-                <Badge badgeContent={2} color="error">
+              <IconButton
+                size="large"
+                aria-label="show 2 new chats"
+                color="inherit"
+                onClick={handleEmailClick}
+              >
+                <Badge badgeContent={unreadEmailCount} color="error">
                   <MailIcon />
                 </Badge>
               </IconButton>
             </Link>
-
+            <Link to="/ContactPatientChat">
+              <IconButton size="large" aria-label="" color="inherit">
+                <Badge>
+                  <ChatIcon />
+                </Badge>
+              </IconButton>
+            </Link>
+            
+            <Link to="/doctor-messages">
             <IconButton size="large" aria-label="" color="inherit">
               <Badge>
-                <Link to="/ContactPatientChat"><ChatIcon /></Link>
+                <CallIcon />
               </Badge>
             </IconButton>
-
-            <IconButton size="large" aria-label="" color="inherit">
-              <Badge>
-                <Link to="/doctor-messages"><CallIcon /></Link>
-              </Badge>
-            </IconButton>
+            </Link>
 
         
 

@@ -20,6 +20,7 @@ import ChatIcon from '@mui/icons-material/Chat';
 import CallIcon from '@mui/icons-material/Call';
 import AuthService from '../../utils/auth';
 
+
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
   borderRadius: theme.shape.borderRadius,
@@ -115,6 +116,23 @@ export default function ProfilePrimarySearchAppBar() {
   //   }
   // };
 
+  const handleEmailClick = () => {
+
+    if (isLoggedIn) {
+      <Link to="/email-dashboard" />;
+    }
+  };
+  const handleProfileClick = () => {
+    if (isLoggedIn) {
+      navigate('/profile');
+    }
+  };
+  const handleBillingClick = () => {  
+    if (isLoggedIn) {
+      navigate('/billing');
+    }
+  };
+  
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
       <Menu
@@ -207,7 +225,6 @@ export default function ProfilePrimarySearchAppBar() {
       </MenuItem>
     </Menu>
   );
-
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -216,8 +233,17 @@ export default function ProfilePrimarySearchAppBar() {
           <Typography
             variant="h6"
             noWrap
-            component="div"
-            sx={{ display: { xs: 'none', sm: 'block' } }}
+            component="a"
+            href="/"
+            sx={{
+              mr: 2,
+              display: { xs: 'none', md: 'flex' },
+              fontFamily: 'monospace',
+              fontWeight: 700,
+              letterSpacing: '.3rem',
+              color: 'inherit',
+              textDecoration: 'none',
+            }}
           >
             DocTalk
           </Typography>
@@ -234,21 +260,21 @@ export default function ProfilePrimarySearchAppBar() {
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <IconButton size="large" aria-label="show 4 new mails" color="inherit">
               <Badge badgeContent={4} color="error">
-              <Link to="/email-dashboard"><MailIcon /></Link>
+                <Link to="/email-dashboard"><MailIcon /></Link>
               </Badge>
             </IconButton>
 
-              <IconButton size="large" aria-label="" color="inherit">
-                <Badge>
-                  <ChatIcon />
-                </Badge>
-              </IconButton>
+            <IconButton size="large" aria-label="" color="inherit">
+              <Badge>
+                <Link to="/ContactDoctorChat"><ChatIcon /></Link>
+              </Badge>
+            </IconButton>
 
-              <IconButton size="large" aria-label="" color="inherit">
-                <Badge>
-                  <Link to="/contactdoctor"><CallIcon /></Link>
-                </Badge>
-              </IconButton>              
+            <IconButton size="large" aria-label="" color="inherit">
+              <Badge>
+                <Link to="/contactdoctor"><CallIcon /></Link>
+              </Badge>
+            </IconButton>
 
           
             <IconButton
@@ -260,9 +286,9 @@ export default function ProfilePrimarySearchAppBar() {
               onClick={handleProfileMenuOpen}
               color="inherit"
             >
-             
-                <AccountCircle />
-             
+
+              <AccountCircle />
+
             </IconButton>
           </Box>
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
