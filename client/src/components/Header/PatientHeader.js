@@ -190,7 +190,7 @@ export default function ProfilePrimarySearchAppBar() {
         <p>Call</p>
       </MenuItem>
 
-      <MenuItem>
+      {/* <MenuItem>
         <IconButton
           size="large"
           aria-label="show 17 new notifications"
@@ -201,7 +201,7 @@ export default function ProfilePrimarySearchAppBar() {
           </Badge>
         </IconButton>
         <p>Notifications</p>
-      </MenuItem>
+      </MenuItem> */}
 
       <MenuItem>
         <Link to="/PatientProfile" style={{ textDecoration: 'none', color: 'inherit' }}>
@@ -270,7 +270,7 @@ export default function ProfilePrimarySearchAppBar() {
                 </Badge>
               </IconButton>              
 
-            <IconButton
+            {/* <IconButton
               size="large"
               aria-label="show 17 new notifications"
               color="inherit"
@@ -278,7 +278,7 @@ export default function ProfilePrimarySearchAppBar() {
               <Badge badgeContent={17} color="error">
                 <NotificationsIcon />
               </Badge>
-            </IconButton>
+            </IconButton> */}
 
             <IconButton
               size="large"

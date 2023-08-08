@@ -20,7 +20,7 @@ const PatientProfile = () => {
     {
       date: "2023-08-05",
       doctor: "Dr. Johnson",
-      department: "Dermatology",
+      department: "Neurology",
     },
     // Add more appointment data here
   ];

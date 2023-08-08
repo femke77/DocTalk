@@ -178,7 +178,7 @@ export default function DoctorHeader() {
         <p>Call</p>
         console.log(error.message)
       </MenuItem>
-
+{/* 
       <MenuItem>
         <IconButton
           size="large"
@@ -190,7 +190,7 @@ export default function DoctorHeader() {
           </Badge>
         </IconButton>
         <p>Notifications</p>
-      </MenuItem>
+      </MenuItem> */}
 
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
@@ -268,7 +268,7 @@ export default function DoctorHeader() {
               </Badge>
             </IconButton>
 
-            <IconButton
+            {/* <IconButton
               size="large"
               aria-label="show 17 new notifications"
               color="inherit"
@@ -276,7 +276,7 @@ export default function DoctorHeader() {
               <Badge badgeContent={17} color="error">
                 <NotificationsIcon />
               </Badge>
-            </IconButton>
+            </IconButton> */}
 
             <IconButton
               size="large"

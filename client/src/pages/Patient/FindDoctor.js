@@ -1,7 +1,6 @@
 import React from 'react';
 import { Box, Container, Typography, Grid } from '@mui/material';
 import Footer from '../../components/Footer';
-import ContactDoc from './ContactDoc';
 import { Link } from 'react-router-dom';
 
 const FindDoctor = () => {
@@ -20,7 +19,7 @@ const FindDoctor = () => {
       photo: '/images/Smith.jpeg',
       info: 'Dr. Jane Smith specializes in skin conditions and has received numerous awards for her work.',
     },
-    // Add more doctors with different specialties, photos, and info
+   
     {
       id: 3,
       name: 'Dr. Michael Johnson',
@@ -107,7 +106,7 @@ const FindDoctor = () => {
               <img
                 src={doctor.photo}
                 alt={doctor.name}
-                style={{ width: '250px', height: '250px', borderRadius: '50%', marginBottom: '10px' }}
+                style={{ width: '220px', height: '210px', borderRadius: '50%', marginBottom: '10px' }}
               />
               <Typography variant="h5">{doctor.name}</Typography>
               </Link>

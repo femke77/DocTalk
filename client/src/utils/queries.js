@@ -14,6 +14,21 @@ export const QUERY_ALL_USERS = gql`
   }
 `;
 
+export const PATIENTS = gql`
+  query Patients {
+    patients {
+      _id
+      username
+      email
+      password
+      firstName
+      lastName
+      patient
+      doctor
+    }
+  }
+`;
+
 export const MESSAGES = gql`
   query Messages {
     messages {

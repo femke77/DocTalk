@@ -1,4 +1,3 @@
-// models/Bill.js
 
 const { Schema, model } = require('mongoose');
 

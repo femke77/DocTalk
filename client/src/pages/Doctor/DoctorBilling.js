@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { useMutation } from '@apollo/client';
-import { ADD_BILL } from '../../utils/mutations';
+import { useMutation, useQuery } from '@apollo/client';
+import { SEND_BILL } from '../../utils/mutations';
+import { PATIENTS } from '../../utils/queries';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -9,16 +10,20 @@ import Button from '@mui/material/Button';
 
 
 const DoctorBilling = () => {
-  const [formState, setFormState] = useState({ amount: 0, description: '', patientName: '' });
-  const [addBill] = useMutation(ADD_BILL);
+  const [formState, setFormState] = useState({ amount: 0, description: '', patient: '' });
+  const [sendBill] = useMutation(SEND_BILL);
+  const { loading, data } = useQuery(PATIENTS);
+  const patients = data?.patients || [];
+
+  console.log(patients);
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    const mutationResponse = await addBill({
+    const mutationResponse = await sendBill({
       variables: {
         amount: formState.amount,
         description: formState.description,
-        patientName: formState.patientName,
+        patient: formState.patient
       },
     });
     
@@ -69,7 +74,7 @@ const DoctorBilling = () => {
             value={formState.description}
             onChange={handleChange}
           />
-          <TextField
+          {/* <TextField
             margin="normal"
             fullWidth
             id="patientName"
@@ -77,7 +82,11 @@ const DoctorBilling = () => {
             name="patientName"
             value={formState.patientName}
             onChange={handleChange}
-          />
+          /> */}
+          <select name="patient" onChange={handleChange}>
+            <option value="">Please select one...</option>
+            {!loading && patients.map(patient => <option value={patient._id}>{patient.firstName} {patient.lastName}</option>)}
+          </select>
           <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
             Submit
           </Button>

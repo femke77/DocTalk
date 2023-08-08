@@ -4,6 +4,7 @@ const { signToken } = require('../utils/auth');
 const User = require('../models/User');
 const Message = require('../models/Message');
 const Email = require('../models/Email');
+const Bill = require('../models/Bill');
 
 const emails = [
   {
@@ -66,6 +67,9 @@ const resolvers = {
         // Handle any errors here
         throw new Error('Error fetching all users');
       }
+    },
+    patients: async () => {
+      return await User.find({ patient: true  });
     },
     userByEmail: async (parent, { email }) => {
       try {
@@ -132,7 +136,6 @@ const resolvers = {
         throw new Error('Failed to fetch received emails');
       }
     },
-
     channel: (parent, {id})=> {  
       return (channels.find(ch => ch.id === id)) 
     }
@@ -200,6 +203,17 @@ const resolvers = {
       const token = signToken(user);
 
       return { token, user };
+    },
+
+    sendBill: async (parent, args, context) => {
+      if (context.user) {
+        const bill = await Bill.create({
+          ...args,
+          doctor: context.user._id
+        });
+
+        return true;
+      }
     },
 
     sendEmail: async (parent, { emailInput }, context) => {
