@@ -27,6 +27,7 @@ import MessagesPatient from './pages/Doctor/MessagesPatient';
 // import ContactDoctor from './pages/Patient/ContactDoc';
 // import ContactPatient from './pages/Doctor/ContactPatient';
 import ContactPatientChat from './pages/Doctor/ContactPatientChat';
+import ContactDoctorChat from './pages/Patient/ContactDoctorChat';
 
 
 
@@ -73,6 +74,7 @@ function App() {
 
         
             <Route path="/contactpatientchat" element={<ContactPatientChat />} />
+            <Route path="/contactdoctorchat" element={<ContactDoctorChat />} />
 
             <Route path="/PatientProfile" element={<PatientProfile />} />
             <Route path="/BookAppointment" element={<BookAppointment />} />
