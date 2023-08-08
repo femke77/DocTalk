@@ -1,0 +1,92 @@
+[
+  {
+   
+    "firstName": "John",
+    "lastName": "Doe",
+    "title": "Dr.",
+    "gender": "Male",
+    "isDoctor": true,
+    "avatar": "https://example.com/avatar1.jpg"
+  },
+  {
+ 
+    "firstName": "Jane",
+    "lastName": "Smith",
+    "title": "Ms.",
+    "gender": "Female",
+    "isDoctor": false,
+    "avatar": "https://example.com/avatar2.jpg"
+  },
+  {
+   
+    "firstName": "Michael",
+    "lastName": "Johnson",
+    "title": "Mr.",
+    "gender": "Male",
+    "isDoctor": false,
+    "avatar": "https://example.com/avatar3.jpg"
+  },
+  {
+
+    "firstName": "Emily",
+    "lastName": "Williams",
+    "title": "Ms.",
+    "gender": "Female",
+    "isDoctor": false,
+    "avatar": "https://example.com/avatar4.jpg"
+  },
+  {
+
+    "firstName": "David",
+    "lastName": "Brown",
+    "title": "Mr.",
+    "gender": "Male",
+    "isDoctor": false,
+    "avatar": "https://example.com/avatar5.jpg"
+  },
+  {
+
+    "firstName": "Sophia",
+    "lastName": "Taylor",
+    "title": "Ms.",
+    "gender": "Female",
+    "isDoctor": false,
+    "avatar": "https://example.com/avatar6.jpg"
+  },
+  {
+
+    "firstName": "William",
+    "lastName": "Wilson",
+    "title": "Mr.",
+    "gender": "Male",
+    "isDoctor": false,
+    "avatar": "https://example.com/avatar7.jpg"
+  },
+  {
+
+    "firstName": "Olivia",
+    "lastName": "Lee",
+    "title": "Mrs.",
+    "gender": "Female",
+    "isDoctor": false,
+    "avatar": "https://example.com/avatar8.jpg"
+  },
+  {
+
+    "firstName": "James",
+    "lastName": "Miller",
+    "title": "Mr.",
+    "gender": "Male",
+    "isDoctor": false,
+    "avatar": "https://example.com/avatar9.jpg"
+  },
+  {
+
+    "firstName": "Emma",
+    "lastName": "Davis",
+    "title": "Ms.",
+    "gender": "Female",
+    "isDoctor": false,
+    "avatar": "https://example.com/avatar10.jpg"
+  }
+]
