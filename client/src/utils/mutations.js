@@ -104,6 +104,7 @@ export const ADD_CHAT_MESSAGE = gql`
   mutation addChatMessage($message: ChatMessageInput) {
     addMessage(message: $message) {
       id
+      username
       text
     }
   }

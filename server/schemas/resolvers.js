@@ -296,18 +296,15 @@ const resolvers = {
         throw new Error('Failed to send email');
       }
     },
-    
-
     addMessage: async (parent, {message}, context) => {
-
-        const channel = channels.find(ch => ch.id === message.channelId)
-        if (!channel)
-        throw new Error("Channel does not exist")
-        
-        const newMessage = {id: String(nextMessageId++), username:context.user.username, text: message.text}
-        channel.messages.push(newMessage)
-        return newMessage;
-      }
+      const channel = channels.find(ch => ch.id === message.channelId)
+      if (!channel)
+      throw new Error("Channel does not exist")
+      
+      const newMessage = {id: String(nextMessageId++), username: context.user.username,text: message.text}
+      channel.messages.push(newMessage)
+      return newMessage;
+    }
 
   },
 };
