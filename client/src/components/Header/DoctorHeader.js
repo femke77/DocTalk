@@ -178,19 +178,7 @@ export default function DoctorHeader() {
         <p>Call</p>
         console.log(error.message)
       </MenuItem>
-{/* 
-      <MenuItem>
-        <IconButton
-          size="large"
-          aria-label="show 17 new notifications"
-          color="inherit"
-        >
-          <Badge badgeContent={17} color="error">
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
-        <p>Notifications</p>
-      </MenuItem> */}
+
 
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
@@ -211,15 +199,7 @@ export default function DoctorHeader() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton>
+      
           <Typography
             variant="h6"
             noWrap
@@ -268,15 +248,7 @@ export default function DoctorHeader() {
               </Badge>
             </IconButton>
 
-            {/* <IconButton
-              size="large"
-              aria-label="show 17 new notifications"
-              color="inherit"
-            >
-              <Badge badgeContent={17} color="error">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton> */}
+        
 
             <IconButton
               size="large"
