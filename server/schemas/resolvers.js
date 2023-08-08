@@ -34,6 +34,26 @@ const emails = [
   },
   // Add more email objects as needed
 ];
+let channels = [{
+  id: "1",
+  name: 'Live Chat with patient',
+  messages:[{
+    id: "1",
+    username: "Doctor",
+    text: 'Ready to chat with patient'
+  }]
+}, {
+  id: "2",
+  name: 'Technical Support',
+  messages:[{
+    id: "1",
+    username: "Tech Support",
+    text: 'The tech support will be with you shortly...'
+  }
+]
+}]
+let nextMessageId = "2";
+
 const resolvers = {
   Query: {
     users: async () => {
@@ -44,6 +64,12 @@ const resolvers = {
         // Handle any errors here
         throw new Error('Error fetching all users');
       }
+    },
+    channels: () => {
+      return channels;
+    },
+    channel: (parent, {id})=> {
+      return (channels.find(ch => ch.id === id))
     },
     loggedInUser: async (_, __, { user }) => {
       if (!user) {
@@ -249,11 +275,7 @@ const resolvers = {
       }
     },
     
-    
-    
-    
-    
-    
+
     addMessage: async (parent, {message}) => {
         const channel = channels.find(ch => ch.id === message.channelId)
         if (!channel)
