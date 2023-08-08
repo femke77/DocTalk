@@ -16,14 +16,11 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
-
+import { useNavigate } from 'react-router-dom';
 import AuthService from '../../utils/auth';
 import ChatIcon from '@mui/icons-material/Chat';
 import CallIcon from '@mui/icons-material/Call';
-
-
-
-import DoctorProfile from '../../pages/Doctor/DoctorProfile';
+// import DoctorProfile from '../../pages/Doctor/DoctorProfile';
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -65,9 +62,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
 }));
 
-export default function PrimarySearchAppBar() {
+export default function PrimarySearchAppBar({ unreadEmailCount }) {
   const [isLoggedIn, setIsLoggedIn] = useState(AuthService.loggedIn());
-
+  const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -103,6 +100,19 @@ export default function PrimarySearchAppBar() {
     }
   };
 
+  const handleProfileClick = () => {
+    if (isLoggedIn) {
+      navigate('/profile');
+    }
+  };
+
+const handleBillingClick = () => {  
+  if (isLoggedIn) {
+    navigate('/billing');
+  }
+
+};
+
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
     <Menu
@@ -120,10 +130,8 @@ export default function PrimarySearchAppBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>DashBoard</MenuItem>
-      <MenuItem onClick={handleMenuClose}><Link to="/DoctorProfile">Profile</Link></MenuItem>
-      <MenuItem onClick={handleMenuClose}>Billing</MenuItem>
+      <MenuItem onClick={handleProfileClick}>Profile</MenuItem>
+      <MenuItem onClick={handleBillingClick}>Billing</MenuItem>
       <MenuItem onClick={handleLogout}>Logout</MenuItem>
     </Menu>
   );
@@ -177,20 +185,6 @@ export default function PrimarySearchAppBar() {
         console.log(error.message)
       </MenuItem>
 
-      <MenuItem>
-        <IconButton
-          size="large"
-          aria-label="show 17 new notifications"
-          color="inherit"
-        >
-          <Badge badgeContent={17} color="error">
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
-        <p>Notifications</p>
-
-      </MenuItem>
-
 
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
@@ -201,6 +195,7 @@ export default function PrimarySearchAppBar() {
           color="inherit"
         >
           <AccountCircle />
+          
         </IconButton>
         <p>Profile</p>
       </MenuItem>
@@ -249,10 +244,15 @@ export default function PrimarySearchAppBar() {
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
 
-            <Link to="/email-dashboard">
-              <IconButton size="large" aria-label="show 2 new chats" color="inherit" onClick={handleEmailClick}>
-                <Badge badgeContent={2} color="error">
-                <MailIcon />
+          <Link to="/email-dashboard">
+              <IconButton
+                size="large"
+                aria-label="show 2 new chats"
+                color="inherit"
+                onClick={handleEmailClick}
+              >
+                <Badge badgeContent={unreadEmailCount} color="error">
+                  <MailIcon />
                 </Badge>
               </IconButton>
             </Link>

@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { TextField, Button, Container } from '@mui/material';
 import { useMutation } from '@apollo/client';
-import { useQuery, gql } from '@apollo/client';
+import { gql } from '@apollo/client';
+import Typography from '@mui/material/Typography';
+
 
 const SEND_EMAIL_MUTATION = gql`
   mutation SendEmail($emailInput: EmailInput!) {
@@ -42,14 +44,14 @@ const ComposeEmail = () => {
           emailInput: {
             recipients: [recipient],
             subject,
-            body: content, 
+            body: content,
           },
         },
       });
-  
- 
+
+
       console.log('Sent Email:', data.sendEmail);
-  
+
 
       setRecipient('');
       setSubject('');
@@ -61,7 +63,9 @@ const ComposeEmail = () => {
 
   return (
     <Container maxWidth="md">
-      <h2>Compose Email</h2>
+      <Typography variant="h4" gutterBottom>
+        Compose Email
+      </Typography>
       <form>
         <TextField
           fullWidth
