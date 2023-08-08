@@ -52,7 +52,6 @@ const typeDefs = gql`
 
   input ChatMessageInput{
    channelId: ID!
-   username: String
    text: String
  }
 

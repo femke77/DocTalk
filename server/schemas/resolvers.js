@@ -297,6 +297,7 @@ const resolvers = {
       }
     },
     addMessage: async (parent, {message}, context) => {
+      console.log(context.user.username);
       const channel = channels.find(ch => ch.id === message.channelId)
       if (!channel)
       throw new Error("Channel does not exist")
