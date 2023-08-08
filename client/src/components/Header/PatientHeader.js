@@ -15,10 +15,11 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import ChatIcon from '@mui/icons-material/Chat';
 import CallIcon from '@mui/icons-material/Call';
 import AuthService from '../../utils/auth';
+
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -60,9 +61,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function ProfilePrimarySearchAppBar() {
+export default function ProfilePrimarySearchAppBar({ unreadEmailCount }) {
   const [isLoggedIn, setIsLoggedIn] = useState(AuthService.loggedIn());
-
+  const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -91,40 +92,72 @@ export default function ProfilePrimarySearchAppBar() {
     setIsLoggedIn(false);
     handleMenuClose();
   };
-  
+
+  const handleBillingMenuClick = () => {
+    handleMenuClose();
+    navigate('/PatientBilling');
+  };
+
+  const handleProfileMenuClick = () => {
+    handleMenuClose();
+    navigate('/PatientProfile');
+  };
+
+  const handleFindDoctorMenuClick = () => {
+    handleMenuClose();
+    navigate('/FindDoctor');
+  };
+
+
   // const handleEmailClick = () => {
-  
+
   //   if (isLoggedIn) {
   //     <Link to="/email-dashboard" />;
   //   }
   // };
 
+  const handleEmailClick = () => {
+
+    if (isLoggedIn) {
+      <Link to="/email-dashboard" />;
+    }
+  };
+  const handleProfileClick = () => {
+    if (isLoggedIn) {
+      navigate('/profile');
+    }
+  };
+  const handleBillingClick = () => {
+    if (isLoggedIn) {
+      navigate('/billing');
+    }
+  };
+
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
-      <Menu
-          anchorEl={anchorEl}
-          anchorOrigin={{
-              vertical: 'top',
-              horizontal: 'right',
-          }}
-          id={menuId}
-          keepMounted
-          transformOrigin={{
-              vertical: 'top',
-              horizontal: 'right',
-          }}
-          open={isMenuOpen}
-          onClose={handleMenuClose}
-      >
-          <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-          <MenuItem onClick={handleMenuClose}>Payment</MenuItem>
-          <MenuItem onClick={handleMenuClose}>Previous Consult</MenuItem>
-        
-          <MenuItem onClick={handleMenuClose}><Link to="/MyAccount">My Account</Link></MenuItem>
-          <MenuItem onClick={handleMenuClose}><Link to="/billing">Billing</Link></MenuItem>
-          <MenuItem onClick={handleLogout}>Logout</MenuItem>
-          
-      </Menu>
+    <Menu
+      anchorEl={anchorEl}
+      anchorOrigin={{
+        vertical: 'top',
+        horizontal: 'right',
+      }}
+      id={menuId}
+      keepMounted
+      transformOrigin={{
+        vertical: 'top',
+        horizontal: 'right',
+      }}
+      open={isMenuOpen}
+      onClose={handleMenuClose}
+    >
+      <MenuItem onClick={handleProfileClick}>Profile</MenuItem>
+      {/* <MenuItem onClick={handleMenuClose}>Payment</MenuItem>
+          <MenuItem onClick={handleMenuClose}>Previous Consult</MenuItem> */}
+
+      <MenuItem onClick={handleFindDoctorMenuClick}>Find Doctor</MenuItem>
+      <MenuItem onClick={handleBillingMenuClick}>Billing</MenuItem>
+      <MenuItem onClick={handleLogout}>Logout</MenuItem>
+    </Menu>
   );
 
   const mobileMenuId = 'primary-search-account-menu-mobile';
@@ -175,21 +208,9 @@ export default function ProfilePrimarySearchAppBar() {
         <p>Call</p>
       </MenuItem>
 
-      <MenuItem>
-        <IconButton
-          size="large"
-          aria-label="show 17 new notifications"
-          color="inherit"
-        >
-          <Badge badgeContent={17} color="error">
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
-        <p>Notifications</p>
-      </MenuItem>
 
       <MenuItem>
-        <Link to="/PatientProfile" style={{ textDecoration: 'none', color: 'inherit' }}>
+        <Link to="/Profile" style={{ textDecoration: 'none', color: 'inherit' }}>
           <IconButton
             size="large"
             aria-label="account of current user"
@@ -204,25 +225,25 @@ export default function ProfilePrimarySearchAppBar() {
       </MenuItem>
     </Menu>
   );
-
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton>
+
           <Typography
             variant="h6"
             noWrap
-            component="div"
-            sx={{ display: { xs: 'none', sm: 'block' } }}
+            component="a"
+            href="/"
+            sx={{
+              mr: 2,
+              display: { xs: 'none', md: 'flex' },
+              fontFamily: 'monospace',
+              fontWeight: 700,
+              letterSpacing: '.3rem',
+              color: 'inherit',
+              textDecoration: 'none',
+            }}
           >
             DocTalk
           </Typography>
@@ -237,33 +258,33 @@ export default function ProfilePrimarySearchAppBar() {
           </Search>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={4} color="error">
-              <Link to="/email-dashboard"><MailIcon /></Link>
-              </Badge>
-            </IconButton>
-
+            <Link to="/email-dashboard">
+              <IconButton
+                size="large"
+                aria-label="show 2 new chats"
+                color="inherit"
+                onClick={handleEmailClick}
+              >
+                <Badge badgeContent={unreadEmailCount} color="error">
+                  <MailIcon />
+                </Badge>
+              </IconButton>
+            </Link>
+            <Link to="/ContactDoctorChat">
               <IconButton size="large" aria-label="" color="inherit">
                 <Badge>
                   <ChatIcon />
                 </Badge>
               </IconButton>
-
+            </Link>
+            <Link to="/contactdoctor">
               <IconButton size="large" aria-label="" color="inherit">
                 <Badge>
-                  <Link to="/contactdoctor"><CallIcon /></Link>
+                  <CallIcon />
                 </Badge>
-              </IconButton>              
+              </IconButton>
+            </Link>
 
-            <IconButton
-              size="large"
-              aria-label="show 17 new notifications"
-              color="inherit"
-            >
-              <Badge badgeContent={17} color="error">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
 
             <IconButton
               size="large"
@@ -274,9 +295,9 @@ export default function ProfilePrimarySearchAppBar() {
               onClick={handleProfileMenuOpen}
               color="inherit"
             >
-             
-                <AccountCircle />
-             
+
+              <AccountCircle />
+
             </IconButton>
           </Box>
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>

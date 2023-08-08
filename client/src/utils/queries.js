@@ -13,6 +13,62 @@ export const QUERY_ALL_USERS = gql`
     }
   }
 `;
+
+export const PATIENTS = gql`
+  query Patients {
+    patients {
+      _id
+      username
+      email
+      password
+      firstName
+      lastName
+      patient
+      doctor
+    }
+  }
+`;
+
+// export const QUERY_PROFILE_USER = gql`
+//   query getUserProfile {
+//     query getUserProfile {
+//     user {
+//       _id
+//       username
+//       email
+//       firstName
+//       lastName
+//       patient
+//       doctor
+//     }
+//   }
+//   }
+// `;
+
+export const MESSAGES = gql`
+  query Messages {
+    messages {
+      _id
+      email
+      firstName
+      lastName
+      phonenumber
+      patient {
+        _id
+        username
+        email
+        firstName
+        lastName
+        patient
+        username
+        }
+        message
+      }
+    }
+  `;
+
+
+
 export const CHANNEL_DETAILS = gql`
   query ChannelDetailsQuery($channelId: ID!) {
     channel(id: $channelId) {
@@ -20,12 +76,10 @@ export const CHANNEL_DETAILS = gql`
       name
       messages {
         id
-        username
         text
       }
     }
   }
-
 `;
 
 export const GET_EMAILS_QUERY = gql`
@@ -59,22 +113,27 @@ const GET_SENT_EMAILS_QUERY = gql`
         patient
         doctor
       }
+      message
     }
   }
 `;
 
-// export const GET_EMAIL_QUERY = gql`
-//   query GetEmail($id: ID!) {
-//     getEmail(id: $id) {
-//       id
-//       subject
-//       sender
-//       recipients
-//       body
-//       timestamp
-//       status
-//     }
-//   }
-// `
+export const GET_RECEIVED_EMAILS_QUERY = gql`
+  query getReceivedEmails {
+    getReceivedEmails {
+      id
+      subject
+      sender
+      recipients
+      body
+      timestamp
+      status
+      user {
+        patient
+        doctor
+      }
+    }
+  }
+  `
 ;
 

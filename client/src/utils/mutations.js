@@ -40,24 +40,34 @@ mutation addMessage($messageData: MessageInput) {
     firstName
     lastName
     phonenumber
-    patient
+    patient {
+      _id
+    }
     message
   }
 }
 `;
 
 
+export const SEND_BILL = gql`
+  mutation SendBill($amount: String!, $description: String!, $patient: ID!) {
+    sendBill(amount: $amount, description: $description, patient: $patient)
+  }
+`;
+
 export const ADD_BILL = gql`
-  mutation addBill($amount: Float!, $description: String!) {
-    addBill(input: { amount: $amount, description: $description }) {
+  mutation addBill($amount: Float!, $description: String!, $doctor: String!) {
+    addBill(input: { amount: $amount, description: $description, doctor: $doctor }) {
       _id
       amount
       description
+      doctor
       createdAt
       updatedAt
     }
   }
 `;
+
 
 
 export const LOGIN_USER = gql`
@@ -98,6 +108,7 @@ export const ADD_CHAT_MESSAGE = gql`
     }
   }
 `;
+
 
 // export const UPDATE_EMAIL_MUTATION = gql`
 //   mutation UpdateEmail($id: ID!, $emailInput: EmailInput!) {
