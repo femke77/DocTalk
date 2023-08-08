@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { styled, alpha } from '@mui/material/styles';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -16,7 +16,7 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
-import { useNavigate } from 'react-router-dom';
+
 import AuthService from '../../utils/auth';
 import ChatIcon from '@mui/icons-material/Chat';
 import CallIcon from '@mui/icons-material/Call';
@@ -62,6 +62,10 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
+// export default function DoctorHeader() {
+//   const [isLoggedIn, setIsLoggedIn] = useState(AuthService.loggedIn());
+//   const navigate = useNavigate();
+
 export default function PrimarySearchAppBar({ unreadEmailCount }) {
   const [isLoggedIn, setIsLoggedIn] = useState(AuthService.loggedIn());
   const navigate = useNavigate();
@@ -70,10 +74,6 @@ export default function PrimarySearchAppBar({ unreadEmailCount }) {
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-
-  const handleProfileMenuOpen = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
 
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
@@ -87,17 +87,28 @@ export default function PrimarySearchAppBar({ unreadEmailCount }) {
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
-  // Logout Function for patientiside
+
   const handleLogout = () => {
     AuthService.logout();
     setIsLoggedIn(false);
     handleMenuClose();
+    navigate('/');
   };
+
   const handleEmailClick = () => {
-    // Add any additional logic you may need before navigating to the DoctorEmail page
     if (isLoggedIn) {
-      <Link to="/email-dashboard" />;
+      navigate('/email-dashboard');
     }
+  };
+
+  const handleBillingMenuClick = () => {
+    handleMenuClose();
+    navigate('/DoctorBilling');
+  };
+
+  const handleProfileMenuOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+    navigate('/DoctorProfile');
   };
 
   const handleProfileClick = () => {
@@ -105,12 +116,10 @@ export default function PrimarySearchAppBar({ unreadEmailCount }) {
       navigate('/profile');
     }
   };
-
   const handleBillingClick = () => {
     if (isLoggedIn) {
       navigate('/billing');
     }
-
   };
 
   const menuId = 'primary-search-account-menu';
@@ -130,12 +139,24 @@ export default function PrimarySearchAppBar({ unreadEmailCount }) {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
+
+
+
+
+
+      {/* <MenuItem onClick={handleProfileMenuOpen}>Profile</MenuItem> */}
+      <MenuItem onClick={handleBillingMenuClick}>Billing</MenuItem>
       <MenuItem onClick={handleProfileClick}>Profile</MenuItem>
-      <MenuItem onClick={handleBillingClick}>Billing</MenuItem>
+      {/* <MenuItem onClick={handleBillingClick}>Billing</MenuItem> */}
       <MenuItem onClick={handleLogout}>Logout</MenuItem>
     </Menu>
   );
 
+
+
+
+
+  
   const mobileMenuId = 'primary-search-account-menu-mobile';
   const renderMobileMenu = (
     <Menu
@@ -206,15 +227,7 @@ export default function PrimarySearchAppBar({ unreadEmailCount }) {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          {/* <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton> */}
+      
           <Typography
             variant="h6"
             noWrap
@@ -243,7 +256,6 @@ export default function PrimarySearchAppBar({ unreadEmailCount }) {
           </Search>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-
             <Link to="/email-dashboard">
               <IconButton
                 size="large"
@@ -272,15 +284,7 @@ export default function PrimarySearchAppBar({ unreadEmailCount }) {
             </IconButton>
             </Link>
 
-            {/* <IconButton
-              size="large"
-              aria-label="show 17 new notifications"
-              color="inherit"
-            >
-              <Badge badgeContent={17} color="error">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton> */}
+        
 
             <IconButton
               size="large"

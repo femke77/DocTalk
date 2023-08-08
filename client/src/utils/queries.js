@@ -14,22 +14,36 @@ export const QUERY_ALL_USERS = gql`
   }
 `;
 
-export const QUERY_PROFILE_USER = gql`
-  query getUserProfile {
-    query getUserProfile {
-    user {
+export const PATIENTS = gql`
+  query Patients {
+    patients {
       _id
       username
       email
+      password
       firstName
       lastName
       patient
       doctor
     }
   }
-  }
 `;
 
+// export const QUERY_PROFILE_USER = gql`
+//   query getUserProfile {
+//     query getUserProfile {
+//     user {
+//       _id
+//       username
+//       email
+//       firstName
+//       lastName
+//       patient
+//       doctor
+//     }
+//   }
+//   }
+// `;
 
 export const MESSAGES = gql`
   query Messages {
@@ -62,7 +76,6 @@ export const CHANNEL_DETAILS = gql`
       name
       messages {
         id
-        username
         text
       }
     }

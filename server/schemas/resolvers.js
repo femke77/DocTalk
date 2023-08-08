@@ -1,9 +1,10 @@
-const { AuthenticationError } = require('apollo-server-express');
+
 // const { User, Message, Email } = require('../models');
 const { signToken } = require('../utils/auth');
 const User = require('../models/User');
 const Message = require('../models/Message');
 const Email = require('../models/Email');
+const Bill = require('../models/Bill');
 
 const emails = [
   {
@@ -36,11 +37,11 @@ const emails = [
 ];
 let channels = [{
   id: "1",
-  name: 'Live Chat with patient',
+  name: 'Live Chat',
   messages:[{
     id: "1",
     username: "Doctor",
-    text: 'Ready to chat with patient'
+    text: 'Ready to chat'
   }]
 }, {
   id: "2",
@@ -52,6 +53,7 @@ let channels = [{
   }
 ]
 }]
+
 let nextMessageId = "2";
 
 const resolvers = {
@@ -65,12 +67,19 @@ const resolvers = {
         throw new Error('Error fetching all users');
       }
     },
+    // patients: async () => {
+    //   return await User.find({ patient: true  });
+    // },
+    // userByEmail: async (parent, { email }) => {
     channels: () => {
       return channels;
     },
     channel: (parent, {id})=> {
+
       return (channels.find(ch => ch.id === id))
     },
+
+
     loggedInUser: async (_, __, { user }) => {
       if (!user) {
         throw new Error("Authentication required.");
@@ -143,8 +152,10 @@ const resolvers = {
         throw new Error('Failed to fetch received emails');
       }
     },
-    
-
+    channel: (parent, {id})=> {  
+      return (channels.find(ch => ch.id === id)) 
+    }
+   
   },
   Mutation: {
     addUser: async (parent, { username, email, password, firstName, lastName, patient, doctor }) => {
@@ -208,6 +219,17 @@ const resolvers = {
       const token = signToken(user);
 
       return { token, user };
+    },
+
+    sendBill: async (parent, args, context) => {
+      if (context.user) {
+        const bill = await Bill.create({
+          ...args,
+          doctor: context.user._id
+        });
+
+        return true;
+      }
     },
 
     sendEmail: async (parent, { emailInput }, context) => {
@@ -276,12 +298,13 @@ const resolvers = {
     },
     
 
-    addMessage: async (parent, {message}) => {
+    addMessage: async (parent, {message}, context) => {
+
         const channel = channels.find(ch => ch.id === message.channelId)
         if (!channel)
         throw new Error("Channel does not exist")
         
-        const newMessage = {id: String(nextMessageId++), text: message.text}
+        const newMessage = {id: String(nextMessageId++), username:context.user.username, text: message.text}
         channel.messages.push(newMessage)
         return newMessage;
       }
