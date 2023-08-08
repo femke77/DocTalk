@@ -66,6 +66,7 @@ const typeDefs = gql`
     getReceivedEmails: [Email!]!
     channels: [Channel]  
     channel(id: ID!): Channel
+    patients: [User]
   }
 
   type Mutation {
@@ -87,6 +88,7 @@ const typeDefs = gql`
     # send a message to the doctor (not chat)
     message(messageData: MessageInput): Message
     sendEmail(emailInput: EmailInput!): Email 
+    sendBill(amount: String! description: String!, patient: ID!): Boolean
   }
 
   input UpdateUserInput {

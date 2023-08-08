@@ -6,8 +6,8 @@ import AppHeader from "./components/Header/AppHeader";
 import AboutUs from "./components/AboutUs";
 import Home from "./components/Home/Home";
 import Services from "./components/Services";
-// import Billing from "./pages/Doctor/DoctorBilling";
-// import PatientBilling from './pages/Patient/PatientBilling';
+import Billing from "./pages/Doctor/DoctorBilling";
+import PatientBilling from './pages/Patient/PatientBilling';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ApolloClient,InMemoryCache,ApolloProvider,createHttpLink} from '@apollo/client';
 import ContactDoc from './pages/Patient/ContactDoc';
@@ -22,7 +22,7 @@ import BookAppointment from './pages/Patient/BookAppointment';
 import Appointments from './pages/Patient/Appointments';
 import MyAccount from './pages/Patient/MyAccount';
 import FindDoctor from './pages/Patient/FindDoctor';
-
+// import DoctorProfile from './pages/Doctor/DoctorProfile';
 import MessagesPatient from './pages/Doctor/MessagesPatient';
 // import ContactDoctor from './pages/Patient/ContactDoc';
 // import ContactPatient from './pages/Doctor/ContactPatient';
@@ -58,6 +58,8 @@ function App() {
             <Route path="/signup" element={<Signup />} />
             <Route path="/contactus" element={<ContactForm />} />
             <Route path="/services" element={<Services />} />
+            <Route path="/DoctorBilling" element={<Billing />} />
+            <Route path="/PatientBilling" element={<PatientBilling />} />
             {/* <Route path="/DoctorBilling" element={<Billing />} />
             <Route path="/PatientBilling" element={<PatientBilling />} /> */}
             <Route path="/contactdoctor" element={<ContactDoc />} />
@@ -79,7 +81,11 @@ function App() {
             <Route path="/FindDoctor" element={<FindDoctor />} />
             <Route path="/Appointments" element={<Appointments />} />
             <Route path="/MyAccount" element={<MyAccount />} />
+
             <Route path="/FindDoctor" element={<FindDoctor />} />
+            {/* <Route path="/DoctorProfile" element={<DoctorProfile />} /> */}
+
+
           </Routes>
         </Router>
       </ApolloProvider>
