@@ -34,6 +34,28 @@ const emails = [
   },
   // Add more email objects as needed
 ];
+let channels = [{
+  id: "1",
+  name: 'Live Chat with patient',
+  messages:[{
+    id: "1",
+    username: "Doctor",
+    text: 'Ready to chat with patient'
+  }]
+}, {
+  id: "2",
+  name: 'Technical Support',
+  messages:[{
+    id: "1",
+    username: "Tech Support",
+    text: 'The tech support will be with you shortly...'
+  }
+]
+}]
+
+
+let nextMessageId = "2";
+
 const resolvers = {
   Query: {
     users: async () => {
@@ -45,6 +67,14 @@ const resolvers = {
         throw new Error('Error fetching all users');
       }
     },
+    channels: () => {
+      return channels;
+    },
+    channel: (parent, {id})=> {
+
+      return (channels.find(ch => ch.id === id)) 
+    },
+
     loggedInUser: async (_, __, { user }) => {
       if (!user) {
         throw new Error("Authentication required.");
@@ -254,12 +284,12 @@ const resolvers = {
     
     
     
-    addMessage: async (parent, {message}) => {
+    addMessage: async (parent, {message}, context) => {
         const channel = channels.find(ch => ch.id === message.channelId)
         if (!channel)
         throw new Error("Channel does not exist")
         
-        const newMessage = {id: String(nextMessageId++), text: message.text}
+        const newMessage = {id: String(nextMessageId++), username:context.user.username, text: message.text}
         channel.messages.push(newMessage)
         return newMessage;
       }

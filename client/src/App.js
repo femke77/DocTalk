@@ -26,7 +26,10 @@ import DoctorProfile from './pages/Doctor/DoctorProfile';
 import MessagesPatient from './pages/Doctor/MessagesPatient';
 // import ContactDoctor from './pages/Patient/ContactDoc';
 // import ContactPatient from './pages/Doctor/ContactPatient';
-// import ContactPatientChat from './pages/Doctor/ContactPatientChat';
+import ContactPatientChat from './pages/Doctor/ContactPatientChat';
+
+
+
 const httpLink = createHttpLink({
   uri: 'http://localhost:3001/graphql',
 });
@@ -65,8 +68,12 @@ function App() {
             <Route path="/emaildetails" element={<EmailDetails />} />
             <Route path="/callpatient" element={<CallPatient />} />
             <Route path="/doctor-messages" element={<MessagesPatient />} />
-{/*
-            <Route path="/contactpatientchat" element={<ContactPatientChat />} /> */}
+
+
+
+        
+            <Route path="/contactpatientchat" element={<ContactPatientChat />} />
+
             <Route path="/PatientProfile" element={<PatientProfile />} />
             <Route path="/BookAppointment" element={<BookAppointment />} />
             <Route path="/FindDoctor" element={<FindDoctor />} />
