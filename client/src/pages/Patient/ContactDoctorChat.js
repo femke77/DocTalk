@@ -49,7 +49,7 @@ export default function ContactDoctorChat() {
   return (
     <ContainerWrapper>
       <ChatContainer>
-        <Header variant="h1">Contact Doctor</Header>
+        <Header variant="h1"></Header>
         <Channel />
       </ChatContainer>
       <Footer />

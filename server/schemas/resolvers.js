@@ -36,11 +36,11 @@ const emails = [
 ];
 let channels = [{
   id: "1",
-  name: 'Live Chat with patient',
+  name: 'Live Chat',
   messages:[{
     id: "1",
     username: "Doctor",
-    text: 'Ready to chat with patient'
+    text: 'Ready to chat'
   }]
 }, {
   id: "2",
