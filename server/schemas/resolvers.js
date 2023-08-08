@@ -53,7 +53,6 @@ let channels = [{
 ]
 }]
 
-
 let nextMessageId = "2";
 
 const resolvers = {
@@ -72,8 +71,9 @@ const resolvers = {
     },
     channel: (parent, {id})=> {
 
-      return (channels.find(ch => ch.id === id)) 
+      return (channels.find(ch => ch.id === id))
     },
+
 
     loggedInUser: async (_, __, { user }) => {
       if (!user) {
@@ -279,12 +279,9 @@ const resolvers = {
       }
     },
     
-    
-    
-    
-    
-    
+
     addMessage: async (parent, {message}, context) => {
+
         const channel = channels.find(ch => ch.id === message.channelId)
         if (!channel)
         throw new Error("Channel does not exist")
